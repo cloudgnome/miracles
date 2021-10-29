@@ -1,0 +1,113 @@
+{%load i18n%}
+<div id="panel">
+    <div>
+        <form action="javascript:void(0)" method="PUT" class="edit-action fields filters">
+            {%for export in exports%}
+                <div>
+                    <div class="heading">{{export.name}}</div>
+                    <div class="radio-wrapper">
+                        <div class="field">
+                            <label class="custom-radio">
+                                {% trans 'Так'%}
+                                <input value='{"export_id":{{export.id}},"load":true}' type="radio" autocomplete="off" name="export_status[]">
+                                <span class="checkmark">
+                                    <span class="inside"></span>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="field">
+                            <label class="custom-radio">
+                                {% trans 'Ні'%}
+                                <input value='{"export_id":{{export.id}},"load":false}' type="radio" autocomplete="off" name="export_status[]">
+                                <span class="checkmark">
+                                    <span class="inside"></span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            {%endfor%}
+            <div class="action">
+                <div class="heading">{% trans 'Перемістити в'%}:</div>
+                <div class="autocomplete brand" id="brand" model="brand">
+                    <input type="text" name="brand__description__name__icontains" value="" placeholder="{% trans 'Виробник'%}" autocomplete="off" action="move">
+                    <div class="variants"></div>
+                </div>
+                <div class="custom-select">
+                    <select name="is_available" id="is_available" autocomplete="off" action="move">
+                        <option value="" selected>{% trans 'Наявність'%}</option>
+                        <option value="True">{% trans 'В наявності'%}</option>
+                        <option value="False">{% trans 'Нема в наявності'%}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="action">
+                <div class="heading">{% trans 'Додати у'%}:</div>
+                <div class="autocomplete category" id="category" model="category">
+                    <input type="text" name="category__description__name__icontains" value="" placeholder="{% trans 'Категория'%}" autocomplete="off" action="add">
+                    <div class="variants"></div>
+                </div>
+                <div class="autocomplete tag" id="tag" model="tag">
+                    <input type="text" name="tag__description__name__icontains" value="" placeholder="{% trans 'Тег'%}" autocomplete="off" action="add">
+                    <div class="variants"></div>
+                </div>
+            </div>
+            <button>{% trans 'Так' %}</button>
+        </form>
+        <form action="javascript: void(0)" method="DELETE" class="edit-action fields filters">
+            <div class="action">
+                <div class="heading">{% trans 'Видалити з'%}:</div>
+                <div class="autocomplete category" id="category" model="category">
+                    <input type="text" name="category__description__name__icontains" value="" placeholder="{% trans 'Категория'%}" autocomplete="off" action="delete">
+                    <div class="variants"></div>
+                </div>
+                <div class="autocomplete tag" id="tag" model="tag">
+                    <input type="text" name="tag__description__name__icontains" value="" placeholder="{% trans 'Тег'%}" autocomplete="off" action="delete">
+                    <div class="variants"></div>
+                </div>
+            </div>
+            <button>{% trans 'Так' %}</button>
+        </form>
+    </div>
+    <div id="filter" class="fields">
+        <div id="toggle-settings" class="panel-icon action" type="edit-action">
+            <i class="fas fa-sort-down"></i>
+        </div>
+        {% include 'main/filters/product.html'%}
+    </div>
+    <div id="product-info" class="fields">
+        {%for export in exports%}
+            <div class="export" type="{{export.id}}">
+                <div class="heading">{{export.name}}</div>
+                <div class="field">
+                    <label class="custom-radio">
+                        {% trans 'Так'%}
+                        <input value="true" type="radio" autocomplete="off" name="{{export.id}}">
+                        <span class="checkmark">
+                            <span class="inside"></span>
+                        </span>
+                    </label>
+                </div>
+                <div class="field">
+                    <label class="custom-radio">
+                        {% trans 'Ні'%}
+                        <input value="false" type="radio" autocomplete="off" name="{{export.id}}">
+                        <span class="checkmark">
+                            <span class="inside"></span>
+                        </span>
+                    </label>
+                </div>
+                {%if export.has_meta%}
+                    <div class="meta">
+                        <div class="input">
+                            <input type="text" name="name" autocomplete="off" placeholder="{% trans 'Назва'%}">
+                        </div>
+                        <div class="input">
+                            <textarea name="text" autocomplete="off" placeholder="{% trans 'Опис'%}"></textarea>
+                        </div>
+                    </div>
+                {%endif%}
+            </div>
+        {%endfor%}
+    </div>
+</div>

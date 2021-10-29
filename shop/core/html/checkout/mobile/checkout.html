@@ -1,0 +1,108 @@
+{%extends 'shop/mobile/index.html'%}
+{%load i18n%}
+{%load translate%}
+{%block breadcrumbs%}
+	<div class="bread-crumbs">
+		<span>
+			<a href="{{language}}/">
+				<div></div>
+				<span>{% trans 'Главная'%}</span>
+			</a>
+		</span>
+	</div>
+{%endblock%}
+{%block main%}
+<template id="cityTemplate">
+	<input type="hidden" name="city">
+	<label>Город<input autocomplete="off" type="text" name="" id="id_city" placeholder="Введите первые буквы"></label><div class="variants"></div>
+</template>
+<template id="departamentTemplate">
+	<input type="hidden" name="departament">
+	<label>Отделение<input autocomplete="off" type="text" name="" id="id_departament" placeholder="Введите первые буквы"></label>
+	<div class="variants"></div>
+</template>
+<template id="addressTemplate">
+	<label>Адрес:<input id="id_address" type="text" placeholder="Адрес" name="address"></label>
+</template>
+<h1>{% trans 'Оформление заказа'%}</h1>
+<form action="{{language}}/checkout/order/" id="checkoutForm" method="post" class="form">
+	{% csrf_token %}
+	{%block freeDelivery%}
+	{%endblock%}
+	<label>
+		{{form.delivery_type.label}}
+		<div class="custom-select">
+			{{form.delivery_type}}
+		</div>
+		{{form.delivery_type.errors}}
+	</label>
+	<div id='city'>
+		{%if form.cleaned_data.delivery_type and form.cleaned_data.delivery_type == 3%}
+			{{form.address.label_tag}}
+			{{form.address}}
+			{{form.address.errors}}
+		{%endif%}
+	</div>
+	<div id='departament'>
+	</div>
+	<label for="">
+		{{form.payment_type.label}}
+		<div class="custom-select">
+			{{form.payment_type}}
+		</div>
+		{{form.payment_type.errors}}
+	</label>
+	<div id="delivery_message"></div>
+	<label>
+		{{form.name.label}}
+		{{form.name}}
+		{{form.name.errors}}
+	</label>
+	<label>
+		{{form.lname.label}}
+		{{form.lname}}
+		{{form.lname.errors}}
+	</label>
+	<label>
+		{{form.sname.label}}
+		{{form.sname}}
+		{{form.sname.errors}}
+	</label>
+	<label>
+		{{form.phone.label}}
+		{{form.phone}}
+		{{form.phone.errors}}
+	</label>
+	<label>
+		{{form.email.label}}
+		{{form.email}}
+		{{form.email.errors}}
+	</label>
+	{{form.subscription}}
+	{{form.subscription.label_tag}}
+	<div>
+		{{form.comment.label_tag}} <br>
+		{{form.comment}} <br>
+	</div>
+	<div class="note">* - {% trans 'поля, обязательные для заполнения'%}.</div>
+	<button>{% trans 'Оформить'%}</button>
+	<h4 id="total">{% trans 'Итого'%}: <div id="sum">{{cart.total}}</div> грн.</h4>
+	<div class="note">{% trans 'Стоимость доставки не включена'%} {% trans 'и оплачивается при получении'%}</div>
+	<h3>{% trans 'Содержимое заказа'%}:</h3>
+	{%for item in cart%}
+		<div class="checkout_item">
+			<div class="item-img">
+				<img src="{{item.product.image.cart_thumb}}" alt="image">
+			</div>
+			<div class="info">
+				<div class="item-name">{% translate item.product 'names' lang %}</div>
+				<div class="model">{% trans 'Артикул'%} #: {{item.product.model}}</div>
+				<div class="total">{{item.qty}} шт х <span class="price">{{item.price}}</span> грн.</div>
+			</div>
+		</div>
+	{%endfor%}
+</form>
+<script>
+	var cartJson = {{cartJson}};
+</script>
+{%endblock%}

@@ -1,0 +1,24 @@
+{%extends 'shop/desktop/index.html'%}
+{%load i18n%}
+{%load translate%}
+{%block main%}
+	<div class="bread-crumbs">
+		<span><a href="{{language}}/">{% trans 'Главная'%}</a></span>
+        <h1>{% trans 'Бренды и производители'%}</h1>
+	</div>
+	<div id='brands'>
+        <div class="items">
+			{%for brand in brands%}
+				<a class="item" href="{% translate brand 'slugy' lang %}" title="{% translate brand 'names' lang %}">
+					<div class="image">
+						<img src="/media/{{brand.image}}" alt="{% translate brand 'names' lang %}">
+					</div>
+					<div class="name">{% translate brand 'names' lang %}</div>
+				</a>
+			{%endfor%}
+		</div>
+	</div>
+	<article class="noselect">
+		{{description|safe}}
+	</article>
+{%endblock%}

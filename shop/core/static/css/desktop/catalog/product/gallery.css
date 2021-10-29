@@ -1,0 +1,47 @@
+#gallery{
+	background: #fff none repeat scroll 0 0;
+	height: 90%;
+	padding: 8px 44px 15px;
+	position: fixed;
+	top: 5%;
+	width: 100%;
+	z-index: 102;
+	margin: auto;
+	display: none;
+	justify-content: center;
+}
+#gallery #image{
+	flex-grow: 3;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	height: 100%;
+}
+#gallery img{
+	max-height: 100%;
+	max-width: 100%;
+	cursor: pointer;
+	margin: auto;
+	display: block;
+}
+#gallery .arrow{
+	width:33px;
+	height:33px;
+	position: absolute;
+	top: 50%;
+	cursor: pointer;
+	z-index: 9;
+	flex-grow: 1;
+	border-left: 3px solid rgba(0, 0, 0, 0.2);
+	border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+	transform: rotateZ(45deg);
+}
+#gallery .left{
+	left: 43px;
+}
+#gallery .right{
+	right: 43px;
+	transform: rotateZ(-135deg);
+}

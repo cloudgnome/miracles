@@ -1,0 +1,63 @@
+{%load i18n%}
+{%block breadcrumbs%}
+<div class="bread-crumbs">
+	<a href="{{language}}/">
+		<div></div>
+		{% trans 'Главная'%}
+	</a>
+</div>
+{%endblock%}
+{%block main%}
+{%if user.is_authenticated%}
+	<form action="" id="review-form">
+		{%csrf_token%}
+		<label>{% trans 'Заголовок'%}:<input type="text" name="title" pattern='.{5,}' required title="{% trans 'Это поле обязательно. Минимум 5 символов'%}."></label>
+		<label>{% trans 'Описание'%}:<textarea name="text" cols="30" rows="10" max_length="1000" required title="{% trans 'Это поле обязательно. Минимум 20 символов'%}."></textarea></label>
+	</form>
+	<span id="leave-review">{% trans 'Оставить отзыв'%}</span>
+{%else%}
+	<p id="alert">
+		<a href="{{language}}/user/signin/" class="sign-in">{% trans 'Войдите'%}</a> {% trans 'или'%} 
+		<a href="{{language}}/user/signup/" class="sign-up">{% trans 'зарегистрируйтесь'%}</a> 
+		{% trans 'чтобы оставить отзыв'%}.
+	</p>
+{%endif%}
+<h1>{{h1}}</h1>
+{%if reviews%}
+	{%for review in reviews%}
+		{%if not review.is_child%}
+			<article class="review">
+				<div class="date">{{review.created_at}}</div>
+				<span class="reply">{% trans 'Ответить'%}</span>
+				<h3>{{review.author}} - "{{review.title}}"</h3>
+				<p>{{review.description|safe}}</p>
+			</article>
+			{%for child in review.child.all%}
+				<article class="child">
+					<div class="date">{{child.created_at}}</div>
+					<span class="reply">{% trans 'Ответить'%}</span>
+					<h3>{{child.author}}</h3>
+					<p>{{child.description}}</p>
+				</article>
+			{%endfor%}
+		{%endif%}
+	{%endfor%}
+	{% if reviews.paginator.num_pages > 1 %}
+		<div class="pagination">
+			{% if reviews.has_previous %}
+			<a class='prevPage' href="?{%if q%}q={{q}}&{%endif%}page={{reviews.previous_page_number}}"> < {% trans 'Предыдущие'%}</a>
+			{% endif %}
+			{%for page in reviews.paginator.page_range%}
+				{%if page == reviews.number%}
+					<span class="active">{{page}}</span>
+				{%else%}
+					<a href="?{%if q%}q={{q}}&{%endif%}page={{page}}">{{page}}</a>
+				{%endif%}
+			{%endfor%}
+			{% if reviews.has_next %}
+				<a class='nextPage' href="?{%if q%}q={{q}}&{%endif%}page={{reviews.next_page_number}}"> {% trans 'следующие'%} > </a>
+			{% endif %}
+		</div>
+	{%endif%}
+{%endif%}
+{%endblock%}

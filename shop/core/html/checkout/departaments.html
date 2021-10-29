@@ -1,0 +1,15 @@
+<span>{{page}}</span>
+<select name="{{id}}" id="id_{{id}}" class='customSelect'>
+    <option selected="selected" value="">-----</option>
+    {%for item in items%}
+        <option value="{{item.id}}">{{item}}</option>
+    {%endfor%}
+</select>
+<script>$('#id_{{id}}').customSelect();</script>
+{%if id == 'city'%}
+    <script>
+        $('#id_city').on('change',function(){
+            loadField($('#id_delivery_type').val(),'departament',$(this).val());
+        });
+    </script>
+{%endif%}

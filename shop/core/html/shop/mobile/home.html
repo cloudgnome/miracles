@@ -1,0 +1,107 @@
+{% load i18n %}
+{% load translate %}
+{%block main%}
+	{%block slider%}
+    {%endblock%}
+    <div class="navigation">
+    	{% include nav%}
+    </div>
+	<div id="home">
+		<h2 class="bests"><a href='{{language}}/bestsellers' class="Bold">{% trans 'Лидеры продаж'%}</a></h2>
+		<div class="products">
+			{%for offer in offers%}
+				<div class='item{%if not offer.product.is_available%} notavail{%endif%}'>
+					<a href="{% translate offer.product 'slugy' lang%}" class="image">
+						<img src="{{offer.product.image.mobile_list_thumb}}" alt="{% translate offer.product 'names' lang%}">
+					</a>
+					<div class="availability">{{offer.product.availability|safe}}</div>
+					{%if offer.product.is_available%}
+						{%block buyBests%}
+							<button class='buy' value="{{offer.product.id}}">
+								<svg><use xlink:href="#cartIcon" fill="#fff"></use></svg>
+								{% trans 'КУПИТЬ'%}
+							</button>
+							<div class="price">
+								{%if offer.product.special%}
+									<span class="price old">{{offer.product.retail_price}} грн</span>
+									<span class="price new">{{offer.product.price|default_if_none:0}} грн.</span>
+								{%else%}
+									<span class="price">{{offer.product.price|default_if_none:0}} грн.</span>
+								{%endif%}
+							</div>
+						{%endblock%}
+					{%endif%}
+					<div class="name">
+						<a href="{% translate offer.product 'slugy' lang%}">
+							{% translate offer.product 'names' lang%}
+						</a>
+					</div>
+				</div>
+			{%endfor%}
+		</div>
+		<h2 class="sale"><a href='{{language}}/sale' class="Bold">{% trans 'Суперцена'%}</a></h2>
+		<div class="products">
+			{%for product in special%}
+				<div class='item{%if not product.is_available%} notavail{%endif%}'>
+					<a href="{% translate product 'slugy' lang%}" class="image">
+						<img src="{{product.image.mobile_list_thumb}}" alt="{% translate product 'names' lang%}">
+					</a>
+					<div class="availability">{{product.availability|safe}}</div>
+					{%if product.is_available%}
+						{%block buySale%}
+							<button class='buy' value="{{product.id}}">
+								<svg><use xlink:href="#cartIcon" fill="#fff"></use></svg>
+								{% trans 'КУПИТЬ'%}
+							</button>
+							<div class="price">
+								{%if product.special%}
+									<span class="price old">{{product.retail_price}} грн</span>
+									<span class="price new">{{product.price|default_if_none:0}} грн.</span>
+								{%else%}
+									<span class="price">{{product.price|default_if_none:0}} грн.</span>
+								{%endif%}
+							</div>
+						{%endblock%}
+					{%endif%}
+					<div class="name">
+						<a href="{% translate product 'slugy' lang%}">
+							{% translate product 'names' lang%}
+						</a>
+					</div>
+				</div>
+			{%endfor%}
+		</div>
+		<h2 class="new"><a href='{{language}}/new' class="Bold">{% trans 'Новинки'%}</a></h2>
+		<div class="products">
+			{%for product in latest%}
+				<div class='item{%if not product.is_available%} notavail{%endif%}'>
+					<a href="{% translate product 'slugy' lang%}" class="image">
+						<img src="{{product.image.mobile_list_thumb}}" alt="{% translate product 'names' lang%}">
+					</a>
+					<div class="availability">{{product.availability|safe}}</div>
+					{%if product.is_available%}
+						{%block buyLatest%}
+							<button class='buy' value="{{product.id}}">
+								<svg><use xlink:href="#cartIcon" fill="#fff"></use></svg>
+								{% trans 'КУПИТЬ'%}
+							</button>
+							<div class="price">
+								{%if product.special%}
+									<span class="price old">{{product.retail_price}} грн</span>
+									<span class="price new">{{product.price|default_if_none:0}} грн.</span>
+								{%else%}
+									<span class="price">{{product.price|default_if_none:0}} грн.</span>
+								{%endif%}
+							</div>
+						{%endblock%}
+					{%endif%}
+					<div class="name">
+						<a href="{% translate product 'slugy' lang%}">
+							{% translate product 'names' lang%}
+						</a>
+					</div>
+				</div>
+			{%endfor%}
+		</div>
+	</div>
+{%endblock%}

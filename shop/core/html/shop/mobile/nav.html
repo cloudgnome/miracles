@@ -1,0 +1,55 @@
+{%load i18n%}
+{%load translate%}
+<div class="container active">
+    <div class="head">{% trans 'Категории товаров'%}<div></div></div>
+    <div class="navCategories {{CATEGORIES_CLASS}}">
+        <div class="back">
+            <i class="fas fa-caret-left"></i>
+        </div>
+        {% load mptt_tags %}
+        {% full_tree_for_model catalog.Category as nodes %}
+        {% recursetree nodes %}
+            {%if node.active%}
+                {%if not node.is_child_node%}
+                    {%if node.is_leaf_node%}
+                        <div class="click">
+                            <div class="image click category-{{node.id}}"></div>
+                            <a href="{%translate node 'slugy' lang%}">{%translate node 'names' lang%}</a>
+                        </div>
+                    {%else%}
+                        <div class="parent click">
+                            <div class="image click category-{{node.id}}"></div>
+                            <a class="icon parent_category" href="{%translate node 'slugy' lang%}">
+                                {%translate node 'names' lang%}
+                            </a>
+                            <span class="nav-bg"></span>
+                            <div class="sub">
+                                {{children}}
+                            </div>
+                        </div>
+                    {%endif%}
+                {%else%}
+                    {%if node.is_leaf_node%}
+                        <div class="click">
+                            <div class="image click category-{{node.id}}"></div>
+                            <a {%if not node.is_leaf_node%}class="icon parent_category"{%endif%} href="{%translate node 'slugy' lang%}">
+                                {%translate node 'names' lang%}
+                            </a>
+                        </div>
+                    {%else%}
+                        <div class="parent click">
+                            <div class="image click category-{{node.id}}"></div>
+                            <a {%if not node.is_leaf_node%}class="icon parent_category"{%endif%} href="{%translate node 'slugy' lang%}">
+                                {%translate node 'names' lang%}
+                            </a>
+                            <span class="nav-bg"></span>
+                            <div class="sub">
+                                {{children}}
+                            </div>
+                        </div>
+                    {%endif%}
+                {%endif%}
+            {%endif%}
+        {% endrecursetree %}
+    </div>
+</div>

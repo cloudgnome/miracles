@@ -1,0 +1,41 @@
+{%extends extends%}
+{%load i18n%}
+{%block main%}
+    <div id="settings">
+        <div id="reload">
+            <div class="container">
+                <div>
+                  <canvas id="UsersChart" height="70px"></canvas>
+                </div>
+            </div>
+            <div class="container">
+                <div>
+                  <canvas id="OrdersChart" height="70px"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="panel-wrapper">
+        <div>
+            <div class="toggle-panel panel-icon action">
+                <i class="fas fa-hamburger"></i>
+            </div>
+        </div>
+        <div id="panel-shortcuts" class="active">
+            {%include panel_shortcuts%}
+        </div>
+    </div>
+    <div id="panel-menu">
+        <div id="search">
+            <input type="text" id="search-text" placeholder='Поиск' value="{{value}}">
+            <div class="toggle-panel panel-icon action">
+                <i class="fas fa-hamburger"></i>
+            </div>
+        </div>
+        {%include panel%}
+    </div>
+    <script>
+        window.PAGE_CONTEXT = JSON.parse({{context|safe|default:"{}"}});
+        if(!document.querySelector('menu')) location.reload();
+    </script>
+{%endblock%}

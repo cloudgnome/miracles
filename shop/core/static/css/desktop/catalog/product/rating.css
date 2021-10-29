@@ -1,0 +1,10 @@
+#rating{
+	display: none;
+}
+#ratingStars{
+	font-size: 21px;
+	color: #ffca2c;
+}
+#ratingStars i{
+	cursor: pointer;
+}

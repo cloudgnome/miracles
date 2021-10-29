@@ -1,0 +1,44 @@
+{%extends 'shop/desktop/index.html'%}
+{%load i18n%}
+{%block main%}
+<div class="bread-crumbs">
+    {%if breadcrumbs%}
+        <a href="{{language}}/">{% trans 'Главная'%}</a> >
+        <span>{% trans 'Прайслист'%}</span>
+    {%endif%}
+    <h1>{{h1}}</h1>
+</div>
+{%if user.is_authenticated and user.is_opt%}
+    {%if brands%}
+        <div id="filterToggle">
+            {% trans 'ФИЛЬТР'%}
+            <div></div>
+        </div>
+        <form action="/catalog/pricelist/" method="post" id="filters">
+            {%csrf_token%}
+            <div class="row manufacturer brand">
+                <div class="shadow">
+                    <h3>{% trans 'ПРОИЗВОДИТЕЛИ'%}</h3>
+                    <div>
+                        {%for brand in brands%}
+                            <input type="radio" id='{{brand.id}}' name="brand__id" value="{{brand.id}}">
+                            <label for="{{brand.id}}">{{brand.name}}</label>
+                            <br>
+                        {%endfor%}
+                    </div>
+                </div>
+            </div>
+            <button id="filter">{% trans 'Применить'%}</button>
+        </form>
+    {%endif%}
+{%endif%}
+{%if pricelist%}
+        <p><a href="/static/{{pricelist}}.xlsx">XLS{{pricelist}}</a></p>
+{%else%}
+    {%if request.user.is_opt%}
+        <p><a href="/static/pricelist_opt.xlsx">XLS</a></p>
+    {%else%}
+        <p><a href="/static/pricelist.xlsx">XLS</a></p>
+    {%endif%}
+{%endif%}
+{%endblock%}

@@ -1,0 +1,104 @@
+{%extends base%}
+{%load i18n%}
+{%block main%}
+<form id="signup" method="post" action="javascript:void(0)" class="user">
+	{%csrf_token%}
+	<h3>{{h1}}</h3>
+	<div class="field">
+		{{form.name.label_tag}}
+		{{form.name}}
+		{{form.name.errors}}
+	</div>
+	<div class="field">
+		{{form.email.label_tag}}
+		{{form.email}}
+		{{form.email.errors}}
+	</div>
+	<div class="field">
+		{{form.phone.label_tag}}
+		{{form.phone}}
+		{{form.phone.errors}}
+	</div>
+	<div class="field">
+		{{form.password1.label_tag}}
+		{{form.password1}}
+		{{form.password1.errors}}
+	</div>
+	<div class="field">
+		{{form.password2.label_tag}}
+		{{form.password2}}
+		{{form.password2.errors}}
+	</div>
+	<button class="blue">{% trans 'Поехали'%}</button>
+	<div id="error">{{error}}</div>
+	<div class="outer">{% trans 'или'%}:</div>
+	<div class="social">
+		<div id="facebook"><svg><use xlink:href="#fbIcon"></use></svg></div>
+		<div id="google"><svg><use xlink:href="#gplusIcon"></use></svg></div>
+	</div>
+</form>
+<style type="text/css"> 
+	.errorlist {
+			color: green;
+			margin: 0;
+			padding: 0;
+	}
+</style>
+<script>
+	$('#signup button').on('click',function(){
+		http.post('/user/signup/',$('#signup').serialize(),true);
+		http.action = function(){
+			if(http.json && http.json.href){
+				$('#form').hide();
+				$('#bg').hide();
+				location.href = http.json.href;
+			}
+		};
+		return false;
+	});
+	var data;
+	$('#facebook').on('click',FBlogin);
+	/* SOCIAL AUTH*/
+		if(window.gapi){
+			function onSuccess(googleUser) {
+				var profile = googleUser.getBasicProfile();
+				data = {
+					social_type:2,
+					social_id:profile.getId(),
+					name:profile.getName(),
+					// image:profile.getImageUrl(),
+					email:profile.getEmail(),
+					social:true
+				};
+				http.action = function(){
+					if(http.json && http.json.href)
+						location.href = http.json.href;
+					else{
+						location.reload();
+					}
+				};
+				http.post('/user/signup/',data=data,true);
+			}
+			function onFailure(resp){
+			  log('failure g+');
+			}
+			var googleUser = {};
+			var startApp = function() {
+			gapi.load('auth2', function(){
+			  auth2 = gapi.auth2.init({
+				client_id: '527934852054-lfqjb64khhjkor8gurr8jcvdh5dntlgp.apps.googleusercontent.com',
+				cookiepolicy: 'single_host_origin',
+				scope: 'profile email'
+			  });
+			  attachSignin($('#google')[0]);
+			});
+			};
+
+			function attachSignin(element) {
+			auth2.attachClickHandler(element, {},
+				onSuccess, onFailure);
+			}
+			startApp();
+		}
+</script>
+{%endblock%}

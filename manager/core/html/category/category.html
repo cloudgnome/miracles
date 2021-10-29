@@ -1,0 +1,36 @@
+{%extends extends%}
+{%load checkbox%}
+{%block main%}
+<div id="item">
+    <h1 class="container">{{form.name.value}}</h1>
+    <div class="container">ID: {{item.id}}</div>
+    <div id="item-menu" class="container">
+        {%for fieldset in form.fieldsets%}
+            <label class="menu noselect" for="{{fieldset.name}}">{{fieldset.legend}}</label>
+        {%endfor%}
+    </div>
+    <form class="container" action="javascript: return false;" enctype="multipart/form-data">
+        {%csrf_token%}
+        {%for fieldset in form.fieldsets%}
+            <input name="tab" class="tab" type="radio" id="{{fieldset.name}}" {%if forloop.counter == 1%}checked=""{%endif%}>
+            <div class="fieldset {{fieldset.classes}}">
+                {%for field in fieldset%}
+                    <div class="field{%if field|is_checkbox%} checkbox{%endif%}">
+                        {{field.label_tag}}
+                        {{field}}
+                    </div>
+                {%endfor%}
+            </div>
+        {%endfor%}
+    </form>
+    <div id="panel">
+        <svg id="delete" item-id="{{item.id}}" model="{{model}}" database="{{database}}" fill="#aaa" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h24v24H0V0z" fill="none"/>
+            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"/>
+            <path d="M0 0h24v24H0z" fill="none"/>
+        </svg>
+        <button class="button" id="save" disabled>Сохранить</button>
+        <a class="button" id='browse' href="http://{{BASE_URL}}/{{item.slug}}" target="_blank">Посмотреть</a>
+    </div>
+</div>
+{%endblock%}

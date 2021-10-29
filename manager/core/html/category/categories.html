@@ -1,0 +1,49 @@
+{%extends extends%}
+{%block main%}
+{%load mptt_tags%}
+{%load i18n%}
+{%load translate%}
+<div id="categories" class="container">
+    <div id="root">
+    {% recursetree items %}
+        <div class="wrapper">
+            {%if not node.is_child_node%}
+                {%if node.is_leaf_node%}
+                    <a class="leaf" href="/Category/{{node.id}}">{% translate node 'names' 'ru'%}</a>
+                {%else%}
+                    <div class="parent-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <a class="icon parent drag_handle" href="/Category/{{node.id}}">{% translate node 'names' 'ru'%}
+                    </a>
+                    <div class="sub">
+                        {{children}}
+                    </div>
+                {%endif%}
+            {%else%}
+                {%if not node.is_leaf_node%}
+                    <div class="parent-arrow"><i class="fas fa-chevron-right"></i></div>
+                {%endif%}
+                    <a {%if not node.is_leaf_node%}class="icon parent"{%endif%} href="/Category/{{node.id}}">
+                        {% translate node 'names' 'ru'%}
+                    </a>
+                {%if not node.is_leaf_node%}
+                    <div class="sub">
+                        {{children}}
+                    </div>
+                {%endif%}
+            {%endif%}
+        </div>
+    {% endrecursetree %}
+    </div>
+</div>
+    </div>
+    <div id="panel-wrapper">
+        <div id="panel-shortcuts" class="active">
+            <a class="button load" href="/Category/"><i class="fas fa-plus"></i></a>
+            <div id="delete" class="delete-list">
+                <i class="fas fa-trash-alt"></i>
+            </div>
+        </div>
+    </div>
+{%endblock%}

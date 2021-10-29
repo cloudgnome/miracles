@@ -1,0 +1,28 @@
+{%load i18n%}
+{%if form%}
+    <div class="close"><i class="far fa-window-close"></i></div>
+    <div id='main'>
+        <div id='quickOrderFormContainer'>
+            <h2>{% trans "Простой заказ в один клик"%}</h2>
+            <div>
+                {% trans "Введите имя и номер телефона."%} 
+                <br>
+                {% trans "Мы Вам перезвоним для оформления заказа."%}
+            </div>
+            <br>
+            <form action="javascript:void(0)" id='quickOrderForm'>
+                {% csrf_token %}
+                <div>
+                    {{form.phone.label_tag}}
+                    {{form.phone}}
+                    {{form.phone.errors}}
+                </div>
+                <button class='bigButton green'>{% trans "Отправить"%}</button>
+                {{form.errors}}
+            </form>
+        </div>
+    </div>
+{%else%}
+    <div id="call-back-form">{% trans 'Спасибо за обращение! Мы скоро свяжемся с вами'%}.</div>
+    <script>ga('send', 'event', 'перезвонить', 'отправить перезвонить ', '');</script>
+{%endif%}

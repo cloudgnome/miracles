@@ -1,0 +1,116 @@
+/* tree editor */
+#categories ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+#categories a{
+  background-color: #fff;
+	padding: 15px 20px 6px 20px;
+	margin: 9px 0 9px 22px;
+	border-radius: 5px;
+	height: 52px;
+	display: block;
+	margin-top: 7px;
+}
+#categories .parent-arrow {
+	width: 13px;
+	height: 13px;
+	float: left;
+	margin-top: 19px;
+	margin-right: 12px;
+	cursor: pointer;
+}
+#categories .parent-arrow.active + a + .sub{
+	display: block;
+}
+#categories .parent-arrow.active i:before{
+	content: "\f078";
+}
+#categories li{
+}
+#categories ul.sub li{
+	margin-left: 38px;
+}
+
+#categories a:hover:after {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  content: " ";
+}
+#categories .sub {
+	display: none;
+  padding-left: 14px;
+}
+/*.page_marker { display:block; text-align: right; float: left; padding: 1px 1px 0 0; }
+tr.cut { border: 2px dashed black; opacity: 0.5; }
+.title-column { width: 400px; }
+
+#result_list tbody tr:focus {
+  background-color: #79aec8 !important;
+  outline: 0px;
+  color: #ffffff;
+}
+
+#result_list tbody tr:focus .field-indented_short_title a {
+  color: #0088cc;
+}
+
+.drag_handle:hover {
+  cursor: move;
+}
+
+.drag_order img {
+  cursor: move;
+}
+
+table tr.dragging {
+  opacity: .3;
+}
+
+table tr.dragging td {
+  color: #333;
+}
+
+table tr.folded {
+  background: red;
+}
+
+div#drag_line {
+  position: relative;
+  height: 3px;
+  font-size: 0px;
+  background-color: #417690;
+}
+
+div#drag_line div {
+  position: absolute;
+  height: 9px;
+  width: 9px;
+  background: #417690;
+  margin: -3px 0 0 -9px;
+  border-radius: 9px;
+}
+
+.page_marker.children {
+	background: url(/static/image/disclosure-down.png) no-repeat right top;
+}
+
+.page_marker.closed {
+	background: url(/static/image/disclosure-right.png) no-repeat right top;
+}
+
+tr.non-editable a:link, tr.non-editable a:visited, tr.non-editable td {
+	color: #AAA;
+}*/
+
+
+tr.item_inactive {
+	color: rgb(221, 17, 68);
+}
+
+tr.item_inactive th a {
+	color: rgb(221, 17, 68);
+}

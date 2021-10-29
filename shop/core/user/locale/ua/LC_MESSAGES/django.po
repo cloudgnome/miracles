@@ -1,0 +1,363 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-18 08:54+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: user/forms.py:17
+msgid "напомните свой номер телефона"
+msgstr "нагадайте свій номер телефону"
+
+#: user/forms.py:23
+msgid "Новый пароль"
+msgstr "Новий пароль"
+
+#: user/forms.py:23
+msgid "Новый пароль*"
+msgstr "Новий пароль"
+
+#: user/forms.py:24
+msgid "Еще раз"
+msgstr "Ще раз"
+
+#: user/forms.py:24
+msgid "Еще раз*"
+msgstr "Ще раз"
+
+#: user/forms.py:32 user/forms.py:51
+msgid "Пароли не совпадают"
+msgstr "Паролі не співпадають"
+
+#: user/forms.py:36
+msgid "Пароль*"
+msgstr "Пароль"
+
+#: user/forms.py:37
+msgid "Пароль еще раз*"
+msgstr "Пароль ще раз"
+
+#: user/forms.py:38
+msgid "ФИО*"
+msgstr "ПІП"
+
+#: user/forms.py:39
+msgid "Email-адрес"
+msgstr "Email-адреса"
+
+#: user/forms.py:39
+msgid "Email адрес"
+msgstr "Email-адреса"
+
+#: user/forms.py:40 user/forms.py:68 user/forms.py:82
+msgid "Номер телефона:"
+msgstr "Номер телефону"
+
+#: user/forms.py:40 user/forms.py:68 user/forms.py:82 user/forms.py:103
+#: user/models/user.py:26
+msgid "Номер телефона"
+msgstr "Номер телефону"
+
+#: user/forms.py:41
+msgid "Подписаться на рассылку"
+msgstr "Підписатися на розсилку"
+
+#: user/forms.py:94
+msgid "Неправильный телефон(пример 0971112233)"
+msgstr ""
+
+#: user/forms.py:103
+msgid "Номер телефона или логин*:"
+msgstr "Номер телефону або логін*:"
+
+#: user/forms.py:104
+msgid "Пароль*:"
+msgstr "Пароль*:"
+
+#: user/forms.py:104
+msgid "Пароль"
+msgstr "Пароль"
+
+#: user/models/user.py:15
+#, fuzzy
+#| msgid "Вход"
+msgid "Код"
+msgstr "Вхід"
+
+#: user/models/user.py:22
+msgid "Email подтвержден"
+msgstr ""
+
+#: user/models/user.py:23
+msgid "Имя"
+msgstr "Ім'я"
+
+#: user/models/user.py:24
+msgid "Фамилия"
+msgstr "Прізвище"
+
+#: user/models/user.py:25
+msgid "Отчество"
+msgstr "По батькові"
+
+#: user/models/user.py:30
+#, fuzzy
+#| msgid "Подписаться на рассылку"
+msgid "Подписка на рассылку"
+msgstr "Підписатися на розсилку"
+
+#: user/models/user.py:32
+msgid "Розничная"
+msgstr ""
+
+#: user/models/user.py:33
+msgid "Биг-оптовая"
+msgstr ""
+
+#: user/models/user.py:34
+msgid "Тип цен"
+msgstr ""
+
+#: user/models/user.py:35
+msgid "Последний раз на сайте"
+msgstr ""
+
+#: user/models/user.py:36
+#, fuzzy
+#| msgid "Регистрация"
+msgid "Дата регистрации"
+msgstr "Реєстрація"
+
+#: user/models/user.py:85
+msgid "Восстановление пароля"
+msgstr "Відновлення пароля"
+
+#: user/models/user.py:101
+msgid "-"
+msgstr ""
+
+#: user/models/user.py:154 user/models/user.py:155
+#, fuzzy
+#| msgid "Пользователь не найден."
+msgid "Пользователи"
+msgstr "Користувач не знайдений."
+
+#: user/validators.py:11
+msgid "Некорректный номер телефона"
+msgstr "Некоректний номер телефону"
+
+#: user/views/compare.py:6
+#, fuzzy
+#| msgid "Кол-во товаров"
+msgid "Сравнение товаров"
+msgstr "Кількість товарів"
+
+#: user/views/favorite.py:6
+msgid "Избранные товары"
+msgstr ""
+
+#: user/views/forget_pass.py:22
+msgid "Пользователь не найден."
+msgstr "Користувач не знайдений."
+
+#: user/views/forget_pass.py:44
+#, fuzzy
+#| msgid "Восстановление пароля"
+msgid "Не сошлись данные пароля"
+msgstr "Відновлення пароля"
+
+#: user/views/forget_pass.py:46
+msgid "Не сошлись данные"
+msgstr ""
+
+#: user/views/forget_pass.py:49 user/views/forget_pass.py:61
+msgid "Смена пароля"
+msgstr "Зміна пароля"
+
+#: user/views/forget_pass.py:70
+msgid "Пароль изменен успешно."
+msgstr "Пароль змінено успішно."
+
+#: user/views/profile.py:163
+msgid "Информации нет"
+msgstr "Інформація відсутня"
+
+#: user/views/profile.py:185
+msgid "Личный кабинет"
+msgstr "Особистий кабінет"
+
+#: user/views/signin.py:62 user/views/signin.py:65
+msgid "Пароль не подошел"
+msgstr "Пароль не підійшов"
+
+#: user/views/signup.py:50
+msgid "Регистрация"
+msgstr "Реєстрація"
+
+#: user/views/signup.py:74
+msgid "С полями формы что то не так."
+msgstr "З полями форми щось не так"
+
+#~ msgid "Введите номер телефона:"
+#~ msgstr "Введіть номер телефону"
+
+#~ msgid "ФИО или Имя*"
+#~ msgstr "ПІП або Ім'я*"
+
+#~ msgid "Отправить"
+#~ msgstr "Відправити"
+
+#~ msgid "Спасибо за обращение! Мы скоро свяжемся с вами"
+#~ msgstr "Дякуємо за звернення! Ми скоро зв'яжемося з вами"
+
+#~ msgid "Главная"
+#~ msgstr "Головна"
+
+#~ msgid "Профиль"
+#~ msgstr "Профіль"
+
+#~ msgid "Изменить"
+#~ msgstr "Змінити"
+
+#~ msgid "Введите пароль."
+#~ msgstr "Введіть пароль"
+
+#~ msgid "Длина пароля минимум 6 символа."
+#~ msgstr "Довжина пароля мінімум 6 символів."
+
+#~ msgid "Максимальная длина 16 символов."
+#~ msgstr "Максимальна довжина 16 символів."
+
+#~ msgid "Введите пароль еще раз."
+#~ msgstr "Введіть пароль ще раз"
+
+#~ msgid "Заказы"
+#~ msgstr "Замовлення"
+
+#~ msgid "Заказ"
+#~ msgstr "Замовлення"
+
+#~ msgid "Адрес почты"
+#~ msgstr "Адреса пошти"
+
+#~ msgid "Способ доставки"
+#~ msgstr "Спосіб доставки"
+
+#~ msgid "Адрес"
+#~ msgstr "Адреса"
+
+#~ msgid "Город доставки"
+#~ msgstr "Місто доставки"
+
+#~ msgid "Отделение доставки"
+#~ msgstr "Відділення доставки"
+
+#~ msgid "Способ оплаты"
+#~ msgstr "Спосіб оплати"
+
+#~ msgid "Внимание! Доставка возможна только с оплатой Приват24"
+#~ msgstr "Увага! Доставка можлива тільки при оплаті Приват24"
+
+#~ msgid "Содержание заказа"
+#~ msgstr "Зміст замовлення"
+
+#~ msgid "Итого к оплате"
+#~ msgstr "Разом до оплати"
+
+#~ msgid "Перейти к истории заказов"
+#~ msgstr "Перейти до історії замовлень"
+
+#~ msgid "Изменить пароль входа"
+#~ msgstr "Змінити пароль входу"
+
+#~ msgid "Статус"
+#~ msgstr "Статус"
+
+#~ msgid "Общая сумма"
+#~ msgstr "Загальна сума"
+
+#~ msgid "Нет доступной информации"
+#~ msgstr "Немає доступної інформації"
+
+#~ msgid "ой,пароль? напомнить"
+#~ msgstr "ой,пароль? нагадати"
+
+#~ msgid "Войти"
+#~ msgstr "Увійти"
+
+#~ msgid "зарегистрироваться"
+#~ msgstr "зараєструватися"
+
+#~ msgid "или"
+#~ msgstr "або"
+
+#~ msgid "Напомнить"
+#~ msgstr "Нагадати"
+
+#~ msgid "Введите номер телефона."
+#~ msgstr "Введіть номер телефону."
+
+#~ msgid "Максимальная длина 16 символов"
+#~ msgstr "Максимальна довжина 16 символів"
+
+#~ msgid "Поехали"
+#~ msgstr "Поїхали"
+
+#~ msgid "Запрос успешно отправлен. Проверьте почтовый ящик."
+#~ msgstr "Запит успішно відправлений. Перевірте поштову скриньку."
+
+#, fuzzy
+#~| msgid "Введите пароль."
+#~ msgid "Введите пароль"
+#~ msgstr "Введіть пароль"
+
+#, fuzzy
+#~| msgid "Длина пароля минимум 6 символа."
+#~ msgid "Длина пароля минимум 6 символа"
+#~ msgstr "Довжина пароля мінімум 6 символів."
+
+#, fuzzy
+#~| msgid "Введите пароль еще раз."
+#~ msgid "Введите пароль еще раз"
+#~ msgstr "Введіть пароль ще раз"
+
+#, fuzzy
+#~| msgid "Содержание заказа"
+#~ msgid "Содержимое заказа"
+#~ msgstr "Зміст замовлення"
+
+#, fuzzy
+#~| msgid "Перейти к истории заказов"
+#~ msgid "Попробуйте найти заказ"
+#~ msgstr "Перейти до історії замовлень"
+
+#~ msgid "ЗДЕСЬ"
+#~ msgstr "ТУТ"
+
+#~ msgid "Вы отправляли запрос на восстановление пароля от кабинета"
+#~ msgstr "Ви відправляли запит на відновлення пароля від кабінету"
+
+#~ msgid "Если Да, то перейдите по ссылке"
+#~ msgstr "Якщо Так, то перейдіть за посиланням"
+
+#~ msgid "Если Вы не отправляли запрос, просто проигнорируйте это сообщение"
+#~ msgstr "Якщо Ви не відправляли запит, просто проігноруйте це повідомленння"
+
+#~ msgid ""
+#~ "Менеджер свяжется с вами с 9 до 18, в течении некоторого времени после "
+#~ "оформления заказа"
+#~ msgstr ""
+#~ "Менеджер зв'яжеться з вами з 9 до 18, протягом деякого часу після "
+#~ "оформлення замовлення"

@@ -1,0 +1,72 @@
+{%load i18n%}
+{%load translate%}
+{%block breadcrumbs%}
+	<div class="bread-crumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+		{%if category.parent%}
+			<a href="{% translate category.parent 'slugy' lang %}">
+				<span itemscope itemtype="http://schema.org/ListItem">
+					<div></div>
+					<span itemprop="name">{% translate category.parent 'names' lang%}</span>
+					<meta itemprop="position" content="1">
+					<meta itemprop="url" content="{% translate category.parent 'slugy' lang %}">
+				</span>
+			</a>
+		{%else%}
+			<a href="{{language}}/">
+				<span itemscope itemtype="http://schema.org/ListItem">
+					<div></div>
+					<span itemprop="name">{% trans 'Главная'%}</span>
+					<meta itemprop="position" content="1">
+					<meta itemprop="url" content="{{language}}/">
+				</span>
+			</a>
+		{%endif%}
+	</div>
+{%endblock%}
+{%block main%}
+<h1>{{h1}}</h1>
+<div id="categories">
+	{%for category in categories%}
+		<div class="category-item">
+			<a href="{% translate category 'slugy' lang %}">
+				<img src="{{category.image_url}}" alt="{% translate category 'names' lang %}">
+				<span>{% translate category 'names' lang %}</span>
+			</a>
+		</div>
+	{%endfor%}
+	<div id="category" class="products">
+		{%for product in products%}
+			<div class='item{%if not product.is_available%} notavail{%endif%}'>
+				<a href="{% translate product 'slugy' lang%}" class="image">
+					<img src="{{product.image.preview_thumb}}" alt="{% translate product 'names' lang%}">
+				</a>
+				<div class="availability">{{product.availability|safe}}</div>
+				{%if product.is_available%}
+					{%block buy%}
+						<button class='buy' value="{{product.id}}">
+							<svg><use xlink:href="#cartIcon" fill="#fff"></use></svg>
+							{% trans 'КУПИТЬ'%}
+						</button>
+						<div class="price">
+							{%if product.special%}
+								<span class="price old">{{product.retail_price}} грн</span>
+								<span class="price new">{{product.price|default_if_none:0}} грн.</span>
+							{%else%}
+								<span class="price">{{product.price|default_if_none:0}} грн.</span>
+							{%endif%}
+						</div>
+					{%endblock%}
+				{%endif%}
+				<div class="name">
+					<a href="{% translate product 'slugy' lang%}">
+						{% translate product 'names' lang%}
+					</a>
+				</div>
+			</div>
+		{%endfor%}
+	</div>
+</div>
+<script>
+	var parameters = {};
+</script>
+{%endblock%}

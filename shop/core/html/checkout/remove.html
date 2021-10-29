@@ -1,0 +1,23 @@
+{%if cart%}
+	{%load get_key%}
+	{{session}}
+	{%for product in cart%}
+	<div class="productItem">
+		<div class="remove" data='{{product.id}}'><div></div></div>
+		<div class="productImage"><a href=""><img src="{{product.image.checkout_thumb}}" alt="image"></a></div>
+		<div class="productName">
+			<a>{{product.name}}</a>
+			<br>
+			<div class="quantity">{{request.session.cart|getkey:product.id}}шт.</div>x
+			<div class="price">{{product.price}}грн</div>
+		</div>
+	</div>
+	{%endfor%}
+	<script>
+		$('.remove').on('click',function(){
+			remove($(this).attr('data'));
+		});
+	</script>
+{%else%}
+	<script>$('h1').text('Ваша корзина пуста.');$('#checkoutForm').empty();</script>
+{%endif%}

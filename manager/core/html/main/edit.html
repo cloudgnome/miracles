@@ -1,0 +1,82 @@
+{%extends extends%}
+{%load checkbox%}
+{%load translate%}
+{%load i18n%}
+{%block main%}
+    <div id="item" class="container">
+        <div>
+            <div class="head">
+                <div class="container">ID: {{item.pk}}</div>
+                <h1 class="container">{{form.name.value}}</h1>
+            </div>
+            <div id="item-menu" class="container">
+                {%for fieldset in form.fieldsets%}
+                    <div class="menu-item noselect" for="{{fieldset.name|default_if_none:'main'}}">
+                        {%if not fieldset.legend and forloop.counter == 1%}
+                            <i class="fas fa-envelope-open-text"></i>
+                            Общее
+                        {%else%}
+                            <i class="fas fa-{{fieldset.icon}}"></i>
+                            {{fieldset.legend}}
+                        {%endif%}
+                    </div>
+                {%endfor%}
+            </div>
+        </div>
+        <form class="container" action="javascript: return false;" enctype="multipart/form-data">
+            {%csrf_token%}
+            {%for fieldset in form.fieldsets%}
+                <div class="fieldset {{fieldset.classes}}" id="{{fieldset.name|default_if_none:'main'}}">
+                    {%for field in fieldset%}
+                        {%if not fieldset.description%}
+                            <div class="field{%if field|is_checkbox%} checkbox{%endif%}">
+                                <div class="label">
+                                    {{field.label_tag}}
+                                    {%if field.field.required%}
+                                        <span class="red">*</span>
+                                    {%endif%}
+                                </div>
+                                {{field}}
+                            </div>
+                        {%else%}
+                            {{field}}
+                        {%endif%}
+                    {%endfor%}
+                </div>
+            {%endfor%}
+            {%if extra_related%}
+                <div id="extra_related"></div>
+            {%endif%}
+        </form>
+        <div id="edit-panel-wrapper">
+            <div id="edit-panel" class="active">
+                <div id="edit-panel" class="active">
+                    {%if item.slug%}
+                        <a class="button" id='browse' href="http://{{SITE_URL}}/{{item.slug}}">
+                            <i class="fas fa-link"></i>
+                        </a>
+                    {%endif%}
+                    <div id="save" class="edit-panel-icon">
+                        <i class="fas fa-save"></i>
+                    </div>
+                    <div id="save-more" class="edit-panel-icon">
+                        <i class="far fa-save"></i>
+                    </div>
+                    <div id="save_and_out" class="edit-panel-icon">
+                        <i class="fas fa-file-upload"></i>
+                    </div>
+                    <div id="out" class="edit-panel-icon">
+                        <i class="fas fa-share-square"></i>
+                    </div>
+                    <div id="delete" class="delete-list">
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        if(!document.querySelector('menu')) location.reload();
+    </script>
+    <!-- <script type="module" defer src="/static/js/views/edit/product.js"></script> -->
+{%endblock%}

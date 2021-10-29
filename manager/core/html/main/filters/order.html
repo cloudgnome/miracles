@@ -1,0 +1,21 @@
+<form action="javascript: void(0)" method="post" id="filters" class="filters">
+    <!-- <input type="text" name="search" value="" placeholder="Поиск"> -->
+    <div class="custom-select">
+        <select name="status__in[]" id="" autocomplete="off">
+            <option value="" selected>Статус</option>
+            <option value="[1,2,3,4,5,6,7,8,9,10,11]">Все</option>
+            <option value="[1,]">Новый</option>
+            <option value="[2,]">Оплачен</option>
+            <option value="[3,]">Отменен</option>
+            <option value="[7,]">На отправку</option>
+            <option value="[8,]">Отправлен</option>
+            <option value="[4,]">Нет связи</option>
+            <option value="[5,]">Liqpay</option>
+            <option value="[6,]">Закрыт</option>
+        </select>
+    </div>
+    <input type="date" name="created_at__contains">
+    <div class="autocomplete">
+        <input type="text" id="phone" name="user__phone__contains" value="" placeholder="Номер тел." autocomplete="off">
+    </div>
+</form>

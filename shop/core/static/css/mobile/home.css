@@ -1,0 +1,29 @@
+#home{
+	margin-top: -36px;
+}
+h2{
+	margin: 72px 0 14px;
+	color: #2d3a6c;
+	font-weight: 600;
+	text-align: center;
+	text-transform: uppercase;
+}
+h2 a{
+	text-decoration: none;
+	font-size: 28px;
+}
+h2.bests a{
+	color: #FF8811;
+}
+h2.sale a{
+	color: #AA6DA3;
+}
+h2.new a{
+	color: #8FC93A;
+}
+.old{
+	margin-right: 3px;
+	color: #9c9c9c;
+	font-weight: 100;
+	text-decoration: line-through;
+}

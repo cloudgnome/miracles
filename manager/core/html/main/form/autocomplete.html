@@ -1,0 +1,19 @@
+{%load i18n%}
+<div class="autocomplete fgk {{model}}" model="{{model}}">
+	<div>
+		<input type="text" autocomplete="off" placeholder="{%trans 'Введите текст для поиска'%}">
+		<div class="variants"></div>
+
+		<input autocomplete="off" type="hidden" name="{{ widget.name }}"{% if widget.value != None %} value="{{widget.value.id}}"{% endif %}{% include "django/forms/widgets/attrs.html" %}>
+	</div>
+	<div>
+		<div class="values">
+			{%if widget.value%}
+				<div class="value">
+					<div class="remove" value="{{widget.value.id}}"><i class="fas fa-times"></i></div>
+					<a href="/{{Model}}/{{widget.id}}">{{widget.value}}</a>
+				</div>
+			{%endif%}
+		</div>
+	</div>
+</div>

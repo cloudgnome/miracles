@@ -1,0 +1,53 @@
+{%extends 'shop/mobile/index.html'%}
+{%load i18n%}
+{%load translate%}
+{%block breadcrumbs%}
+<div class="bread-crumbs">
+	<span itemscope itemtype="http://schema.org/ListItem">
+		<a href="{{language}}/">
+			<div></div>
+			<span itemprop="name">{% trans 'Главная'%}</span>
+		</a>
+	</span>
+	<div id="signout" class="button"><a href="{{language}}/user/signout/">{% trans 'Выход'%}</a></div>
+</div>
+{%endblock%}
+{%block main%}
+<h1>{% trans 'Заказы'%}</h1>
+<div id="orders">
+	{%if orders%}
+		{%for order in orders%}
+		<div class="order">
+			{%if order.cart.items_qty == 1%}
+				<div class="image">
+					<img src="{{order.cart.items.first.product.image.cart_thumb}}" alt="{% translate order.cart.items.first 'names' lang %}">
+				</div>
+			{%elif order.cart.items_qty > 1%}
+				<div class="images">
+					{%for item in order.cart.profile_items%}
+						<div class="image">
+							<img src="{{item.product.image.cart_thumb}}" alt="{% translate item 'names' lang %}">
+						</div>
+					{%endfor%}
+				</div>
+			{%endif%}
+			<a href="{{language}}/user/order/{{order.id}}">{% trans 'Заказ'%} №{{order.id}}</a>
+			<div class="status property">
+				<span class="title Bold">{% trans 'Статус'%}:</span> 
+				<span class="value">{{order.get_status_display}}</span>
+			</div>
+			<div class="qty property">
+				<span class="title Bold">{% trans 'Кол-во товаров'%}:</span> 
+				<span class="value">{{order.cart.items_qty}}</span>
+			</div>
+			<div class="total property">
+				<span class="title Bold">{% trans 'Общая сумма'%}:</span> 
+				<div class="value">{{order.cart.total}}грн.</div>
+			</div>
+		</div>
+		{%endfor%}
+	{%else%}
+	{% trans 'Нет доступной информации'%}.
+	{%endif%}
+</div>
+{%endblock%}

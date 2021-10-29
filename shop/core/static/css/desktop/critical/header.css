@@ -1,0 +1,166 @@
+header{
+	min-width: 1024px;
+	z-index: 2;
+	background-color: #d8edf7;
+}
+header .main{
+	height: 81px;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	position: relative;
+	z-index: 3;
+}
+header #logo{
+	position: relative;
+	top: 1px;
+	z-index: 2;
+	margin-left: 12px;
+	width: 289px;
+	height: 100%;
+}
+header #logo svg{
+	height: 100%;
+	width: 100%;
+}
+header .phones{
+	width: 149px;
+	height: 62px;
+	text-align: center;
+	font-size: 13px;
+	padding-top: 14px;
+	margin-top: 5px;
+}
+header #search{
+	width: 220px;
+	margin-right: 7px;
+	z-index: 3;
+	margin-top: 32px;
+	position: absolute;
+	right: 53px;
+	z-index: 8;
+}
+header #search input[type='text']{
+	width: 100%;
+	border: 0 solid #9cbbc9;
+	border-bottom-width: 1px;
+	background-color: transparent;
+	height: 30px;
+	font-size: 12px;
+	color: #1a1a1a;
+}
+header #search svg{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	fill: #999;
+}
+header #autocomplete{
+	background: #fff;
+	width: 100%;
+	 min-height: 110px;
+	position: absolute;
+	box-shadow: 2px 4px 16px #898989;
+	padding: 15px 5px 5px 10px;
+	max-height: 315px;
+	overflow-y: auto;
+	display: none;
+	z-index: 16;
+}
+
+header .nav{
+	height: 42px;
+	background: #fff;
+	border-radius: 38px 38px 0 0;
+	border-bottom: 1px solid #e7eaea;
+	font-size: 11px;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	position: relative;
+	z-index: 2;
+}
+header .nav .info{
+	width: 74%;
+	padding-left: 12px;
+	margin: auto;
+	margin-left: 0;
+}
+header .nav a{
+	color: #1a1a1a;
+	text-decoration: none;
+	margin-right: 3%;
+}
+header #sign-in, #sign-out, #cart{
+	width: auto;
+	height: 25px;
+	font-size: 12px;
+	border-radius: 12px;
+	color: #fff;
+	text-transform: uppercase;
+	padding: 0 17px;
+	min-width: 119px;
+	margin: auto;
+	transition: 0.5s all ease;
+}
+header #cart{
+	background: #7ba936;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	margin-right: 4px;
+}
+header #cart svg{
+	height: 17px;
+	width: 17px;
+	margin: auto;
+}
+header #cart span:nth-child(1){
+	flex: 90%;
+	margin: auto;
+}
+header #sign-in,#sign-out{
+	background: #43abd7;
+	margin-left: 8px;
+	margin-right: 8px;
+}
+header #lang{
+	position: absolute;
+	right: 29%;
+	font-size: 12px;
+	color: #787878;
+	text-transform: lowercase;
+}
+header #lang a{
+	float: left;
+	cursor: pointer;
+	padding: 3px 12px 5px;
+	text-decoration: none;
+	display: block;
+}
+header #lang a.active{
+	background-color: #82c9e6;
+	color: #fff;
+	border-radius: 0px 0px 7px 7px;
+	cursor: default;
+}
+#add-cart{
+	display: none;
+}
+header #attention{
+	font-size: 13px;
+	width: 20%;
+	margin: auto;
+	margin-left: 16px;
+	padding-top: 15px;
+	color: #f4000b;
+}

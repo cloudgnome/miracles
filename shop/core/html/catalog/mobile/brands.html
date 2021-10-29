@@ -1,0 +1,33 @@
+{%extends 'shop/mobile/index.html'%}
+{%load i18n%}
+{%load translate%}
+{%block breadcrumbs%}
+    <div class="bread-crumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+        <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="{{language}}/" itemtype="http://schema.org/Thing"
+        itemprop="item">
+                <div></div>
+                <span itemprop="name">{% trans 'Главная'%}</span>
+            </a>
+            <meta itemprop="position" content="1">
+        </span>
+        <h1>{% trans 'Бренды и производители'%}</h1>
+    </div>
+{%endblock%}
+{%block main%}
+    <div id='brands'>
+        <div class="items">
+            {%for brand in brands%}
+                <a class="item" href="{% translate brand 'slugy' lang %}" title="{% translate brand 'names' lang %}">
+                    <div class="image">
+                        <img src="/media/{{brand.image}}" alt="{% translate brand 'names' lang %}">
+                    </div>
+                    <div class="name">{% translate brand 'names' lang %}</div>
+                </a>
+            {%endfor%}
+        </div>
+    </div>
+    <article class="noselect">
+        {{description|safe}}
+    </article>
+{%endblock%}

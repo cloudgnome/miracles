@@ -1,0 +1,48 @@
+{%load value%}
+<div id="list-{{model}}">
+    <input type="checkbox" name="all" id="check-all">
+    <div id="head">
+        <div></div>
+        {%for field in head%}
+            <a view="list" order="{%if field.1 == ordering%}-{%endif%}{{field.1}}">{{field.0}}</a>
+        {%endfor%}
+    </div>
+    <div id="items">
+        {%for item in items%}
+            <div class="item">
+                <input type="checkbox" value="{{item.id}}" name="delete">
+                {%for field in model|value:item%}
+                    {%if forloop.counter == 2%}
+                        <a class="column" href="/{{model}}/edit/{{item.id}}" view="{{view}}">{{field}}</a>
+                    {%else%}
+                        <div class="column">{{field|safe}}</div>
+                    {%endif%}
+                {%endfor%}
+            </div>
+        {%endfor%}
+    </div>
+</div>
+{% if items.paginator.num_pages > 1 %}
+    <div id="pagination">
+        <span class="step-links">
+            {% if items.has_previous and items.previous_page_number > 1%}
+                <a view="list" class='prevPage' page="{{items.previous_page_number}}"> < Пред.</a>
+            {% endif %}
+            {%for page in items.paginator.page_range%}
+                {%if page == items.number%}
+                    <span class="active">{{page}}</span>
+                {%elif page == 1%}
+                    <a view="list" page="{{page}}">{{page}}</a>
+                {%elif page <= 9%}
+                    <a view="list" page="{{page}}">{{page}}</a>
+                {%endif%}
+            {%endfor%}
+            {% if items.has_next %}
+                <a view="list" class='nextPage' page="{{items.next_page_number}}"> След. > </a>
+            {% endif %}
+        </span>
+    </div>
+{%endif%}
+    <script>
+        if(!document.querySelector('menu')) location.reload();
+    </script>

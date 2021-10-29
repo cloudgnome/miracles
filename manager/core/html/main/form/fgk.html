@@ -1,0 +1,13 @@
+{%load i18n%}
+<div id="fgk">
+    <input type="text" name="fgk" value="" field="{{field}}" placeholder="{%trans 'Введите текст для поиска'%}">
+    <div id="id_fgk_on_deck" class="results_on_deck values">
+        {%for item in instance%}
+            <div class="value">
+                <span class="ui-icon ui-icon-trash remove" item-id="{{item.id}}"><i class="fas fa-times"></i></span> 
+                <span class="tag">{{item}}</span>
+                <input type="hidden" name="{{model}}[]" value="{{item}}">
+            </div>
+        {%endfor%}
+    </div>
+</div>

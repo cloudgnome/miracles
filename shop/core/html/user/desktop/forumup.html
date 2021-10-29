@@ -1,0 +1,40 @@
+<form id="signup" method="post" action="/user/signup/" class="user">
+	{%csrf_token%}
+	<div class="close"></div>
+	<h3>{{h1}}</h3>
+	<div class="field">
+		{{form.name.label_tag}}
+		{{form.name}}
+		{{form.name.errors}}
+	</div>
+	<div class="field">
+		{{form.email.label_tag}}
+		{{form.email}}
+		{{form.email.errors}}
+	</div>
+	<div class="field">
+		{{form.phone.label_tag}}
+		{{form.phone}}
+		{{form.phone.errors}}
+	</div>
+	<div class="field">
+		{{form.password1.label_tag}}
+		{{form.password1}}
+		{{form.password1.errors}}
+	</div>
+	<div class="field">
+		{{form.password2.label_tag}}
+		{{form.password2}}
+		{{form.password2.errors}}
+	</div>
+	<button class="blue">Поехали</button>
+	<div id="error">{{error}}</div>
+</form>
+<script>
+	$('#signup button').on('click',function(){
+		http.post('/user/forumup/',$('#signup').serialize());
+		if(http.json && http.json.href)
+				location.href = http.json.href;
+		return false;
+	})
+</script>

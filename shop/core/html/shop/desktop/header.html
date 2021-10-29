@@ -1,0 +1,106 @@
+{% load i18n %}
+{% load translate %}
+<header>
+	<div class='main container'>
+		<div id="logo">
+			<a href="{{language}}/" title="{% trans 'Игрушки от'%} {{BASE_URL}}">
+				<svg><use xlink:href="#logoIcon"></use></svg>
+			</a>
+		</div>
+		{%block header_phones%}
+			<div class="phones">
+				{%for phone in PHONES%}
+					<div>
+						<a href="tel:{{phone}}">{{phone}}</a>
+					</div>
+					{%if forloop.counter == 2%}
+						</div>
+						<div class="phones">
+					{%endif%}
+				{%endfor%}
+			</div>
+		{%endblock%}
+		<div id="attention">{{attention_message|default_if_none:''}}</div>
+		<div id="search" class="right">
+			<form action="{{language}}/search" method="get">
+				<input id="query" type="text" placeholder='{% trans "Поиск"%}' name="q" value="{{request.session.query}}" autocomplete="off">
+				<svg><use xlink:href="#searchIcon"></use></svg>
+			</form>
+			<div id="autocomplete"></div>
+		</div>
+		<div id="lang" class='noselect'>
+			<a {%if lang == 'ua'%}class="active"{%else%} href="/ua/{{url|default_if_none:''}}" title="/ua/{{url|default_if_none:''}}"{%endif%}>мова</a>
+			<a {%if lang == 'ru'%}class="active"{%else%} href="/{{url|default_if_none:''}}" title="/{{url|default_if_none:''}}"{%endif%}>язык</a>
+		</div>
+	</div>
+	<div class='nav container'>
+		<div class="info">
+			<button id="navigation_toggle">{%trans 'Категории товаров'%}</button>
+			{%for item in header_menu%}
+				<a href="{{language}}/{{item.slug}}">
+					{% translate item 'names' lang%}
+				</a>
+			{%endfor%}
+			{%block header_links%}
+			{%endblock%}
+		</div>
+		<div class="buttons">
+			<button id="cart" class="right cart"><span>{% trans 'Корзина'%} (<span class='items_qty'>0</span>)</span>
+				<svg><use xlink:href="#cartIcon" fill="#fff"></use></svg>
+			</button>
+			<a href="{{language}}/user/favorite/" class="profile favorite link">
+				{% trans 'Избранные'%}
+				(<span class="counter"></span>)
+				<i class="fas fa-star"></i>
+			</a>
+			<a href="{{language}}/user/compare/" class="profile compare link">
+				{% trans 'Сравнение'%}
+				(<span class="counter"></span>)
+				<i class="fas fa-balance-scale"></i>
+			</a>
+			{%if user.is_anonymous%}
+				<button id="sign-in" class="right">
+					{% trans 'Войти'%}
+					<i class="fas fa-user"></i>
+				</button>
+			{%else%}
+				<a href="{{language}}/user/profile/" class="profile link">
+					{% trans 'История заказов'%}
+					<i class="fas fa-history"></i>
+				</a>
+				<button id="sign-out" class="right">
+					{% trans 'Выйти'%}
+					<i class="fas fa-user"></i>
+				</button>
+			{%endif%}
+		</div>
+	</div>
+	{%if user.is_admin%}
+		<div id="panel">
+			{%if product.special%}
+				<div class="price" class="link">
+					<span class="new">{{product.price}} грн.</span>
+				</div>
+			{%endif%}
+			<a href="{{edit_url}}" class="link">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+			</a>
+			<a href="{{ADMIN_BASE_URL}}/Order" id="orders" class="link">
+				<svg><use xlink:href="#cartIcon"></use></svg>
+			</a>
+		</div>
+	{%else%}
+		{%block panel%}
+			<div id="panel">
+				<div class="link filterToggle">
+					<svg><use xlink:href="#panelFilterToggle"></use></svg>
+				</div>
+				<div class="cart link">
+					<div class='items_qty'>0</div>
+					<svg><use xlink:href="#cartIcon"></use></svg>
+				</div>
+				<div id="scroll-up" class="link"></div>
+			</div>
+		{%endblock%}
+	{%endif%}
+</header>

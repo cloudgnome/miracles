@@ -1,0 +1,241 @@
+{%extends extends%}
+{%load i18n%}
+{%block main%}
+    <template id="order-item">
+        <div class="order-item autocomplete" product-id="{~id~}">
+            <div class="remove-wrap">
+                <div class="remove" item-id="{~id~}">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="info-block">
+                <div class="image">
+                    {~admin_image~}
+                </div>
+                <div class="inputs">
+                    <div>
+                        <div>
+                            <input type="text" name="qty" value="1" placeholder="{% trans 'Кол-во'%}">
+                        </div>
+                        <div>
+                            <input type="text" name="price" opt='' value="{~price~}" placeholder="{% trans 'Ціна'%}">
+                        </div>
+                    </div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <div class="name">
+                {?if name?}
+                    <a href="http://{{SITE_URL}}/{~slug~}" target="_blank">{~name~}</a>
+                {?else?}
+                    <input type="text" class="search" placeholder="{% trans 'Введите текст'%}">
+                    <div class="variants"></div>
+                {?endif?}
+            </div>
+            <div class="total">
+                <div>
+                    <span class="title">{~price~}</span> грн.
+                </div>
+                <div class="icon">
+                    {~storage_icon~}
+                </div>
+                <div>
+                    <span class="title">{~qty~}</span> шт.
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="seat">
+        <div class="seat">
+            <div class="remove">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="field">
+                <input type="text" name="weight" placeholder="Вес">
+            </div>
+            <div class="field">
+                <input type="text" name="volumetricHeight" class="calculate" placeholder="Высота">
+            </div>
+            <div class="field">
+                <input type="text" name="volumetricWidth" class="calculate" placeholder="Ширина">
+            </div>
+            <div class="field">
+                <input type="text" name="volumetricLength" class="calculate" placeholder="Длина">
+            </div>
+            <div class="field">
+                <input type="text" name="cost" placeholder="Цена">
+            </div>
+            <div class="field description">
+                <input type="text" name="description" placeholder="Описание">
+            </div>
+        </div>
+    </template>
+    <div id="items">
+        <form class="container" id="order" action="javascript: void(0)">
+            {%csrf_token%}
+            <div id="order-user">
+                <div class="order-info">№ {{item.id}}&nbsp;&nbsp;&nbsp;{{item.created_at}}</div>
+                <div id="user-info" class="order-column">
+                    {%if item.ttn%}
+                        <div class="field">
+                            {{form.ttn}}
+                            <div class="icons">
+                                {%if item.link%}
+                                    <a class="icon" id="ttn_link" href="{{item.link}}" target="_blank"><i class="fas fa-file-invoice"></i></a>
+                                {%endif%}
+                                <div class="icon" id="track">
+                                    <i class="fas fa-cookie-bite"></i>
+                                </div>
+                            </div>
+                        </div>
+                    {%endif%}
+                    <div class="field">{{form.lname}}
+                        <i id="copyFIO" class="fas fa-copy"></i>
+                    </div>
+                    <div class="field">{{form.name}}</div>
+                    <div class="field">{{form.sname}}</div>
+                    <div class="field">{{form.email}}</div>
+                    <div class="field">
+                        {{form.phone}}
+                        <i class="fas fa-sms" id="sms"></i>
+                    </div>
+                    <div id="sms-panel">
+                        <div class="select-items">
+                            <div class="sel-items-wrapper">
+                                <div id="ttn">ТТН</div>
+                                <div id="payment">Расч. счет</div>
+                                <div id="card">Номер карты</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div id="order-total" class="order-info">
+                    <div id="total">Итого: <span class="sum">{{item.cart.total}}</span> грн.</div>
+                    <div id="discount">Скидка: <span class="sum">{{item.cart.discount}}</span> грн.</div>
+                </div>
+                <div id="order-info" class="order-column">
+                    {%csrf_token%}
+                    {{form.delivery_type}}
+                    {%if item.delivery_type == 3 or item.delivery_type == 5%}
+                        <div id="address" class="field">{{form.address}}</div>
+                    {%endif%}
+                    <div id="city">
+                        <input type="hidden" name="city" value="{{item.city.id}}">
+                        <div class="field">
+                            <input type="text" placeholder="Введите первые буквы" value="{{item.city}}" id="id_city" autocomplete="off">
+                            <div class="variants"></div>
+                        </div>
+                    </div>
+                    <div id="departament">
+                        <input type="hidden" name="departament" value="{{item.departament.id}}">
+                        <div class="field">
+                            <input type="text" placeholder="Введите первые буквы" value="{{item.departament}}" id="id_departament" autocomplete="off">
+                            <div class="variants"></div>
+                        </div>
+                    </div>
+                    {{form.payment_type}}
+                    {{form.status}}
+                    {{form.comment}}
+                </div>
+            </div>
+            <div id="order-search">
+                <div class="order-column">
+                    <div id="items-wrapper">
+                        <div id="items">
+                            {%for item in item.cart%}
+                                <div class="order-item" product-id={{item.product.id}}>
+                                    <div class="remove-wrap">
+                                        <div class="remove" item-id="{{item.id}}">
+                                            <i class="fas fa-times"></i>
+                                        </div>
+                                    </div>
+                                    <div class="info-block">
+                                        <div class="image">
+                                            {{item.product.admin_image|safe}}
+                                        </div>
+                                        <div class="inputs">
+                                            <div>
+                                                <div>
+                                                    <input type="text" name="qty" value="{{item.qty}}">
+                                                </div>
+                                                <div>
+                                                    <input type="text" name="price" opt='{{item.product.big_opt_price}}' value="{{item.price}}">
+                                                </div>
+                                            </div>
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+                                    <div class="name">
+                                        <a href="http://{{SITE_URL}}/{{item.product.slug}}" target="_blank">{{item.product.description.first.name}}</a>
+                                    </div>
+                                    <div class="total">
+                                        <div>
+                                            <span class="title">{{item.total}}</span> грн.
+                                        </div>
+                                        <div class="icon overlay_container">
+                                            <img src="/static/icon/{{item.product.get_storage_display}}.jpg" alt="{{item.product.get_storage_display}}">
+                                            <div class="overlay">
+                                                <div class="overlay_text">
+                                                    {{item.product.get_storage_display}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="title">{{item.product.qty|floatformat:"0"}}</span> шт.
+                                        </div>
+                                    </div>
+                                </div>
+                            {%endfor%}
+                        </div>
+                    </div>
+
+                    <div class="buttons">
+                        <i class="fas fa-caret-square-down" id="add-product"></i>
+                        <i class="fas fa-expand"></i>
+                    </div>
+                </div>
+
+                {%if form.delivery_type.value == 1%}
+                    <div id="create-ttn" class="button">
+                        {%trans 'Оформить доставку'%}
+                        <i class="fas fa-truck"></i>
+                    </div>
+                {%endif%}
+            </div>
+            <div id="order-items"></div>
+            <input type="hidden" name="item-id" value="{{item.id}}">
+        </form>
+        <form id="order-ttn" class="filters" action="javascript: void(0)">
+            <div class="close">
+                <i class="fas fa-times"></i>
+            </div>
+            <label>Вес:<input value="0.1" type="text" name="weight" placeholder="Вес" required></label>
+            <label>Обьемный вес:<input value="0.1" type="text" name="volume" placeholder="Обьемный вес" required></label>
+            <label>Кол-во мест:<input value="1" type="text" name="seats" placeholder="Кол-во мест" required></label>
+            <label>Дата:<input value="{{date}}" type="date" name="date" placeholder="Дата в формате 00.00.0000" required autocomplete></label>
+            <div id="add-seat">
+                <i class='fas fa-plus-circle'></i>
+                <span>место</span>
+            </div>
+            <div id="seats"></div>
+            <button id="make-ttn">Давай</button>
+        </form>
+        <div id="edit-panel-wrapper">
+            <div id="edit-panel" class="active">
+                <div id="save" class="edit-panel-icon">
+                    <i class="fas fa-thumbs-up"></i>
+                </div>
+                <div id="delete">
+                    <i class="fas fa-trash-alt"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        if(!document.querySelector('menu')) location.reload();
+    </script>
+{%endblock%}

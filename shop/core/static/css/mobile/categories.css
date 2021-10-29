@@ -1,0 +1,35 @@
+#categories{
+	display: flex;
+	flex-wrap: wrap;
+}
+#categories .category-item{
+	width: 47%;
+	padding: 10px;
+	border: 1px solid #e1e1e1;
+	margin-left: 2%;
+	margin-bottom: 11px;
+	border-radius: 3px;
+}
+#categories .category-item img{
+	max-width: 100%;
+	max-height: 100%;
+	margin: auto;
+	width: 100%;
+	display: block;
+}
+#categories .category-item a{
+	text-decoration: none;
+	display: flex;
+	height: 100%;
+	flex-wrap: wrap;
+	align-items: center;
+	padding-bottom: 12px;
+}
+#categories .category-item span{
+	display: block;
+	font-size: 16px;
+	padding-top: 13px;
+	font-family: Light;
+	text-align: center;
+	width: 100%;
+}

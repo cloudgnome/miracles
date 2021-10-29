@@ -1,0 +1,8 @@
+<div class="close"></div>
+<div id="form">
+	<div id="gallery">
+		{%for image in gallery%}
+			<img class="noselect" src="{{image.big_thumb}}" alt="{{product.name}}">
+		{%endfor%}
+	</div>
+</div>

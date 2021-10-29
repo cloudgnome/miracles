@@ -1,0 +1,85 @@
+{% load i18n %}
+{%load translate%}
+{%block main%}
+<div class="bread-crumbs">
+	<span><a href="/">{% trans 'Главная'%}</a></span>
+	{%if article%}
+		<span><a href="{{language}}/useful_articles.html">{% trans 'Полезные статьи'%}</a></span>
+		<h1>{% translate article 'names' lang%}</h1>
+	{%else%}
+		<h1>{% trans 'Полезные статьи'%}</h1>
+	{%endif%}
+</div>
+{%if articles_list%}
+	{%for article in articles_list%}
+	<article class="useful_article">
+		<h2><a href="{% translate article 'slugy' lang%}">{% translate article 'names' lang%}</a></h2>
+	</article>
+	{%endfor%}
+{%elif article%}
+	<article>
+		{%autoescape off%}{% translate article 'text' lang %}{%endautoescape%}
+	</article>
+	<div class="items">
+		{%for product in article.products.all%}
+			<div class='item{%if not product.is_available%} notavail{%endif%}'>
+				<div class="product-buttons">
+					<i class="fas fa-balance-scale"></i>
+					<i class="fas fa-star"></i>
+				</div>
+				<div class="model">{%trans 'Код'%}: {{product.model}}</div>
+				<a class='image' href="{% translate product 'slugy' lang %}" title="{% translate product 'names' lang %}">
+					<img src="{{product.image.list_thumb}}" alt="{% translate product 'names' lang %}">
+					{%if product.special%}
+						<div class="special">-{{product.special.percent}}%</div>
+					{%endif%}
+				</a>
+				<div class="info">
+					<div class="availability ">
+						{{product.availability|safe}}
+					</div>
+					{%if product.is_available%}
+						<div>
+							{%block buy%}
+								<button class='blue buy button' value="{{product.id}}" name="{% translate product 'names' lang%}">{% trans 'Купить'%}</button>
+								{%if product.special%}
+									<div class="price">
+										<span class="old">{{product.retail_price}} грн.</span>
+										<span class="new">{{product.price|default_if_none:0}} грн.</span>
+									</div>
+								{%else%}
+									<div class="price">{{product.price|default_if_none:0}} грн.</div>
+								{%endif%}
+							{%endblock%}
+						</div>
+					{%endif%}
+				</div>
+					{%if product.is_available%}
+						<div class="more_info">
+							<div class='quantity'>
+								<span class="minus">-</span>
+								<input type="text" name="quantity" value="1">
+								<span class="plus">+</span>
+							</div>
+							<div class="properties">
+								{%if product.brand%}
+									<div><span class="key">{% trans 'Брэнд'%}: </span><span>{{product.brand}}</span></div>
+									{%if product.brand.country%}
+										<div><span class="key">{% trans 'Страна'%}: </span><span>{{product.brand.country}}</span></div>
+									{%endif%}
+								{%endif%}
+								{%if product.width%}
+									<div><span class="key">{% trans 'Параметры'%}: </span><span>{{product.parameters}}</span></div>
+								{%endif%}
+							</div>
+						</div>
+					{%endif%}
+				<a href="{% translate product 'slugy' lang %}" class='name' title="{% translate product 'names' lang %}">{% translate product 'names' lang %}</a>
+			</div>
+		{%endfor%}
+	</div>
+{%else%}
+	<h1>{% trans 'ПОЛЕЗНЫЕ СТАТЬИ'%}</h1>
+{%endif%}
+<style>article{height:auto;}article p{font-size: 15px;line-height: 25px;text-indent: 1em;margin-bottom: 10px;}h1+p{text-indent: 0;}article img{max-width: 100%;max-height: 500px;}</style>
+{%endblock%}

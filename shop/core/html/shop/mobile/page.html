@@ -1,0 +1,13 @@
+{%load i18n%}
+{%block breadcrumbs%}
+<div class="bread-crumbs">
+	<a href="{{language}}/">
+		<div></div>
+		{% trans 'Главная'%}
+	</a>
+</div>
+{%endblock%}
+{%block main%}
+	<h1>{{h1}}</h1>
+	{{description|safe}}
+{%endblock%}

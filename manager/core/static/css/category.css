@@ -1,0 +1,8 @@
+#proms{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+.prom.results_on_deck {
+	margin-left: 10px;
+}
+#gallery input,#image input{display: none;}

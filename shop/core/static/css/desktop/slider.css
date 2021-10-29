@@ -1,0 +1,47 @@
+#slider{
+    padding: 2% 7% 10%;
+    min-height: 464px;
+    position: relative;
+    overflow: hidden;
+}
+#slider img{
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin: auto;
+}
+#slider a{
+    position: absolute;
+    left: 100%;
+    transition: left 0.2s ease;
+    width: 100%;
+    display: block;
+    height: 444px;
+    right: 0;
+}
+#slider a.active{
+    left: 0;
+}
+#slider a.left{
+    left: -100%;
+}
+#slider .bullets{
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    width: 105px;
+    cursor: pointer;
+}
+#slider .bullets div{
+    width: 10px;
+    height: 10px;
+    background-color: #b8b8b8;
+    border-radius: 25px;
+    margin: 0 3px;
+}
+#slider .bullets div.active{
+    background-color: #bc8bcb;
+}

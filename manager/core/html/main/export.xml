@@ -1,0 +1,43 @@
+{%load translate%}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE yml_catalog SYSTEM "shops.dtd">
+<yml_catalog date="2011-07-20 14:58">
+<shop>
+    <name>{{COMPANY_NAME}}</name>
+    <company>{{COMPANY_NAME}}</company>
+    <url>{{PROTOCOL}}://{{HOST}}/</url>
+    <currencies>
+        <currency id="UAH" rate="1"/>
+        <currency id="USD" rate="28.5"/>
+    </currencies>
+    <categories>
+        {%for category in categories%}
+            <category id="{{category.id}}">{{category.name}}</category>
+        {%endfor%}
+    </categories>
+
+    <offers>
+        {%for product in products%}
+            <offer id="{{product.id}}" available="{{product.is_available|lower}}">
+                <url>{{PROTOCOL}}://{{HOST}}/{{product.slug}}</url>
+                <price>{{product.get_export.price}}</price>
+                <currencyId>UAH</currencyId>
+                <categoryId>{{product.get_category.id}}</categoryId>
+                <picture>{{PROTOCOL}}://{{HOST}}{{product.gallery.first.url}}</picture>
+                <vendor>{{product.brand}}</vendor>
+                <stock_quantity>{{product.qty|floatformat:"0"}}</stock_quantity>
+                <name>{{product.get_export.meta.name}}</name>
+                <description><![CDATA[{{product.get_export.meta.text}}]]></description>
+                <param name="Страна производитель товара">{{product.brand.country}}</param>
+                <param name="Артикул">{{product.model}}</param>
+                <param name="Длина">{{product.length}}</param>
+                <param name="Ширина">{{product.width}}</param>
+                <param name="Высота">{{product.height}}</param>
+                {%for attr in product.attributes.all%}
+                    <param name="{{attr.name}}">{{attr.value}}</param>
+                {%endfor%}
+            </offer>
+        {%endfor%}
+    </offers>
+</shop>
+</yml_catalog>

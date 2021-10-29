@@ -1,0 +1,34 @@
+{%extends base%}
+{%load i18n%}
+{%block main%}
+<form id="login-form" class="user" action="javascript: void(0)">
+	{%csrf_token%}
+	<!-- <div class="close"><i class="far fa-window-close"></i></div> -->
+	<h3>{% trans 'Вход'%}</h3>
+	{{form.phone.label_tag}}
+	{{form.phone}}
+	{{form.phone.errors}}
+	{{form.password.label_tag}}
+	{{form.password}}
+	{{form.password.errors}}
+	{{form.non_field_errors}}
+	<input type="hidden" name="next" value="{{next}}">
+	<a href="javascript:void(0)" id="forget">{% trans 'ой,пароль? напомнить'%}</a>
+	<button class="blue left">{% trans 'Войти'%}</button>
+	<a href="javascript:void(0)" id="sign-up" class="right">{% trans 'зарегистрироваться'%}</a>
+	<div></div>
+	<div style="text-align: center;">{% trans 'или'%}:</div>
+	<div class="social">
+		<div id="facebook"><svg><use xlink:href="#fbIcon"></use></svg></div>
+		<div id="google"><svg><use xlink:href="#gplusIcon"></use></svg></div>
+	</div>
+</form>
+<form id="forget-password-form" class="user" action="javascript: void(0)">
+	{%csrf_token%}
+	{{forget_form.phone.label_tag}}
+	{{forget_form.phone}}
+	{{forget_form.phone.errors}}
+	{{error}}
+	<button class="blue left">{% trans 'Напомнить'%}</button>
+</form>
+{%endblock%}

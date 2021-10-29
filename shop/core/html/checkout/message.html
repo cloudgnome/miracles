@@ -1,0 +1,77 @@
+{%load i18n%}
+{%load translate%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{% trans 'Информация по заказу'%} №{{order.id}}</title>
+</head>
+<body style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:16px 0;">
+	<div style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0 auto; padding:10px; width: 600px;background: #fff;">
+		<div><a href="http://{{domain}}" target="_blank"><img src="{{logo}}" height='80px'></a></div>
+		<p>{% trans 'Ваш заказ'%} №{{order.id}}. {% trans 'Статус заказа'%}: {{order.get_status_display}}.</p>
+		<div style="line-height: 18px; margin-bottom: 12px;">
+			<table cellspacing="0" class="form-list" style="width: 100%;">
+				<tr>
+					<td style="width: 150px;">{% trans 'Номер телефона'%}:</td>
+					<td>{{order.phone}}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				</tr>
+				<tr>
+					<td>{% trans 'На имя'%}:</td>
+					<td>{{order.full_name}}</td>
+				</tr>
+				<tr>
+					<td>{% trans 'Способ доставки'%}:</td>
+					<td>{{order.get_delivery_type_display}}</td>
+				</tr>
+				{%if order.address%}
+					<tr>
+						<td>{% trans 'Адрес доставки'%}:</td>
+						<td>{{order.address}}</td>
+					</tr>
+				{%endif%}
+				{%if order.city%}
+					<tr>
+						<td>{% trans 'Город'%}:</td>
+						<td>{{order.city}}</td>
+					</tr>
+				{%endif%}
+				{%if order.departament%}
+					<tr>
+						<td>{% trans 'Отделение'%}:</td>
+						<td>{{order.departament}}</td>
+					</tr>
+				{%endif%}
+				<tr>
+					<td>{% trans 'Способ оплаты'%}:</td>
+					<td>{{order.get_payment_type_display}}</td>
+				</tr>
+				<tr>
+					<td>{% trans 'Содержание заказа'%}:</td>
+				</tr>
+			</table>
+		</div>
+		<table cellspacing="0" cellpadding="0" border="0" style="border: 1px solid #dfe3f4; width: 100%;">
+	{%for item in order.cart%}
+	<tr>
+		<td style='padding: 5px; width: 50px; border-bottom: 1px solid #dfe3f4;'><a href=''>
+			<img width="50px" src='http://{{domain}}{{item.product.image.checkout_thumb}}' />
+			</a>
+		</td>
+		<td style='padding: 5px; line-height: 18px; vertical-align: middle; border-bottom: 1px solid #dfe3f4;'>
+			<a style='text-decoration: none; color: #515c86; font-weight: bold;' href="http://{{domain}}{% translate item.product 'slugy' lang %}">{% translate item.product 'names' lang%}</a>
+			<br> {{item.qty}}шт. x {{item.price}}грн.
+		</td>
+	</tr>
+	{%endfor%}
+	</table>
+		<br>
+		<div style="display: inline-block">
+			<div style="font-size: 22px; margin-bottom: 10px;">{% trans 'Итого к оплате'%}:  {{order.cart.total}}грн. </div>
+		</div>
+		<div style="border-top: 1px solid #dfe3f4; margin-top: 10px; padding-top: 5px; color: #726a6a; font-size: 11px;">{% trans 'Если у Вас есть какие-либо вопросы, пишите нам или звоните по номерам'%}:<br> 
+		{%for phone in PHONES%}{{phone}} {%endfor%}</div>
+		<br>
+	</div>
+</body>
+</html>

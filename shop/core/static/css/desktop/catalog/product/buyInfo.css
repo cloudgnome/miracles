@@ -1,0 +1,64 @@
+.buy-info{
+	width: 100%;
+	color:#000;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	padding-bottom: 5%;
+	background-color: #fff;
+	padding-top: 57px;
+}
+.buy-info .info-head{
+	background-color: #81d4ef;
+	border-radius: 0 0 10px 10px;
+	color: #fff;
+	height: 62px;
+	font-weight: 300;
+	font-size: 17px;
+	line-height: 64px;
+	position: relative;
+	padding-left: 69px;
+}
+.buy-info svg{
+	width: 47px;
+	height: 47px;
+	fill: #fff;
+	position: absolute;
+	top: 1px;
+	left: 15px;
+}
+.buy-info ul{
+	padding: 0 5% 0 10%;
+	color: #fff;
+}
+.buy-info .shiping{
+	font-weight: 700;
+}
+.buy-info ul li span{
+	color:#000;
+}
+.buy-info ul li span span{
+	font-weight: 400;
+}
+.buy-info .i{
+	padding-left: 4%;
+	font-style:italic;
+	font-weight: 400;
+}
+.buy-info a{
+	color: #fff;
+	text-decoration: none;
+}
+.buy-info .return,.buy-info .shiping,.buy-info .pay{
+	border-bottom: 5px solid #cce6f2;
+	border-top:5px solid #43abd7;
+	padding-bottom: 4%;
+	background-color: #d8edf7;
+	margin-bottom: 5px;
+	width: 31%;
+	margin: auto;
+	min-height: 312px;
+	border-radius: 9px;
+}

@@ -1,0 +1,53 @@
+{%extends extends%}
+{%load value%}
+{%block main%}
+    <div id="reload">
+        <div class="container">
+            <div id="product_head">
+                <div id="check-all">
+                    <input type="checkbox" name="all">
+                </div>
+                <div>
+                    {%for field in Model.list_search%}
+                        <div>
+                            <a ordering="{{field.ordering}}">{{field.head_text}}</a>
+                            <div class="search-text">
+                                <input name="{{field.query}}" type="text" placeholder="{{field.text}}" value="{{filters|val:field.query}}" autocomplete="off">
+                                <div class="clear-search noselect">X</div>
+                            </div>
+                        </div>
+                    {%endfor%}
+                </div>
+            </div>
+            <div id="items" class="product_items">
+                {%include 'main/productItems.html'%}
+            </div>
+        </div>
+    </div>
+    <div id="panel-wrapper">
+        <div>
+            <div class="toggle-panel panel-icon action">
+                <i class="fas fa-hamburger"></i>
+            </div>
+        </div>
+        <div id="panel-shortcuts" class="active">
+            <a class="button load" href="/{{Model}}/"><i class="fas fa-plus"></i></a>
+            <div id="delete" class="delete-list">
+                <i class="fas fa-trash-alt"></i>
+            </div>
+        </div>
+    </div>
+    <div id="panel-menu">
+        <div id="search">
+            <input type="text" id="search-text" placeholder='Поиск' value="{{value}}">
+            <div class="toggle-panel panel-icon action">
+                <i class="fas fa-hamburger"></i>
+            </div>
+        </div>
+        {%include panel%}
+    </div>
+    <script>
+        window.PAGE_CONTEXT = JSON.parse({{context|safe|default:"{}"}});
+        if(!document.querySelector('menu')) location.reload();
+    </script>
+{%endblock%}

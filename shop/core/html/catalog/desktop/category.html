@@ -1,0 +1,103 @@
+{%load i18n%}
+{%load translate%}
+{%block breadcrumbs%}
+<div class="bread-crumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+	<span itemprop="itemListElement" 
+	itemscope itemtype="http://schema.org/ListItem">
+		<a href="{{language}}/" itemprop="item">
+			<span itemprop="name">{% trans 'Главная'%}</span>
+		</a>
+		<meta itemprop="position" content="1">
+	</span>
+	{%for crumb in breadcrumbs%}
+		<span itemprop="itemListElement" 
+		itemscope itemtype="http://schema.org/ListItem">
+			<a href='{{crumb.1}}' itemtype="http://schema.org/Thing"
+			itemprop="item">
+				<span itemprop="name">{{crumb.0}}</span>
+			</a>
+			<meta itemprop="position" content="{{forloop.counter|add:'1'}}">
+		</span>
+	{%endfor%}
+	<h1>{{h1}}</h1>
+</div>
+{%endblock%}
+{%block main%}
+<div class="body">
+	{%include 'catalog/desktop/aside.html'%}
+	<main>
+		<div class="categories items">
+			{%for category in categories%}
+				<div class='item'>
+					<a href="{% translate category 'slugy' lang %}" class="image">
+						<img src="{{category.image_url}}" alt="{% translate category 'names' lang %}">
+					</a>
+					<a class='name' href="{% translate category 'slugy' lang %}">{% translate category 'names' lang %}</a>
+				</div>
+			{%endfor%}
+		</div>
+		<div id="category" class='products'>
+			<div class="items">
+				{%for product in products%}
+					<div class='item{%if not product.is_available%} notavail{%endif%}'>
+						<div class="model">{%trans 'Код'%}: {{product.model}}</div>
+						<a class='image' href="{% translate product 'slugy' lang %}" title="{% translate product 'names' lang %}">
+							<img src="{{product.image.list_thumb}}" alt="{% translate product 'names' lang %}">
+							{%if product.special%}
+								<div class="special">-{{product.special.percent}}%</div>
+							{%endif%}
+						</a>
+						<div class="info">
+							<div class="availability ">
+								{{product.availability|safe}}
+							</div>
+							{%if product.is_available%}
+								<div>
+									{%block buy%}
+										<button class='blue buy button' value="{{product.id}}" name="{% translate product 'names' lang%}">{% trans 'Купить'%}</button>
+										{%if product.special%}
+											<div class="price">
+												<span class="old">{{product.retail_price}} грн.</span>
+												<span class="new">{{product.price|default_if_none:0}} грн.</span>
+											</div>
+										{%else%}
+											<div class="price">{{product.price|default_if_none:0}} грн.</div>
+										{%endif%}
+									{%endblock%}
+								</div>
+							{%endif%}
+						</div>
+							{%if product.is_available%}
+								<div class="more_info">
+									<div class='quantity'>
+										<span class="minus">-</span>
+										<input type="text" value="1">
+										<span class="plus">+</span>
+									</div>
+									<div class="properties">
+										{%if product.brand%}
+											<div><span class="key">{% trans 'Брэнд'%}: </span><span>{{product.brand}}</span></div>
+											{%if product.brand.country%}
+												<div><span class="key">{% trans 'Страна'%}: </span><span>{{product.brand.country}}</span></div>
+											{%endif%}
+										{%endif%}
+										{%if product.width%}
+											<div><span class="key">{% trans 'Параметры'%}: </span><span>{{product.parameters}}</span></div>
+										{%endif%}
+									</div>
+								</div>
+							{%endif%}
+						<a href="{% translate product 'slugy' lang %}" class='name' title="{% translate product 'names' lang %}">{% translate product 'names' lang %}</a>
+					</div>
+				{%endfor%}
+			</div>
+		</div>
+		<article class="noselect">
+			{{description|safe}}
+		</article>
+	</main>
+</div>
+<script>
+	var parameters = {};
+</script>
+{%endblock%}

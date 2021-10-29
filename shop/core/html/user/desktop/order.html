@@ -1,0 +1,189 @@
+{%extends 'shop/desktop/index.html'%}
+{%load i18n%}
+{%load translate%}
+{%block main%}
+<div class="bread-crumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+	<span itemprop="itemListElement" 
+	itemscope itemtype="http://schema.org/ListItem">
+		<a href="{{language}}/" itemprop="item">
+			<span itemprop="name">{% trans 'Главная'%}</span>
+		</a>
+		<meta itemprop="position" content="1">
+	</span>
+	<span itemprop="itemListElement" 
+	itemscope itemtype="http://schema.org/ListItem">
+		<a href="{{language}}/user/profile/" itemprop="item">
+			<span itemprop="name">{% trans 'Заказы'%}</span>
+		</a>
+		<meta itemprop="position" content="2">
+	</span>
+	<h1 id="order-head">Заказ №{{order.id}}</h1>
+</div>
+{%if messages%}
+	{% for message in messages %}
+		<div class="message">{{message}}</div>
+	{% endfor %}
+	<script>
+		document.onreadystatechange = function(){
+			if(document.readyState === 'complete')
+				pageObject.clearCart();
+		};
+
+		// Event snippet for Покупки conversion page
+		gtag('event', 'conversion', {
+			'send_to': '{{GOOGLE_CONVERSION}}',
+			'transaction_id': '{{order.id}}'
+		});
+	</script>
+{%endif%}
+<div class="order profile">
+	{%if order%}
+		<div id="order">
+			<div id="order-info">
+				<form action="" id='orderForm'>
+					{%csrf_token%}
+					<table class="form-list">
+						<tr>
+							<td>{% trans 'Имя'%}:</td>
+							<td>{{form.name}}</td>
+						</tr>
+						{%if order.delivery_type != 4%}
+							<tr>
+								<td>{% trans 'Фамилия'%}:</td>
+								<td>{{form.lname}}</td>
+							</tr>
+							<tr>
+								<td>{% trans 'Отчество'%}:</td>
+								<td>{{form.sname}}</td>
+							</tr>
+						{%endif%}
+						<tr>
+							<td>{% trans 'Номер телефона'%}:</td>
+							<td>{{form.phone}}</td>
+						</tr>
+						<tr>
+							<td>{% trans 'Адрес почты'%}:</td>
+							<td>{{form.email}}</td>
+						</tr>
+						<tr>
+							<td>{% trans 'Способ доставки'%}:</td>
+							<td>{{order.get_delivery_type_display}}</td>
+						</tr>
+						{%if order.address%}
+							<td>{% trans 'Адрес'%}:</td>
+							<td>{{form.address}}</td>
+						{%endif%}
+						{%if order.delivery_type == 1 or order.delivery_type == 2%}
+							{%if order.city%}
+								<tr>
+									<td>{% trans 'Город доставки'%}:</td>
+									<td id='city'>{% translate order.city 'address' lang%}</td>
+								</tr>
+							{%endif%}
+							{%if order.departament%}
+								<tr>
+									<td>{% trans 'Отделение доставки'%}:</td>
+									<td id='departament'>{% translate order.departament 'address' lang%}</td>
+								</tr>
+							{%endif%}
+						{%endif%}
+						<tr>
+							<td>{% trans 'Способ оплаты'%}:</td>
+							<td>{{form.payment_type}}</td>
+						</tr>
+					</table>
+					<div id="delivery_message">{% trans 'Внимание! Доставка возможна только с оплатой Приват24'%}.</div>
+					<button id='change-order' class='button' disabled="">{% trans 'Изменить'%}</button>
+				</form>
+				<h2>{% trans 'Содержание заказа'%}:</h2>
+				<div class='blockScroll'>
+					{%for item in order.cart%}
+						<div class="order_item">
+							<img src='{{item.product.image.checkout_thumb}}'>
+							<a href="{% translate item.product 'slugy' lang %}">{% translate item.product 'names' lang%}</a>
+							<br> {{item.qty}}шт. x {{item.price}}грн.
+						</div>
+					{%endfor%}
+				</div>
+				{%if order.cart.discount%}
+					<div style="width: 570px;text-align:right;color:red">Учтена скидка:  {{order.cart.discount}}грн. </div>
+				{%endif%}
+				<div class='order_total'>{% trans 'Итого к оплате'%}:  {{order.cart.total}}грн. </div>
+				<script>var order_id = {{order.id}};</script>
+			</div>
+			<div id="order-payment">
+				{%if order.status == 1 and order.payment_type == 2%}
+					<div id="payment">
+						<div id="paymentMessage">
+							Важно! Желательно осуществляйте предоплату после согласования деталей заказа(цвет, разновидность товара)
+						</div>
+						{%if CHECKOUT_TYPE == 'liqpay'%}
+							<!-- {{liqpay|safe}} -->
+							<div id="liqpay_checkout"></div>
+							<script>
+								window.LiqPayCheckoutCallback = function() {
+								LiqPayCheckout.init({
+										data: "{{data}}",
+										signature: "{{signature}}",
+										embedTo: "#liqpay_checkout",
+										language: "uk",
+										mode: "embed",
+									}).on("liqpay.callback", function(data){
+										console.log(data.status);
+										console.log(data);
+									}).on("liqpay.ready", function(data){
+										// ready
+									}).on("liqpay.close", function(data){
+										// close
+									});
+								};
+							</script>
+							<script src="//static.liqpay.ua/libjs/checkout.js" async></script>
+						{%elif CHECKOUT_TYPE == 'wfp'%}
+							<script id="widget-wfp-script" language="javascript" type="text/javascript" src="https://secure.wayforpay.com/server/pay-widget.js"></script>
+
+							<script type="text/javascript">   
+								var wayforpay = new Wayforpay();  
+								var pay = function () {     
+								wayforpay.run({
+									merchantAccount : "ckl_com_ua",
+									merchantDomainName : "ckl.com.ua",
+									authorizationType : "SimpleSignature",
+									merchantSignature : "{{signature}}",
+									orderReference : "{{order.id}}",
+									orderDate : "{{data}}",
+									amount : "{{order.cart.total}}",
+									orderTimeout: 864000,
+									currency : "UAH",
+									productName: "Заказ №{{order.id}}",
+									productPrice: "{{order.cart.total}}",
+									productCount: "1",
+									clientFirstName : "{{order.name}}",
+									clientLastName : "{{order.lname}}",
+									clientEmail : "{{order.email}}",
+									clientPhone: "{{order.phone}}",
+									language: "UA",
+									serviceUrl: "https://{{BASE_URL}}/user/pay/callback"
+								},
+								function (response) {
+								// on approved              
+								},      
+								function (response) {
+								// on declined      
+								},      
+								function (response) {
+								// on pending or in processing      
+								}     
+								);  
+								}
+							</script>
+
+							<button class="button green" type="button" onclick="pay();">Оплатить</button>
+						{%endif%}
+					</div>
+				{%endif%}
+			</div>
+		</div>
+	{%endif%}
+</div>
+{%endblock%}

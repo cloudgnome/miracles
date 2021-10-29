@@ -1,0 +1,18 @@
+{%extends 'shop/mobile/index.html'%}
+{%load i18n%}
+{%block main%}
+<div class="wrap">
+	<div class="nice-image"></div>
+	<h1 class="error_page404">404 {% trans 'Страница не существует, либо была удалена'%}.</h1>
+</div>
+	<style>
+		.wrap{
+			clear: both;
+			padding-top: 14px;
+		}
+		main{
+			font-size: 18px;
+			text-align: center;
+		}
+	</style>
+{%endblock%}

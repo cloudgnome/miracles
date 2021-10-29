@@ -1,0 +1,21 @@
+#call-back-form{
+	width: 600px;
+	text-align: center;
+	padding: 60px 35px 45px;
+}
+#call-back-form input[type='text']{
+	width: 60%;
+	height: 30px;
+	display: block;
+	margin: 5px auto 10px;
+}
+#call-back-form button{
+	margin: auto;
+	background-color: #FF5347;
+}
+#call-back-form .errorlist{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	color: green;
+}

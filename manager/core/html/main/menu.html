@@ -1,0 +1,95 @@
+{%load i18n%}
+<menu class="noselect" id="nav">
+    <div id="top">
+        <div class="burger">
+            <i class="fas fa-hamburger"></i>
+        </div>
+        <a href="http://{{SITE_URL}}/" id="shop">
+            <svg><use xlink:href="#logo-default"></use></svg>
+        </a>
+    </div>
+    <div id="menu-title">
+        <div id="prev">
+            <i class="fas fa-chevron-left"></i>
+            <div id="menu-title-text"></div>
+        </div>
+    </div>
+    <div id="menu">
+        <a href="/Order/">
+            <i class="fas fa-cart-plus"></i>
+            {%trans 'Добавить заказ'%}
+        </a>
+        <a href="/Order">
+            <i class="fas fa-shopping-cart"></i>
+            {%trans 'Заказы'%}
+        </a>
+        <div class="parent branch">
+            <i class="fab fa-product-hunt"></i>
+            <span>{%trans 'Товары'%}</span>
+            <div class="sub">
+                <a href="/Product">{%trans 'Все'%}</a>
+                <a href="/Storage">{%trans 'Новые товары'%}</a>
+                <a href="/Tigres">{%trans 'Тигрес'%}</a>
+                <a href="/Popular">{%trans 'Популярные'%}</a>
+                <a href="/Offer">{%trans 'Рекомендуемые'%}</a>
+                <a href="/Special">{%trans 'Акции'%}</a>
+                <a href="/Attribute">{%trans 'Атрибуты'%}</a>
+                <a href="/Tag">{%trans 'Теги'%}</a>
+                <a href="/Featured">{%trans 'Наборы'%}</a>
+                <a href="/Brand">{%trans 'Производители'%}</a>
+            </div>
+        </div>
+        {%if TIGRES_CATEGORIES%}
+            <div class="parent menu-link branch">
+                <i class="fa fa-list-alt"></i>
+                <span>{%trans 'Категории'%}</span>
+                <div class="sub">
+                    <a href="/Category">{%trans 'Все'%}</a>
+                    <a href="/TigresCategory">{%trans 'Тигрес'%}</a>
+                </div>
+            </div>
+        {%else%}
+            <a href="/Category">
+                <i class="fa fa-list-alt"></i>
+                {%trans 'Категории'%}
+            </a>
+        {%endif%}
+        <div class="parent branch">
+            <i class="fas fa-store-alt"></i>
+            <span>{%trans 'Магазин'%}</span>
+            <div class="sub">
+                <a href="/Meta">{%trans 'Meta'%}</a>
+                <a href="/Article">{%trans 'Статьи'%}</a>
+                <a href="/Slider">{%trans 'Слайдер'%}</a>
+                <a href="/Page">{%trans 'Простые страницы'%}</a>
+                <a href="/City">{%trans 'Город'%}</a>
+                <a href="/Review">{%trans 'Отзывы'%}</a>
+                <a href="/Robots">{%trans 'robots.txt'%}</a>
+                <a href="/Prom">{%trans 'prom.ua'%}</a>
+                <a href="/Slug">{%trans 'Ссылки'%}</a>
+                <a href="/Redirect">{%trans 'Переадресации'%}</a>
+                <a href="/Language">{%trans 'Языки'%}</a>
+                <a href="/Percent">{%trans 'Наценка'%}</a>
+                <a href="/Sms">{%trans 'SMS'%}</a>
+                <a href="/Settings">{%trans 'Настройки'%}</a>
+                <a href="/Currency">{%trans 'Валюта'%}</a>
+            </div>
+        </div>
+        <a href="/User">
+            <i class="fas fa-users"></i>
+            {%trans 'Пользователи'%}
+        </a>
+        <a href="/" id="home-link">
+            <i class="fas fa-home"></i>
+            {%trans 'Настройки'%}
+        </a>
+        <a href="/Export">
+            <i class="fas fa-file-export"></i>
+            {%trans 'Экспорт'%}
+        </a>
+        <a href="/Task">
+            <i class="fas fa-code-branch"></i>
+            {%trans 'Завдання'%}
+        </a>
+    </div>
+</menu>

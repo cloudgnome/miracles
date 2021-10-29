@@ -1,0 +1,97 @@
+{% load i18n %}
+{% load translate %}
+<!DOCTYPE html>
+<html lang="{{langISOcode}}">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{title}}</title>
+	<meta content='{{meta_description}}' name="description">
+	<meta content='{{meta_keywords}}' name="keywords">
+	<meta content='{{title}}' property="og:title">
+	<meta content="{{image}}" property="og:image">
+	<meta content="{{request.build_absolute_uri}}" property="og:url">
+	<meta content="{{host}}" property="og:site_name">
+	<meta content="website" property="og:type">
+	<meta name="yandex-verification" content="72a241ba8b22dc06" />
+	<meta name="google-site-verification" content="{{GOOGLE_SITE_VERIFICATION}}" />
+	<link rel="icon" type="image/png" href="/static/image/favicon.png" />
+	<link type="text/css" rel="stylesheet" href="/static/desktop-critical-min{{CSS_BUILD}}.css">
+	{%for language in languages%}
+		<link rel="alternate" hreflang="{{language.ISOcode}}" href="{{PROTOCOL}}://{{BASE_URL}}{{language.path}}{{url|default_if_none:''}}" />
+	{%endfor%}
+	{%include 'shop/desktop/sprite.svg'%}
+</head>
+<body>
+	<div id="loading"></div>
+	<div id="bg"></div>
+	<div id="form"></div>
+	<div id="add-cart" class="message">
+		<div>
+			{% trans 'Вы добавили'%}:
+			<span class="name"></span>
+		</div>
+	</div>
+	{%include 'shop/desktop/header.html' with category=category%}
+	<div id="categories-container" class="container"></div>
+	<div id="content" class="container">
+		{%block main%}
+			{{content|safe}}
+		{%endblock%}
+	</div>
+	{%include 'shop/desktop/footer.html'%}
+	<div id="token">
+		{%csrf_token%}
+	</div>
+	<link type="text/css" rel="stylesheet" href="/static/desktop-min{{CSS_BUILD}}.css">
+	<script src="/static/desktop-min{{JS_BUILD}}.js"></script>
+	<script>
+		var pageObject = new Page();
+		{%if view%}
+			var view = eval('new {{view|safe}}()');
+		{%else%}
+			var view = new Default();
+		{%endif%}
+
+		{%if language%}
+			var language = '{{language}}';
+		{%else%}
+			var language = '';
+		{%endif%}
+
+		var csrf_token = getCookie('csrftoken');
+		if(!csrf_token)
+			csrf_token = $('#token input')[0].value;
+	</script>
+	{%block JS%}
+	{%endblock%}
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id={{GOOGLE_TAG}}"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', '{{GOOGLE_TAG}}');
+	  gtag('config', '{{GOOGLE_ADWORDS}}');
+	</script>
+	<!-- Facebook Pixel Code -->
+	<script>
+		!function(f,b,e,v,n,t,s)
+		{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		n.queue=[];t=b.createElement(e);t.async=!0;
+		t.src=v;s=b.getElementsByTagName(e)[0];
+		s.parentNode.insertBefore(t,s)}(window,document,'script',
+		'https://connect.facebook.net/en_US/fbevents.js');
+		 fbq('init', '{{FACEBOOK_ID}}'); 
+		fbq('track', 'PageView');
+	</script>
+	<noscript>
+		<img height="1" width="1" src="https://www.facebook.com/tr?id={{FACEBOOK_ID}}&ev=PageView&noscript=1"/>
+	</noscript>
+	<!-- End Facebook Pixel Code -->
+</body>
+</html>

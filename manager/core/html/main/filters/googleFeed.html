@@ -1,0 +1,18 @@
+<form action="javascript: void(0)" method="post" id="filters">
+    <!-- <input type="text" name="search" value="" placeholder="Поиск"> -->
+    <div class="select">
+        <select name="is_available" id="is_available">
+            <option value="" selected>Наличие</option>
+            <option value="True">В наличии</option>
+            <option value="False">Нет в наличии</option>
+        </select>
+    </div>
+    <div class="autocomplete" id="brand">
+        <input type="text" name="brand__description__name__icontains" value="" placeholder="Производитель" autocomplete="off">
+        <div class="variants"></div>
+    </div>
+    <div class="autocomplete" id="category">
+        <input type="text" name="category__description__name__icontains" value="" placeholder="Категория" autocomplete="off">
+        <div class="variants"></div>
+    </div>
+</form>

@@ -1,0 +1,48 @@
+{%load i18n%}
+{%load translate%}
+<div class="close"></div>
+<div>
+	<form action="javascript:void(0)" method="post" class="cart" id="cart-form">
+		{%csrf_token%}
+		{%if items and items_qty > 4%}
+			<button class="checkoutButton">
+				{% trans 'ОФОРМИТЬ ЗАКАЗ'%}
+				<div class="loading"></div>
+			</button>
+		{%endif%}
+		<h3>{{h2}}</h3>
+		<div id="products">
+			{%if items%}
+				<div class="line"></div>
+				{%if items%}
+					{%for item in items%}
+						<div class="cart_item">
+							<div class='image'>
+								<img src="{{item.product.image.cart_thumb}}" alt="image">
+							</div>
+							<div class="name"><a href="{%translate item.product 'slugy' lang%}">{{item.product.name}}</a></div>
+							<div class="model">{% trans 'Артикул'%} #: {{item.product.model}}</div>
+							<div class='quantity'>
+								<input name='{{item.product.id}}' type="tel" value="{{item.qty}}" data-price="{{item.product.price}}">
+							</div>
+							<div class="price">
+								<span class="total">{{item.total}}</span><span class="currency">грн.</span>
+							</div>
+							<div class="remove left" item-id="{{item.id}}" product-id={{item.product.id}}></div>
+						</div>
+					{%endfor%}
+				{%endif%}
+				<div id="total">
+					<span>{% trans 'К оплате'%}:</span>
+					<div id="sum">{{total}}</div><div class="currency">грн.</div>
+				</div>
+			{%endif%}
+		</div>
+		{%if items%}
+			<button class="checkoutButton">
+				{% trans 'ОФОРМИТЬ ЗАКАЗ'%}
+				<div class="loading"></div>
+			</button>
+		{%endif%}
+	</form>
+</div>

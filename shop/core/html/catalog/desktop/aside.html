@@ -1,0 +1,146 @@
+{%load i18n%}
+{%load translate%}
+<aside>
+    {%if search_categories%}
+        <div id="filter-categories-sidebar">
+            <div class='title'>{%trans 'Категории товаров'%}</div>
+            <div id="categories-tree">
+                {%for category in search_categories%}
+                    <div>
+                        <a href="{%translate category 'slugy' lang%}">
+                            <i class="fas fa-chevron-right"></i>
+                            {%translate category 'names' lang%}
+                        </a>
+                    </div>
+                {%endfor%}
+            </div>
+        </div>
+    {%endif%}
+    {%if products.paginator.count > 4%}
+        <form action="javascript: void(0)" method="post" id="filters">
+            <div class="row sort">
+                <div class="title">{% trans 'Сортировка'%}</div>
+                <div class="custom-select">
+                    <select name="ordering" class='selectedFilter' id='price-sort'>
+                        <option value="">{% trans 'по цене'%}</option>
+                        <option value="retail_price">{% trans 'от дешевых к дорогим'%}</option>
+                        <option value="-retail_price">{% trans 'от дорогих к дешевым'%}</option>
+                    </select>
+                </div>
+                {%if not user.is_opt%}
+                    <div class="custom-select">
+                        <select name="storage__in[]" class='selectedFilter' id='storage-filter'>
+                            <option value="">{% trans 'по складу'%}</option>
+                            <option value="2,3">{% trans 'в наличии'%}</option>
+                            <option value="1">{% trans 'под заказ'%}</option>
+                        </select>
+                    </div>
+                {%endif%}
+                {%if min_price and max_price and min_price < max_price%}
+                    <div class="title">{%trans 'Цена'%}</div>
+                    <div id="range-1">
+                        <input type="text" id="amount-from" value="{{min_price}}" readonly disabled name="retail_price__gte">
+                        <input type="text" id="amount-to" value="{{max_price}}" readonly disabled name="retail_price__lte">
+                        <div id="slider-range"></div>
+                    </div>
+                {%endif%}
+            </div>
+            {%if attributes%}
+                <div class="row attributes">
+                    {%for attribute in attributes%}
+                        <label class="title" for="attribute_{{attribute.id}}">{{attribute}}</label>
+                        <div class="custom-select">
+                            <select name="attributes__id[]" id="attribute_{{attribute.id}}">
+                                <option value="">{% trans 'Не выбрано'%}</option>
+                                {%for value in attribute.values.all%}
+                                    <option value="{{value.id}}">{{value}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    {%endfor%}
+                </div>
+            {%endif%}
+            {%if filter_categories%}
+                <div class="row manufacturer categories">
+                    <div class="shadow">
+                        <h3 class="title">{% trans 'Категории'%}</h3>
+                        <div>
+                            {%for category in filter_categories%}
+                                <input type="checkbox" id='{{category.id}}' name="category__id__in[]" value="{{category.id}}">
+                                <label for="{{category.id}}">{% translate category 'names' lang %}</label>
+                                <br>
+                            {%endfor%}
+                        </div>
+                    </div>
+                </div>
+            {%endif%}
+            <div class="row">
+                {%if brands%}
+                    <div class="row manufacturer brand">
+                        <div class="shadow">
+                            <div class="title">{% trans 'Производители'%}</div>
+                            <div>
+                                {%for brand in brands%}
+                                    <input type="checkbox" id='{{brand.id}}' name="brand__id__in[]" value="{{brand.id}}">
+                                    <label for="{{brand.id}}">{{brand.name}}</label>
+                                    <br>
+                                {%endfor%}
+                            </div>
+                        </div>
+                    </div>
+                {%endif%}
+                <button id="filter" class="blue">{% trans 'Применить'%}</button>
+            </div>
+        </form>
+    {%endif%}
+    {%if aside_categories%}
+        <div id="filter-categories-sidebar">
+            <div class='title'>{%translate category.root 'names' lang%}</div>
+            <div id="categories-tree">
+                {% load mptt_tags %}
+                {%if aside_categories%}
+                    {% recursetree aside_categories %}
+                        {%if node.active%}
+                            {%if not node.is_child_node%}
+                                {%if node.is_leaf_node%}
+                                    <div>
+                                        <a href="{%translate node 'slugy' lang%}"{%if node == category%} class="active"{%endif%}>
+                                            <i class="fas fa-chevron-right"></i>
+                                            {%translate node 'names' lang%}
+                                        </a>
+                                    </div>
+                                {%else%}
+                                    <div class="parent">
+                                        <a class="icon parent_category{%if node == category%} active{%endif%}" href="{%translate node 'slugy' lang%}">
+                                            <i class="fas fa-chevron-right"></i>
+                                            {%translate node 'names' lang%}
+                                        </a>
+                                    </div>
+                                {%endif%}
+                            {%else%}
+                                {%if node.is_leaf_node%}
+                                    <div>
+                                        <a {%if not node.is_leaf_node%}class="icon parent_category"{%endif%} href="{%translate node 'slugy' lang%}"{%if node == category%} class="active"{%endif%}>
+                                            <i class="fas fa-chevron-right"></i>
+                                            {%translate node 'names' lang%}
+                                        </a>
+                                    </div>
+                                {%else%}
+                                    <div class="parent">
+                                        <a {%if not node.is_leaf_node%}class="icon parent_category{%if node == category%} active{%endif%}"{%endif%} href="{%translate node 'slugy' lang%}">
+                                            <i class="fas fa-chevron-right"></i>
+                                            {%translate node 'names' lang%}
+                                        </a>
+                                    </div>
+                                {%endif%}
+                            {%endif%}
+                        {%endif%}
+                    {% endrecursetree %}
+                {%endif%}
+            </div>
+        </div>
+    {%endif%}
+    {%block sidebar_products%}
+        {%include 'catalog/desktop/sidebar_products.html'%}
+    {%endblock%}
+</aside>

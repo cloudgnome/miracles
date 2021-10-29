@@ -1,0 +1,30 @@
+#settings{
+    width: 100%;
+}
+#tasks{
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 4px;
+}
+#tasks .box{
+    display: flex;
+    padding-bottom: 22px;
+}
+#tasks .box .custom-select{
+    flex: 1;
+}
+#tasks .box i{
+    margin: auto;
+    margin-left: 12px;
+    cursor: pointer;
+}
+#settings input{
+    width: 70%;
+}
+#settings button{
+    margin-top: 2%;
+}
+#settings .container #cache i{
+    font-size: 41px;
+    cursor: pointer;
+}

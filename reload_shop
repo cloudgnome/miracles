@@ -1,0 +1,2 @@
+/bin/bash -c 'cd /home/core/shop & for d in *; do if [[ "$d" != "core" ]] && [[ "$d" != "default" ]]; then \
+  cd "$d" && ls -l && touch uwsgi.ini & cd /home/core/shop; fi done'

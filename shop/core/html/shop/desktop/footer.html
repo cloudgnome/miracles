@@ -1,0 +1,67 @@
+{% load i18n %}
+{%load translate%}
+<footer>
+	<div id="footer-info" class="container">
+		<div id="channels">
+			<div class="heading">Каналы в соцсетях</div>
+			<a href="{{FACEBOOK_LINK}}" target="_blank" rel="nofollow"><svg><use xlink:href="#fbIconRounded"></use></svg></a>
+			<a href="{{YOUTUBE_LINK}}" target="_blank" rel="nofollow"><svg><use xlink:href="#youIcon"></use></svg></a>
+		</div>
+		<div class="footer-info-links">
+            <div class="heading">{% trans 'Компания'%}</div>
+			{%for item in footer_menu%}
+				<a href="{{language}}/{{item.slug}}">
+					{% translate item 'names' lang%}
+				</a>
+			{%endfor%}
+			{%block footer_links%}
+			{%endblock%}
+		</div>
+		<div class="footer-info-links">
+            <div class="heading">{% trans 'Другие города'%}</div>
+			{%for city in cities%}
+				<a class="link" href="{% translate city 'slugy' lang %}" title="{% translate city 'names' lang%}">{% translate city 'names' lang%}</a>
+			{%endfor%}
+		</div>
+		{%if IOS_APP%}
+			<div>
+				<div class="downloadStore">
+				    <a href="https://apps.apple.com/us/app/igroteka/id1450140814" target="_blank">
+				        <svg><use xlink:href="#appstore"></use></svg>
+				    </a>
+				</div>
+			</div>
+		{%endif%}
+	</div>
+	<hr>
+	<div class="container" id="footer-phones">
+		<div class='address'>
+			<div>{{ADDRESS}}</div>
+			<a href="{{language}}/kontakti" class="link" title="{% trans 'Контакты'%}">{% trans 'Смотреть на карте'%}</a>
+		</div>
+		<div>
+			<a href="mailto:{{EMAIL}}" class="email phones">
+				<svg><use xlink:href="#emailIcon"></use></svg>
+				{{EMAIL}}
+			</a>
+			<div class="phoneList phones">
+				<svg width="24" height="24"><use xlink:href="#cellIcon"></use></svg>
+				{%for phone in PHONES%}
+					<span>{{phone}}</span>
+				{%endfor%}
+			</div>
+		</div>
+	</div>
+	<div class="container" id="footer-privacy">
+		<div class="mid">
+			<div id="copyright">© 2020 {{BASE_URL|upper}} {% trans 'Украина'%}</div>
+		</div>
+		<div id="site-by">
+			Site By
+			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 98 24">
+			  <image width="98" height="24" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGIAAAAYCAQAAACrFeAiAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAHdElNRQfkBBoQLBJdi1uZAAADXElEQVRYw82XYXnkOAyGNcvAFHIQQsEUQiELIRSyEHIQUggphCyEDAQvhPd+WJblpHNPp9vunX9lNJYsfZI+2SL/u8XIxkL4r/34nRAW8trer3Mz5SCDBPl1+/sskZfbL5P1EkXkfnv5ohAmmUXkLp2I/HW7P6lMUgSWi2TPqSWwwfM4PeFFIAELHQDxOeUFvzoR5kayiBDYG9n4FXmw858NQh0+DPvIYJKM/SHCCiRmC3j9giAOYBd5OghiLSJ1OXKYJKjLEUj0IiKaES0oAtPnsAk9AJP51L1fdXJ9kIOYfc2XHqjI6K7N6evhvxnEVPBnzNl/7/omr/Lj9r2RRRFpJXeJ8nJ71V8Z859u9+esaHZ7EXn9oBWAzA8m6a2R+2aXNTY9B7B9Qjmlgj8JGD5mJLzhcCw0e5H0Hzrk8eldKVJGID2j+819F7fut58X2ctZUvcQawvSl+AIxDY7xGvgROOgbONVRAYR+WGhXbToGR42PeO1RY1Qq5trO+zyDv2ey7c2qTWn0ffEVEIzWaI3jakyE70NV1esZd+jIKZroSid7k6SWiNZRbHXvXV4qrxOetNtBuxauYlNh2tvNwaAuTk/PexAxZhGdjbRqWSwcrC86IicDQytbHV3J+o/g+ntBGYdpotmQl1U+CIhE0dTLY8vPe0Q0+prmMgctfJSt2b3PZKgFp26exBswvTVRYVutf+SjrvB2d1dEIfuepiJa0eULqlsNVWEHcqjy+TqKnunU+noS08LL6nFjd6CKNeO2YKcnX7x51EuDHXHz6UwnGQ5tfVWDnNYHo6Iywp2wtYW4cmSAqa/VkV+cR6WfVPx2xsZvJHG8PZYkn+7tq6o+Tvv4XBcaom9AeF8Cgl2tdeVsizVQFCb9c5wRd0q0N1XNbnZQDCGCYRCCxl1vRhOnmrVscnxYLmNjcZEawPIYb03Vg19dUBU6SWI5tr1L12S2BwFbhruKWRnY7EgU0uuLNasRbI2lidmsz4xsNlplzopQaxvONA8f06cX1stqenTGHLPq919b80UgJ3e2YLkiLqsyaYUzo7nKSKJ1F67WLDHqckCE4cimt+AmVI7elKm0ksY+dEZNKSDUYTOcrDaZbJaDiJEy0ndUSE82L7idfkHFoGFjaW9T/0DAWiUowRQc/MAAAAASUVORK5CYII="/>
+			</svg>
+		</div>
+		<a id="privacy" href="/privacy_policy">{% trans 'Политика конфиденциальности'%}</a>
+	</div>
+</footer>

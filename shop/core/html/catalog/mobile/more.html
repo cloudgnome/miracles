@@ -1,0 +1,37 @@
+{%load i18n%}
+{%load translate%}
+{%for product in products%}
+	<div class='item{%if not product.is_available%} notavail{%endif%}'>
+		<a href="{% translate product 'slugy' lang %}" class="image">
+			<img src="{{product.image.preview_thumb}}" alt="{% translate product 'names' lang %}">
+		</a>
+		<div class="Bold availability">{{product.availability|safe}}</div>
+		<div class="name">
+			<a href="{% translate product 'slugy' lang %}">
+				{% translate product 'names' lang %}
+			</a>
+		</div>
+		{%if product.is_available%}
+			<button class='buy' value="{{product.id}}">
+				<svg><use xlink:href="#cartIcon" fill="#fff"></use></svg>
+				{% trans 'КУПИТЬ'%}
+			</button>
+			<div class="price">
+				{%if product.special%}
+					<span class="price old">{{product.retail_price}} грн</span>
+					<span class="price new">{{product.price}} грн.</span>
+				{%else%}
+					<span class="price">{{product.price}} грн.</span>
+				{%endif%}
+			</div>
+		{%endif%}
+	</div>
+{%endfor%}
+<script>
+	{%if products.has_next%}
+		page = "{{products.next_page_number}}";
+	{%else%}
+		if(window.page)
+			page = undefined;
+	{%endif%}
+</script>

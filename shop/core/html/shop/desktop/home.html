@@ -1,0 +1,159 @@
+{% load i18n %}
+{% load translate %}
+{%block main%}
+	{%block banner%}
+		{%if video_banner%}
+			<div id="video-container">
+				<div id="video-banner">
+					<video class="video-bg fill hide-for-medium" preload="true" playsinline="" autoplay="" muted="" loop="" eq-attached="true">
+						<source src="{{video_url}}.webm" type="video/webm">
+						<source src="{{video_url}}.mp4" type="video/mp4">
+					</video>
+				</div>
+			</div>
+		{%endif%}
+	{%endblock%}
+	{%include nav%}
+	<div id="home" class='products'>
+		<h3><a href='{{language}}/bestsellers'>{% trans 'Лидеры продаж'%}</a></h3>
+		<div id="bestsellers" class="items slider">
+			{%for offer in offers%}
+				<div class='item'>
+					<a class="image" href="{% translate offer.product 'slugy' lang %}" title="{% translate offer.product 'names' lang %}">
+						<img src="{{offer.product.image.list_thumb}}" alt="{% translate offer.product 'names' lang %}">
+						{%if offer.product.special%}
+							<div class="special">-{{offer.product.special.percent}}%</div>
+						{%endif%}
+					</a>
+					<div class="availability">
+						{{offer.product.availability|safe}}
+					</div>
+					{%block buyBests%}
+						<button class='blue buy button' value="{{offer.product.id}}" name="{% translate offer.product 'names' lang %}">{% trans 'Купить'%}</button>
+						{%if offer.product.special%}
+							<div class="price">
+								<span class="old">{{offer.product.retail_price}} грн.</span>
+								<span class="new"> {{offer.product.price|default_if_none:0}} грн.</span>
+							</div>
+						{%else%}
+							<div class="price ">{{offer.product.price|default_if_none:0}} грн.</div>
+						{%endif%}
+					{%endblock%}
+					<a href="{% translate offer.product 'slugy' lang %}" class='name'>{% translate offer.product 'names' lang %}</a>
+					<div class="more_info">
+						<div class='quantity'>
+							<span class="minus">-</span>
+							<input type="text" name="quantity" value="1">
+							<span class="plus">+</span>
+						</div>
+						<div class="properties">
+							{%if offer.product.brand%}
+								<div><span class="key">{% trans 'Брэнд'%}: </span><span>{{offer.product.brand}}</span></div>
+								{%if offer.product.brand.country%}
+									<div><span class="key">{% trans 'Страна'%}: </span><span>{{offer.product.brand.country}}</span></div>
+								{%endif%}
+							{%endif%}
+							{%if offer.product.width%}
+								<div><span class="key">{% trans 'Параметры'%}: </span><span>{{offer.product.parameters}}</span></div>
+							{%endif%}
+						</div>
+					</div>
+				</div>
+			{%endfor%}
+		</div>
+		<h3><a href='{{language}}/sale' class="sale">{% trans 'Суперцена'%}</a></h3>
+		<div id="sale" class="items">
+			{%for product in special%}
+				<div class='item'>
+					<a class="image" href="{% translate product 'slugy' lang %}" title="{% translate product 'names' lang %}">
+						<img src="{{product.image.list_thumb}}" alt="{% translate product 'names' lang %}">
+						{%if product.special%}
+							<div class="special">-{{product.special.percent}}%</div>
+						{%endif%}
+					</a>
+					<div class="availability">
+						{{product.availability|safe}}
+					</div>
+					{%block buySale%}
+						<button class='blue buy button' value="{{product.id}}" name="{% translate product 'names' lang %}">{% trans 'Купить'%}</button>
+						<div class="price">
+							<span class="old">{{product.retail_price}} грн.</span>
+							<span class="new"> {{product.price|default_if_none:0}} грн.</span>
+						</div>
+					{%endblock%}
+					<a href="{% translate product 'slugy' lang %}" class='name'>{% translate product 'names' lang %}</a>
+					<div class="more_info">
+						<div class='quantity'>
+							<span class="minus">-</span>
+							<input type="text" name="quantity" value="1">
+							<span class="plus">+</span>
+						</div>
+						<div class="properties">
+							{%if product.brand%}
+								<div><span class="key">{% trans 'Брэнд'%}: </span><span>{{product.brand}}</span></div>
+								{%if product.brand.country%}
+									<div><span class="key">{% trans 'Страна'%}: </span><span>{{product.brand.country}}</span></div>
+								{%endif%}
+							{%endif%}
+							{%if product.width%}
+								<div><span class="key">{% trans 'Параметры'%}: </span><span>{{product.parameters}}</span></div>
+							{%endif%}
+						</div>
+					</div>
+				</div>
+			{%endfor%}
+		</div>
+		<div class="outer"></div>
+		<h3><a href='{{language}}/new' class="latest">{% trans 'Новинки'%}</a></h3>
+		<div id="new" class="items">
+			{%for product in latest%}
+				<div class='item'>
+					<a class="image" href="{% translate product 'slugy' lang %}" title="{% translate product 'names' lang %}">
+						<img src="{{product.image.list_thumb}}" alt="{% translate product 'names' lang %}">
+						{%if product.special%}
+							<div class="special">-{{product.special.percent}}%</div>
+						{%endif%}
+					</a>
+					<div class="availability">
+						{{product.availability|safe}}
+					</div>
+					{%block buyLatest%}
+						<button class='blue buy button' value="{{product.id}}" name="{% translate product 'names' lang %}">{% trans 'Купить'%}</button>
+						{%if product.special%}
+							<div class="price">
+								<span class="old">{{product.retail_price}} грн.</span>
+								<span class="new"> {{product.price|default_if_none:0}} грн.</span>
+							</div>
+						{%else%}
+							<div class="price">{{product.price|default_if_none:0}} грн.</div>
+						{%endif%}
+					{%endblock%}
+					<a href="{% translate product 'slugy' lang %}" class='name'>{% translate product 'names' lang %}</a>
+					<div class="more_info">
+						<div class='quantity'>
+							<span class="minus">-</span>
+							<input type="text" name="quantity" value="1">
+							<span class="plus">+</span>
+						</div>
+						<div class="properties">
+							{%if product.brand%}
+								<div><span class="key">{% trans 'Брэнд'%}: </span><span>{{product.brand}}</span></div>
+								{%if product.brand.country%}
+									<div><span class="key">{% trans 'Страна'%}: </span><span>{{product.brand.country}}</span></div>
+								{%endif%}
+							{%endif%}
+							{%if product.width%}
+								<div><span class="key">{% trans 'Параметры'%}: </span><span>{{product.parameters}}</span></div>
+							{%endif%}
+						</div>
+					</div>
+				</div>
+			{%endfor%}
+		</div>
+	</div>
+	{%block info%}
+	{%endblock%}
+	<article class="noselect">
+		<p>{{description|safe}}</p>
+	</article>
+{%endblock%}

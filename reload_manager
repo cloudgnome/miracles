@@ -1,0 +1,2 @@
+/bin/bash -c 'for d in /home/core/manager/*; do if [[ "$d" != "core" ]] && [[ "$d" != "default" ]]; then \
+  echo $d && touch /home/core/manager/$d/uwsgi.ini; fi done'

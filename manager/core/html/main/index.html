@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/static/min{{CSS_BUILD}}.css">
+    <link rel="icon" type="image/png" href="/static/image/favicon.png" />
+    {%include 'main/sprite.svg'%}
+</head>
+<body>
+<template id="http-loading-template">
+    <div id="http-loading"></div>
+</template>
+<template id="http-alert-template">
+    <div id="http-alert">
+        <div class="close"></div>
+        <div id="http-alert-message"></div>
+    </div>
+</template>
+{%block body%}
+    <template id="selectTemplate">
+        <div class="select-selected"></div>
+        <div class="select-items">
+            <div class="sel-items-wrapper"></div>
+        </div>
+    </template>
+    <template id="autocompleteItem">
+        <div class="value">
+            <div class="remove" value="{~value~}">
+                <i class="fas fa-times"></i>
+            </div>
+            {~text~}
+        </div>
+    </template>
+    <div id="content">
+        <div id="left">
+            <div id="menu-mini">
+                <div class="burger">
+                    <i class="fas fa-hamburger"></i>
+                </div>
+                {%include 'main/menu-mini.html'%}
+            </div>
+            {%include 'main/menu.html'%}
+            <div class="change-database">
+                <div class="custom-select">
+                    <select name="database">
+                        <option value="" disabled="">Сайт</option>
+                        {%for site in sites%}
+                            <option {%if site.database == request.session.database%}selected {%endif%}value="{{site.database}}" url="{{site.url}}">
+                                {{site.name}}
+                            </option>
+                        {%endfor%}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <main id="right">
+        {%block main%}
+        {%endblock%}
+        </main>
+    </div>
+{%endblock%}
+<div id="bigPhoto"><div class="close"><i class="fas fa-times"></i></div><img src=""></div>
+<div id="bg"></div>
+<script>BASE_URL = "{{BASE_URL}}";</script>
+<script src="/static/min{{JS_BUILD}}.js"></script>
+<script>
+    var PAGE_CONTEXT = JSON.parse({{context|safe|default:"{}"}});
+    const MainView = Http.process_view();
+</script>
+{%block JS%}
+{%endblock%}
+</body>
+</html>

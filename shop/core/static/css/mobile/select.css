@@ -1,0 +1,87 @@
+/* The container must be positioned relative: */
+.custom-select,.birthdaySelect {
+  position: relative;
+}
+
+.custom-select select,.birthdaySelect select{
+  display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
+  background-color: #fff;
+  position: relative;
+  font-size: 13px;
+  font-family: Semibold;
+}
+.custom-select.active .select-selected{
+  border-radius: 4px 4px 0 0 !important;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 18px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #222 transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.custom-select.active .select-selected:after {
+  border-color: transparent transparent #222 transparent;
+  top: 11px;
+}
+.custom-select.active .select-items div:last-child{
+  border-radius: 0 0 4px 4px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div{
+  color: #222;
+  padding: 16px;
+  cursor: pointer;
+  border: 1px solid #c2c2c2;
+  border-top: none;
+}
+.select-selected {
+  color: #222;
+  padding: 12px 27px 12px 0px;
+  cursor: pointer;
+  border-bottom: 1px solid #c2c2c2;
+}
+/*.select-items div:nth-last-child(1){
+  border-radius: 0px 0px 7px 7px;
+}
+.select-selected.select.active{
+  border-radius: 7px 7px 0px 0px;
+}*/
+
+/* Style items (options): */
+.select-items {
+  /*position: absolute;*/
+  background-color: #fff;
+  /*top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;*/
+  overflow-y: hidden;
+  max-height: 0px;
+  transition: max-height 0.4s ease-in-out;
+}
+
+.select-items .disabled{
+  color: #aaa;
+}
+
+/* Hide the items when the select box is closed: */
+.custom-select.active .select-items {
+  max-height: 7000px;
+}
+
+.select-items div:hover, .selected {
+  background-color: #009fe3;
+  color: #fff !important;
+}

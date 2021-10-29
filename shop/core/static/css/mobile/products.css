@@ -1,0 +1,172 @@
+#filters{
+	padding: 0 4px;
+	display: flex;
+}
+#filters.active{
+    position: fixed;
+    top: 59px;
+    left: 0;
+    right: 0;
+    z-index: 7;
+}
+#main.active #filters.active{
+    left: 85%;
+}
+#filters label.dropdownButton{
+	height: 50px;
+	background-color: #82c9e6;
+	line-height: 50px;
+	width: 50%;
+	color: #fff;
+	flex: 50%;
+	text-transform: uppercase;
+	font-size: 16px;
+}
+#filters .dropdown{
+	display: none;
+	position: fixed;
+	background-color: rgba(108, 166, 193, 0.9);
+	width: 80%;
+	height: 100%;
+	top: 0;
+	z-index: 24;
+	color: #fff;
+	right: 0;
+	padding-top: 19px;
+	overflow-y: scroll;
+}
+#filters .dropdown .outer{
+	padding: 15px 0;
+}
+#filters label.dropdownButton:nth-child(1){
+	margin-right: 1px;
+}
+#filters .dropdown label.heading{
+	height: 50px;
+	display: block;
+	line-height: 50px;
+}
+#filters #range-1{
+	padding: 0 24px 18px;
+}
+#filters .inputs{
+	padding-bottom: 15px;
+	display: flex;
+}
+#filters .inputs input{
+	height: 36px;
+	width: 80%;
+	font-size: 16px;
+	text-align: center;
+}
+#filters .ui-selectmenu-text{
+	margin-right: 46px;
+}
+#filters .dropdown:nth-child(4) .ui-selectmenu-button.ui-button{
+	margin-bottom: 20px;
+}
+#filters .ui-selectmenu-button.ui-button{
+	width: 90%;
+	padding: .4em 0em .4em 1em;
+	margin-bottom: 8px;
+}
+#filters .aprove{
+	text-transform: uppercase;
+	font-size: 16px;
+	margin: 0px auto 20px;
+	clear: both;
+	display: block;
+}
+
+#filters .switcher{
+	float: left;
+	text-align: left;
+	margin: 11px 0;
+	clear: both;
+}
+
+#filters .switch .text{
+	min-width: 256px;
+	display: block;
+	padding-left: 60px;
+}
+
+/* The switch - the box around the slider */
+#filters .switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+	height: 18px;
+}
+
+/* Hide default HTML checkbox */
+#filters .switch input {display:none;}
+/* The slider */
+#filters .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #616161;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+#filters .slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 0px;
+	bottom: -4px;
+  background-color: #d0d0d0;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+#filters input:checked + .slider {
+  background-color: #00699b;
+}
+
+#filters input:focus + .slider {
+  box-shadow: 0 0 1px #105275;
+}
+
+#filters input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+  background-color: #FFE66D;
+}
+#filters .custom-select{
+    margin: 0 13px 7px;
+}
+
+/* Rounded sliders */
+#filters .slider.round {
+  border-radius: 34px;
+}
+
+#filters .slider.round:before {
+  border-radius: 50%;
+}
+#filters .manufacturer{
+	padding: 0 25px;
+}
+
+#products-loading{width:200px;height:115px;margin:0 auto;background: url(/static/image/igroteka/products-loading.gif) no-repeat;clear: both;}
+
+@media (min-width: 600px){
+	.products .item{
+		flex: 40%;
+	}
+}
+@media (max-width: 320px){
+	.products .price{
+		font-size: 14px;
+	}
+	#home .products .price{
+		font-size: 16px;
+	}
+}

@@ -1,0 +1,33 @@
+{%extends 'main/index.html'%}
+{%load i18n%}
+{%block body%}
+	<div id="login-form-wrap">
+		<div id="login-form">
+			<i class="fas fa-lock"></i>
+			<form action="javascript: void(0)">
+				{%csrf_token%}
+				<div class="fields">
+					<div class="input">
+						{{form.phone.label_tag}}
+						{{form.phone}}
+						{{form.phone.errors}}
+						<div class="errors"></div>
+					</div>
+					<div class="input">
+						{{form.password.label_tag}}
+						{{form.password}}
+						{{form.password.errors}}
+						<div class="errors"></div>
+					</div>
+				</div>
+				<button id="login-button">{% trans 'Так' %}</button>
+			</form>
+		</div>
+		<div></div>
+	</div>
+{%endblock%}
+{%block JS%}
+	<script>
+		new Login();
+	</script>
+{%endblock%}

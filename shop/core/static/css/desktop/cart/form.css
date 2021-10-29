@@ -1,0 +1,191 @@
+#cart-form{
+	padding: 52px 42px 47px 65px;
+	scrollbar-width: thin;
+	display:block;
+}
+#cart-form .outer{
+	margin-top: 130px;
+}
+#cart-form h2{
+	clear:both;
+	margin-bottom:40px;
+	font-size:24px;
+}
+#cart-form .other{
+	margin-top: 40px;
+}
+#cart-form .head{
+	padding-left:175px;
+	font-size: 14.67px;
+}
+#cart-form .line{
+	height: 2px;
+	width:100%;
+	clear: both;
+	margin: 0;
+	background:url("/static/image/igroteka/line.jpg") repeat-x scroll;
+	color: #fff;
+}
+#cart-form .productItem{
+	height: 133px;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	padding: 20px 0;
+	border-top: 1px solid #f7f1f1;
+}
+#cart-form .productItem:nth-last-child(4){
+	border-bottom: 1px solid #f7f1f1;
+}
+#cart-form .productItem:hover{
+	box-shadow: unset;
+}
+#cart-form .productItem .remove{
+	margin-left: -35px;
+	margin-top: 34px;
+}
+#cart-form .productItem .image{
+	width:175px;
+	height: 100%;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: center;
+}
+#cart-form .productItem .image a{
+	margin: auto;
+}
+#cart-form .productItem .image img{
+	max-width:100%;
+	max-height: 100%;
+}
+#cart-form .productItem .name-price{
+	width: 40%;
+	height: 100%;
+}
+#cart-form .productItem .name{
+	padding:22px 15px 10px 0px;
+	color: #000;
+	font-size: 16px;
+	display: block;
+	text-overflow: ellipsis;
+	height: 58px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+#cart-form .productItem .price{
+	font-size:16px;
+}
+#cart-form .productItem .price span,#cart-form .productItem .total{
+	font-size:18.6px;
+}
+#cart-form .quantity{
+	height: 100%;
+	padding-right: 15px;
+	padding-top: 50px;
+	width: 30%;
+}
+#cart-form .productItem .total{
+	text-align:right;
+	height: 100%;
+	line-height:35px;
+	padding-top: 50px;
+	margin: auto;
+}
+#cart-form .productItem .total,#cart-form .price span{
+	white-space:nowrap;
+	font-weight: 700;
+}
+#cart-form #total{
+	height:55px;
+	margin-bottom:11px;
+	font-size:24px;
+	text-align:right;
+	line-height:55px;
+	padding: 15px 0 65px;
+}
+#cart-form .productItem .old.price{
+	font-size: 14px;
+	color: #ccc;
+	text-decoration: line-through;
+}
+#cart-form #total div{
+	font-weight:bold;
+	display:inline;
+}
+#cart-form #total span{
+	font-size:16px;
+	margin-right:5px;
+}
+#cart-form #buttons{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	padding-bottom: 22px;
+}
+#cart-form #buttons span{
+	flex-grow: 1;
+}
+#cart-form button{
+	height:55px;
+	color:#fff;
+	font-size:14px;
+	cursor:pointer;
+	border-radius:27px;
+	transition: 0.5s all ease;
+	padding: 0 47px;
+}
+#cart-form .blue{
+}
+#cart-form .green{
+	position: relative;
+}
+#cart-form .green:before{
+	height: 9px;
+	width: 9px;
+	position: absolute;
+	top: 20px;
+	right: 19px;
+	content: " ";
+	border-right: 5px solid white;
+	border-bottom: 5px solid white;
+	transform: rotateZ(-45deg);
+	border-radius: 3px;
+}
+#cart-form #continue{
+	line-height: 16px;
+	position: relative;
+	margin-right: 20px;
+}
+#cart-form #continue:before{
+	height: 9px;
+	width: 9px;
+	position: absolute;
+	top: 20px;
+	left: 19px;
+	content: " ";
+	border-left: 5px solid white;
+	border-bottom: 5px solid white;
+	transform: rotateZ(45deg);
+	border-radius: 3px;
+}
+.checkout.active{
+	background-color: #eaeaea;
+	color: #999;
+}
+#cart-form button .loading{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	width: 41px;
+	height: 41px;
+}

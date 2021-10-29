@@ -1,0 +1,20 @@
+{%load i18n%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{% trans 'Восстановление пароля'%}</title>
+</head>
+<body style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:16px 0;">
+	<div style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0 auto; padding:10px; width: 600px;background: #fff;">
+		<div><a href="http://{{BASE_URL}}/" target="_blank"><img src="http://{{BASE_URL}}/static/image/igroteka/LOGO.png" width='200px'></a></div>
+		<p>{% trans 'Вы отправляли запрос на восстановление пароля от кабинета'%} {{BASE_URL}}?</p>
+		<div style="line-height: 18px; margin-bottom: 12px;">
+			{% trans 'Если Да, то перейдите по ссылке'%}:<br>
+			http://{{BASE_URL}}/user/change-password?phone={{phone}}&password={{password}}
+			<br>
+			{% trans 'Если Вы не отправляли запрос, просто проигнорируйте это сообщение'%}.
+		</div>
+	</div>
+</body>
+</html>

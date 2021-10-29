@@ -1,0 +1,11 @@
+<div class="image">
+    <div class="pic active">
+        <div class="remove" item-id="{{model.id}}" model="image"></div>
+        {%if widget.value%}
+            <img src="/media/{{widget.value}}" original="">
+        {%else%}
+            <img src="/media/data/no_image.jpg" original="">
+        {%endif%}
+        <input type="file" name="{{widget.name}}" id="id_image" autocomplete="off">
+    </div>
+</div>

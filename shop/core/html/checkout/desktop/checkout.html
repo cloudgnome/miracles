@@ -1,0 +1,120 @@
+{%extends 'shop/desktop/index.html'%}
+{%load i18n%}
+{%load translate%}
+{%block main%}
+<div class="bread-crumbs">
+	<span>
+		<a href="{{language}}/">
+			<span>{% trans 'Главная'%}</span>
+		</a>
+	</span>
+	<h1>{% trans 'Оформление заказа'%}</h1>
+</div>
+<template id="cityTemplate">
+	<input type="hidden" name="city">
+	<label>Город<input autocomplete="off" type="text" name="" id="id_city" placeholder="Введите первые буквы"></label><div class="variants"></div>
+</template>
+<template id="departamentTemplate">
+	<input type="hidden" name="departament">
+	<label>Отделение<input autocomplete="off" type="text" name="" id="id_departament" placeholder="Введите первые буквы"></label>
+	<div class="variants"></div>
+</template>
+<template id="addressTemplate">
+	<label>Адрес:<input id="id_address" type="text" placeholder="Адрес" name="address"></label>
+</template>
+<form id='checkoutForm' action="{{language}}/checkout/order/" method="post">
+	<div>
+		<fieldset class='pay_shiping'>
+			<legend>{% trans 'Оплата и доставка'%}</legend>
+			<div>
+				<span>{% trans 'Способ доставки'%}</span>
+				{{form.delivery_type}}
+				{{form.delivery_type.errors}}
+				<div>
+					<div id='city'>
+						{%if form.cleaned_data.delivery_type and form.cleaned_data.delivery_type == 3%}
+							{{form.address.label_tag}}
+							{{form.address}}
+							{{form.address.errors}}
+						{%endif%}
+					</div>
+					<div id='departament'>
+					</div>
+				</div>
+				<span>{% trans 'Способ оплаты'%}</span>
+				{{form.payment_type}}
+				{{form.payment_type.errors}}
+				<div id="delivery_message" style="display:none">{% trans 'Внимание! Доставка возможна только с оплатой Приват24'%}.</div>
+			</div>
+		</fieldset>
+		<fieldset class='contact_info'>
+			<legend>{% trans 'Контактная информация'%}</legend>
+			<div class="fields">
+				<div>{{form.name.label_tag}}*<br>{{form.name}}<br>{{form.name.errors}}</div>
+				<div>{{form.lname.label_tag}}*<br>{{form.lname}}<br>{{form.lname.errors}}</div>
+				<div>{{form.sname.label_tag}}*<br>{{form.sname}}<br>{{form.sname.errors}}</div>
+				<div>{{form.phone.label_tag}}*<br>{{form.phone}}<br>{{form.phone.errors}}</div>
+				<div>{{form.email.label_tag}}<br>{{form.email}}<br>{{form.email.errors}}</div>
+				<div></div>
+				<div>{{form.subscription.label_tag}}{{form.subscription}}</div>
+				<div></div>
+			</div>
+		</fieldset>
+		<fieldset class='comment'>
+			<legend>{% trans 'Комментарий'%}</legend>
+			<div>
+				{{form.comment.label_tag}} <br>
+				{{form.comment}} <br>
+				{{form.errors}}
+				{{form.non_field_errors}}
+			</div>
+		</fieldset>
+	</div>
+	<div>
+		<fieldset class='order_contents'>
+			<legend>{% trans 'Содержимое заказа'%}</legend>
+			<div class='blockScroll'>
+				{%for item in cart%}
+					<div class="productItem" data-id='{{item.id}}'>
+						<div class="remove rm" data='{{item.id}}' product-id="{{item.product.id}}">
+							<i class="fas fa-trash-alt"></i>
+						</div>
+						<div class="product_image"><img src="{{item.product.image.checkout_thumb}}" alt="image"></div>
+						<div>
+							<div class='product_name'>
+								<a href="{% translate item.product 'slugy' lang %}" target="_blank">{% translate item.product 'names' lang %}</a>
+							</div>
+							<div class='quantity'>
+								<div>{{item.qty}} шт. x</div>
+								<div class="price">{{item.price}}грн.</div>
+								{%if cart.discount %}
+									<div class="old">
+										{{item.product.retail_price}}грн.
+									</div>
+								{%endif%}
+							</div>
+						</div>
+					</div>
+				{%endfor%}
+			</div>
+		</fieldset>
+		<button class="blue">{% trans 'Оформить заказ'%}</button>
+		{%block discount%}
+			{%if discount%}<div style="color:red">{% trans 'Учтена скидка'%}: <span id="discount">{{discount}}</span>грн.</div>{%endif%}
+		{%endblock%}
+		<div id="total">{% trans 'Итого'%}: <span id="sum">{{cart.total}}</span> грн.
+			<div>
+				{% trans 'Стоимость доставки не включена'%}
+				<br>
+				{% trans 'и оплачивается при получении'%}.
+			</div>
+		</div>
+		{%block freeDelivery%}
+		{%endblock%}
+	</div>
+	{% csrf_token %}
+</form>
+<script>
+	var cartJson = {{cartJson}};
+</script>
+{%endblock%}

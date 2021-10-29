@@ -1,0 +1,157 @@
+menu{
+    right: 0px;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    overflow-y: auto;
+    z-index: 51;
+    border-radius: 0px;
+    transition: left 0.2s ease;
+    font-size: 16px;
+    overflow: hidden;
+    -webkit-transition: bottom 0s ease 0s, -webkit-transform .3s ease 0s;
+    transition: bottom 0s ease 0s, -webkit-transform .3s ease 0s;
+    -o-transition: transform .3s ease 0s, bottom 0s ease 0s;
+    transition: transform .3s ease 0s, bottom 0s ease 0s;
+    transition: transform .3s ease 0s, bottom 0s ease 0s, -webkit-transform .3s ease 0s;
+    padding-left: 0;
+    position: relative;
+    height: 70%;
+}
+menu a{
+    display: block;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    padding-left: 5%;
+}
+menu .parent{
+    cursor: pointer;
+    padding: 17px 0 10px 0px;
+    padding-left: 6%;
+}
+menu a:hover,menu .parent:hover{
+    background-color: #eee;
+}
+menu a{
+    padding: 17px 0 10px;
+}
+menu i{
+    width: 19%;
+    font-size: 17px;
+}
+menu a.active{
+    background-color: #ccc;
+}
+#menu{
+    height: 85%;
+    overflow-y: auto;
+    position: relative;
+    overflow-x: hidden;
+}
+#menu > a{
+    padding-left: 10px;
+}
+menu .sub{
+    color: #125560;
+    font-size: 15px;
+    text-transform: capitalize;
+    background-color: #fff;
+    text-align: left;
+    overflow: visible;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: content-box;
+    padding-right: 17px;
+    width: 100%;
+    position: absolute;
+    left: 100%;
+    transition: left 0.2s ease;
+    top: 0;
+    z-index: 1;
+    background-color: #fdfdfd;
+    padding-bottom: 98px;
+    height: 0;
+}
+menu .sub.open{
+    left: 0;
+    z-index: 2;
+    height: 100%;
+}
+menu .sub a{
+    color: #333;
+    padding-left: 10%;
+    width: 110%;
+}
+menu #menuPrev{
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 0;
+    width: 10px;
+    height: 10px;
+    border-top: 0px solid;
+    border-right: 0px solid;
+    opacity: .99;
+    cursor: pointer;
+}
+menu #prev {
+    display: none;
+    cursor: pointer;
+}
+menu #prev i{
+    width: 37%;
+}
+menu #menuPrev {
+    left: 15px;
+    top: 0px;
+}
+#menu-close {
+    display: flex;
+    float: right;
+    padding: 17px;
+}
+.parent.branch i {
+    font-weight: 900;
+}
+#menu-header {
+    display: block;
+    position: fixed;
+    width: 100%;
+    background: #30a8bc;
+    color: #fff;
+    z-index: 110;
+}
+#menu-title{
+    position: relative;
+    text-align: center;
+    padding: 12px 0;
+}
+menu a,menu .branch,#menu-title-text {
+    display: block;
+    font-size: 15px;
+}
+#menu-mini .icon{
+    font-size: 20px;
+    text-align: center;
+    padding: 17% 0;
+    cursor: pointer;
+    margin-bottom: 17%;
+}
+#menu-mini .icon a{
+    color: #36454d;
+    width: 100%;
+    display: block;
+}
+#menu-mini #logout{
+    height: 34px;
+    position: absolute;
+    bottom: 2%;
+    text-align: center;
+    width: 100%;
+}
+#menu-mini #logout i{
+    font-size: 20px;
+    color: #36454d;
+}

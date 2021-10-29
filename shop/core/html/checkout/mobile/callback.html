@@ -1,0 +1,23 @@
+{%load i18n%}
+{%if form%}
+    <div class="close"></div>
+    <div id='main'>
+        <div id='quickOrderFormContainer'>
+            <h2>{% trans "Простой заказ в один клик"%}</h2>
+            <br>
+            <form action="javascript:void(0)" id='quickOrderForm'>
+                {% csrf_token %}
+                <div>
+                    {{form.phone.label_tag}}
+                    {{form.phone}}
+                    {{form.phone.errors}}
+                </div>
+                <button class='bigButton green'>{% trans "Отправить"%}</button>
+                {{form.errors}}
+            </form>
+        </div>
+    </div>
+{%else%}
+    <div class="close"></div>
+    <div id="quickOrderFormContainer">{% trans 'Спасибо за обращение! Мы скоро свяжемся с вами'%}.</div>
+{%endif%}

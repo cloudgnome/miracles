@@ -1,0 +1,33 @@
+#orders{
+    margin-top: -20px;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 19px;
+}
+#orders .images{
+    display: flex;
+    flex-wrap: wrap;
+}
+#orders .images .image{
+    width: 30%;
+}
+#orders a{
+    display: block;
+    padding: 5px 0;
+    text-align: left;
+}
+#orders .order{
+    padding: 19px 0;
+    flex: 50%;
+    max-width: 50%;
+}
+#orders .status .value{
+    color: #5F9F29;
+}
+#checkoutForm.order .item{
+    max-width: 100%;
+}

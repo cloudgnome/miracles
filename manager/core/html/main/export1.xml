@@ -1,0 +1,40 @@
+{%load translate%}
+<?xml version="1.0" encoding="UTF-8"?>
+<price>
+    <date>{{timezone.now}}</date>
+    <firmName>{{COMPANY_NAME}}</firmName>
+    <firmId>20666</firmId>
+    <rate>28.5</rate>
+
+    <categories>
+        {%for category in categories%}
+            <category>
+                <id>{{category.id}}</id>
+                <name>{{category.name}}</name>
+                {%if category.parent%}
+                    <parentId>{{category.parent.id}}</parentId>
+                {%endif%}
+            </category>
+        {%endfor%}
+    </categories>
+
+    <delivery id="3" type="warehouse" carrier="NP" time="1"></delivery>
+    <delivery id="1" type="pickup" time="1"></delivery>
+
+    <items>
+        {%for product in products%}
+            <item>
+                <id>{{product.id}}</id>
+                <categoryId>{{product.get_category.id}}</categoryId>
+                <code>{{product.model}}</code>
+                <vendor>{{product.brand}}</vendor>
+                <name>{{product.name}}</name>
+                <priceRUAH>{{product.price}}</priceRUAH>
+                <url>{{PROTOCOL}}://{{HOST}}/{{product.slug}}</url>
+                <image>{{PROTOCOL}}://{{HOST}}{{product.gallery.first.url}}</image>
+                <stock>В наявності</stock>
+                <param name="Країна виготовлення">{{product.brand.country}}</param>
+            </item>
+        {%endfor%}
+    </items>
+</price>

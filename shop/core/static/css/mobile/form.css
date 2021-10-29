@@ -1,0 +1,21 @@
+.form label,
+.form input[type='text'],
+.form input[type='password'],
+.form input[type='email'],
+.form input[type='tel']{
+	display: block;
+	width: 96%;
+	font-family: Light;
+	margin: auto;
+	font-size: inherit;
+}
+.form input[type='text'],
+.form input[type='password'],
+.form input[type='email'],
+.form input[type='tel']{
+	height: 55px;
+	padding-left: 20px;
+	border: 1px solid #d7d7d7;
+	margin-top: 9px;
+	border-radius: 4px;
+}

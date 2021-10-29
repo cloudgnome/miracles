@@ -1,0 +1,398 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-18 08:54+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: checkout/forms.py:13
+#, fuzzy
+#| msgid "Введите номер телефона"
+msgid "Введите номер телефона:"
+msgstr "Введіть номер телефону"
+
+#: checkout/forms.py:13
+msgid "Номер телефона"
+msgstr "Номер телефону"
+
+#: checkout/forms.py:18
+msgid "Неправильный телефон(пример +30971112233)"
+msgstr "Невірний номер телефону(приклад +380971112233)"
+
+#: checkout/forms.py:31 checkout/models/order.py:27
+msgid "Самовывоз"
+msgstr "Самовивіз"
+
+#: checkout/forms.py:32 checkout/models/order.py:24
+msgid "Новая почта"
+msgstr "Нова Пошта"
+
+#: checkout/forms.py:33 checkout/models/order.py:25
+msgid "Деливери"
+msgstr "Делівері"
+
+#: checkout/forms.py:34 checkout/models/order.py:26
+msgid "УкрПочта"
+msgstr "УкрПошта"
+
+#: checkout/forms.py:35 checkout/models/order.py:28
+#, fuzzy
+#| msgid "Адрес доставки"
+msgid "Курьерская Доставка"
+msgstr "Адреса доставки"
+
+#: checkout/forms.py:38 checkout/models/order.py:31
+msgid "Наличными при получении"
+msgstr "Готівкою при отриманні"
+
+#: checkout/forms.py:39
+#, fuzzy
+#| msgid "Оплата и доставка"
+msgid "Оплата картой"
+msgstr "Оплата і доставка"
+
+#: checkout/forms.py:41
+#, fuzzy
+#| msgid "Способ доставки"
+msgid "Способ доставки:"
+msgstr "Спосіб доставки"
+
+#: checkout/forms.py:42
+#, fuzzy
+#| msgid "Способ оплаты"
+msgid "Способ оплаты:"
+msgstr "Спосіб оплати"
+
+#: checkout/forms.py:43
+#, fuzzy
+#| msgid "Уточнения к заказу"
+msgid "Уточнения к заказу:"
+msgstr "Уточнення до замовлення"
+
+#: checkout/forms.py:44 checkout/forms.py:90
+msgid "Имя:"
+msgstr "Ім'я:"
+
+#: checkout/forms.py:44 checkout/forms.py:90 checkout/models/order.py:48
+msgid "Имя"
+msgstr "Ім'я"
+
+#: checkout/forms.py:45
+#, fuzzy
+#| msgid "Фамилия"
+msgid "Фамилия:"
+msgstr "Прізвище"
+
+#: checkout/forms.py:45 checkout/models/order.py:49
+msgid "Фамилия"
+msgstr "Прізвище"
+
+#: checkout/forms.py:46
+#, fuzzy
+#| msgid "Отчество"
+msgid "Отчество:"
+msgstr "По батькові"
+
+#: checkout/forms.py:46 checkout/models/order.py:50
+msgid "Отчество"
+msgstr "По батькові"
+
+#: checkout/forms.py:48 checkout/forms.py:91
+msgid "Номер телефона:"
+msgstr "Номер телефону:"
+
+#: checkout/forms.py:48 checkout/models/order.py:52
+msgid "Телефон"
+msgstr "Телефон"
+
+#: checkout/forms.py:49
+#, fuzzy
+#| msgid "Адрес"
+msgid "Адрес:"
+msgstr "Адреса"
+
+#: checkout/forms.py:49 checkout/models/order.py:57
+msgid "Адрес"
+msgstr "Адреса"
+
+#: checkout/forms.py:50
+msgid "Подписаться на рассылку"
+msgstr "Підписатися на розсилку"
+
+#: checkout/forms.py:63
+msgid "Неправильный телефон(пример 0971112233)"
+msgstr "Невірний номер телефону(приклад +380971112233)"
+
+#: checkout/forms.py:73 checkout/forms.py:75 checkout/forms.py:78
+#: checkout/forms.py:81
+msgid "Обязательное поле"
+msgstr "Обов'язкове поле"
+
+#: checkout/models/order.py:18
+msgid "Нет"
+msgstr ""
+
+#: checkout/models/order.py:19
+msgid "Да"
+msgstr ""
+
+#: checkout/models/order.py:32
+msgid "Приват 24"
+msgstr "Приват 24"
+
+#: checkout/models/order.py:35
+msgid "Новый"
+msgstr ""
+
+#: checkout/models/order.py:36
+msgid "Оплачен"
+msgstr ""
+
+#: checkout/models/order.py:38
+msgid "Отменен"
+msgstr ""
+
+#: checkout/models/order.py:39
+msgid "Ждем товар"
+msgstr ""
+
+#: checkout/models/order.py:41
+#, fuzzy
+#| msgid "Отправить"
+msgid "На отправку"
+msgstr "Відправити"
+
+#: checkout/models/order.py:42
+#, fuzzy
+#| msgid "Отправить"
+msgid "Отправлен"
+msgstr "Відправити"
+
+#: checkout/models/order.py:43
+msgid "Нет связи"
+msgstr ""
+
+#: checkout/models/order.py:45
+msgid "Закрыт"
+msgstr ""
+
+#: checkout/models/order.py:53
+msgid "Корзина"
+msgstr ""
+
+#: checkout/models/order.py:54
+#, fuzzy
+#| msgid "Способ доставки"
+msgid "Способ доставки"
+msgstr "Спосіб доставки"
+
+#: checkout/models/order.py:55
+msgid "Город"
+msgstr "Місто"
+
+#: checkout/models/order.py:56
+msgid "Отделение"
+msgstr "Відділення"
+
+#: checkout/models/order.py:58
+#, fuzzy
+#| msgid "Способ оплаты"
+msgid "Способ оплаты"
+msgstr "Спосіб оплати"
+
+#: checkout/models/order.py:59
+msgid "Статус заказа"
+msgstr "Статус замовлення"
+
+#: checkout/models/order.py:60
+msgid "Дата добавления"
+msgstr ""
+
+#: checkout/models/order.py:61
+#, fuzzy
+#| msgid "Способ доставки"
+msgid "Дата отправки"
+msgstr "Спосіб доставки"
+
+#: checkout/models/order.py:62
+#, fuzzy
+#| msgid "Комментарий"
+msgid "Комментарий к заказу"
+msgstr "Коментар"
+
+#: checkout/models/order.py:118
+#, fuzzy, python-format
+#| msgid "Информация по заказу"
+msgid "Информация по заказу №%s"
+msgstr "Інформція щодо замовлення"
+
+#: checkout/models/order.py:119
+msgid "{} Интернет магазин <{}>"
+msgstr "{} Інтернет магазин <{}>"
+
+#: checkout/models/order.py:131 checkout/models/order.py:132
+#, fuzzy
+#| msgid "Ваш заказ"
+msgid "Заказ"
+msgstr "Ваше замовлення"
+
+#: checkout/models/order.py:140
+#, fuzzy
+#| msgid "Адрес"
+msgid "Вес"
+msgstr "Адреса"
+
+#: checkout/models/order.py:141
+msgid "Высота"
+msgstr ""
+
+#: checkout/models/order.py:142
+msgid "Ширина"
+msgstr ""
+
+#: checkout/models/order.py:143
+msgid "Длина"
+msgstr ""
+
+#: checkout/models/order.py:144
+msgid "Оценочная стоимость"
+msgstr ""
+
+#: checkout/models/order.py:145
+msgid "Описание"
+msgstr ""
+
+#: checkout/models/order.py:160 checkout/models/order.py:161
+msgid "Место"
+msgstr ""
+
+#: checkout/views/callback.py:29 checkout/views/callback.py:32
+#: checkout/views/callback.py:51 checkout/views/callback.py:54
+msgid "Перезвонить"
+msgstr ""
+
+#: checkout/views/checkout.py:43 checkout/views/checkout.py:114
+msgid "Оформление заказа"
+msgstr "Оформлення замовлення"
+
+#: checkout/views/checkout.py:98
+msgid "Ваш заказ успешно оформлен."
+msgstr "Ваше замовлення успішно оформлено."
+
+#~ msgid "Способ доставки*"
+#~ msgstr "Спосіб доставки"
+
+#~ msgid "Способ оплаты*"
+#~ msgstr "Спосіб оплати"
+
+#~ msgid "Главная"
+#~ msgstr "Головна"
+
+#~ msgid "Внимание! Доставка возможна только с оплатой Приват24"
+#~ msgstr "Увага! доставка можлива тільки при оплаті Приват 24"
+
+#~ msgid "Контактная информация"
+#~ msgstr "Контактна інформація"
+
+#, fuzzy
+#~| msgid "Содержание заказа"
+#~ msgid "Содержимое заказа"
+#~ msgstr "Зміст замовлення"
+
+#~ msgid "Оформить заказ"
+#~ msgstr "Оформити замовлення"
+
+#~ msgid "Учтена скидка"
+#~ msgstr "Врахована знижка"
+
+#~ msgid "Итого"
+#~ msgstr "Разом"
+
+#~ msgid "Стоимость доставки не включена"
+#~ msgstr "Вартість дотавки не включена"
+
+#~ msgid "и оплачивается при получении"
+#~ msgstr "і оплачується при отриманні"
+
+#~ msgid "Простой заказ в один клик"
+#~ msgstr "Просте замовлення в один клік"
+
+#, fuzzy
+#~| msgid "Введите номер телефона"
+#~ msgid "Введите имя и номер телефона."
+#~ msgstr "Введіть номер телефону"
+
+#~ msgid "Мы Вам перезвоним для оформления заказа."
+#~ msgstr "Ми Вам передзвонимо для оформлення замовлення."
+
+#~ msgid "Информация по заказу"
+#~ msgstr "Інформція щодо замовлення"
+
+#~ msgid "На имя"
+#~ msgstr "На ім'я"
+
+#~ msgid "Содержание заказа"
+#~ msgstr "Зміст замовлення"
+
+#~ msgid "Итого к оплате"
+#~ msgstr "Разом до сплати"
+
+#~ msgid "кабинет"
+#~ msgstr "кабінет"
+
+#~ msgid ""
+#~ "Если у Вас есть какие-либо вопросы, пишите нам или звоните по номерам"
+#~ msgstr ""
+#~ "Якщо у Вас є які-небудь запитання, пишіть нам або дзвоніть за номерами"
+
+#~ msgid "Спасибо что выбрали наш магазин"
+#~ msgstr "Дякуємо що обрали наш магазин"
+
+#~ msgid "Имя клиента"
+#~ msgstr "Ім'я клієнта"
+
+#~ msgid "Стоимость заказа"
+#~ msgstr "Вартість замовлення"
+
+#~ msgid "Ваш пароль к личному кабинету"
+#~ msgstr "Ваш пароль до особистого кабінету"
+
+#, fuzzy
+#~| msgid "Обязательное поле"
+#~ msgid "поля, обязательные для заполнения"
+#~ msgstr "Обов'язкове поле"
+
+#, fuzzy
+#~| msgid "Оформить заказ"
+#~ msgid "Оформить"
+#~ msgstr "Оформити замовлення"
+
+#~ msgid "Артикул"
+#~ msgstr "Артикул"
+
+#~ msgid "Введите имя"
+#~ msgstr "Введіть ім'я"
+
+#~ msgid "Введите более 3х символов"
+#~ msgstr "Введіть більше 3х символів"
+
+#~ msgid "Максимальное значение - 16 символов"
+#~ msgstr "Максимальне значення - 16 символів"
+
+#~ msgid "Некорректный номер телефона"
+#~ msgstr "Некоректний номер телефону"
+
+#~ msgid "Ваш заказ №{{order.id}}. {%% trans "
+#~ msgstr "Ваше замовлення"

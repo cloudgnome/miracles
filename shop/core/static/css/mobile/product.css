@@ -1,0 +1,161 @@
+.property{
+	font-size: 16px;
+	text-align: left;
+	font-weight: 100;
+}
+.property .title{
+	font-family: Bold;
+}
+#availability{
+	background-color: #f4faf6;
+	color: #fff;
+	padding: 10px 11px;
+	margin-bottom: 9px;
+	border-radius: 4px;
+}
+#availability.notaval{
+	background-color: #dddddd;
+}
+.availability{
+	font-family: Bold;
+}
+.price{
+	font-size: 24px;
+	/*color: #0C6291;*/
+	color: #2d3a6c;
+}
+.old.price{
+	margin-right: 3px;
+	color: #9c9c9c;
+	font-weight: 100;
+	text-decoration: line-through;
+	font-size: 17px;
+}
+.opt{
+	color: #9c9c9c;
+}
+.new.price{
+	color: #ff5347;
+}
+.description{
+	text-align: left;
+	font-weight: 100;
+	padding-top: 17px;
+}
+.description img{
+	max-width: 100%;
+	max-height: 100%;
+}
+#product .price .opt{
+	font-size: 17px;
+	color:#888;
+}
+#product .buy{
+	height: 48px;
+	margin-top: 21px;
+	font-size: 20px;
+	position: relative;
+}
+
+.topic.featured:hover{
+	color: #6dc0db;
+}
+#product #thumb img{
+	max-width: 100%;
+	max-height: 100%;
+}
+#product #reviews{
+	padding-top: 15px;
+}
+#product #reviews p{
+	font-size: 16px;
+	font-weight: 100;
+}
+#product #reviews p.signin{
+	font-size: 14px;
+}
+#product #reviews article{
+	background: #F6FFFF;
+	border: 1px dotted #b1e0f3;
+	margin-top: 10px;
+	padding: 10px;
+	min-height: 110px;
+	max-height: 400px;
+	height: auto;
+	text-align: left;
+}
+#product #reviews article div[itemprop="author"]{
+	font-family: Bold;
+}
+#product #related .row{
+	padding-top: 15px;
+	flex-wrap: wrap;
+}
+#product #related.carousel .row a{
+	flex: 45%;
+	text-decoration: none;
+}
+#product #related .image-container + div{
+	padding: 9px 0;
+}
+#product #related.carousel .row .price{
+	font-size: 18px;
+}
+#gallery{
+	position: fixed;
+	z-index: 36;
+	width: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	height: 100%;
+	background-color: #fff;
+	overflow-y: auto;
+	max-width: 0;
+	transition: all 0.2s ease;
+}
+#gallery.show{
+	max-width: unset;
+	width: 80%;
+}
+#gallery img{
+	max-width: 100%;
+	max-height: 100%;
+	display: block;
+	margin: auto;
+}
+.gallery{
+	display: flex;
+	flex-wrap: wrap;
+}
+.gallery a{
+	border: 1px solid #eee;
+	border-radius: 5px;
+	display: block;
+	margin-right: 6px;
+	overflow: hidden;
+	width: 18%;
+	display: flex;
+	justify-content: center;
+	height: 69px;
+	margin-bottom: 5px;
+}
+#product .gallery img{
+	max-width: 100%;
+}
+#rating-button{
+    display: none;
+}
+#rating{
+	display: none;
+}
+#ratingStars {
+    font-size: 21px;
+    color: #ffca2c;
+    text-align: left;
+	padding-bottom: 21px;
+	padding-top: 12px;
+}
+#ratingStars i {
+    cursor: pointer;
+}

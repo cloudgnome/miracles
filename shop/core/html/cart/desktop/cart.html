@@ -1,0 +1,62 @@
+{% load i18n %}
+{% load translate %}
+<form action="javascript:void(0)" id="cart-form">
+	{%csrf_token%}
+	<h2>{{h2}}</h2>
+	{%if items and items_qty > 4%}
+		<div id="buttons">
+			<button class="blue" id="continue">{% trans 'ПРОДОЛЖИТЬ'%}<br> {% trans 'ПОКУПКИ'%}</button>
+			<button class="blue" id="clear">{% trans 'ОЧИСТИТЬ КОРЗИНУ'%}</button>
+			<span></span>
+			<button class="checkout green">
+				{% trans 'ОФОРМИТЬ ЗАКАЗ'%}
+				<div class="loading"></div>
+			</button>
+		</div>
+	{%endif%}
+	{%if items%}
+		{%for item in items%}
+			<div class="productItem">
+				<div class="remove" item-id="{{item.id}}" product-id="{{item.product.id}}"><i class="fas fa-trash-alt"></i></div>
+				<div class="image">
+					<a href="/{{item.product.slug}}">
+						<img src="{{item.product.image.cart_thumb}}" alt="{{item.product.name}}">
+					</a>
+				</div>
+				<div class="name-price">
+					<a class="name" href="/{{item.product.slug}}">{% translate item.product 'names' lang%}</a>
+					{%if item.product.special%}
+						<span class="old price"><span>{{item.product.retail_price}}</span> грн </span>
+						<span class="new price"><span> {{item.product.price}}</span> грн</span>
+					{%else%}
+						<div class="price"><span>{{item.product.price}}</span> грн</div>
+					{%endif%}
+				</div>
+				<div class='quantity'>
+					<span class='minus'>-</span>
+					{%if item.product.special%}
+						<input name='{{item.product.id}}' type="text" value="{{item.qty}}" data-price="{{item.product.special.price}}">
+					{%else%}
+						<input name='{{item.product.id}}' type="text" value="{{item.qty}}" data-price="{{item.product.price}}">
+					{%endif%}
+					<span class='plus'>+</span>
+				</div>
+				<div class="total right"><span>{{item.total}}</span> грн</div>
+			</div>
+		{%endfor%}
+		<div id="total">
+			<span>{% trans 'Общая сумма'%}:</span>
+			<div id="sum">{{total}}</div> <div class="currency">грн</div>
+		</div>
+		<div id="buttons">
+			<button class="blue" id="continue">{% trans 'ПРОДОЛЖИТЬ'%}<br> {% trans 'ПОКУПКИ'%}</button>
+			<button class="blue" id="clear">{% trans 'ОЧИСТИТЬ КОРЗИНУ'%}</button>
+			<span></span>
+			<button class="checkout green">
+				{% trans 'ОФОРМИТЬ ЗАКАЗ'%}
+				<div class="loading"></div>
+			</button>
+		</div>
+	{%endif%}
+	<div class="close"><i class="far fa-window-close"></i></div>
+</form>

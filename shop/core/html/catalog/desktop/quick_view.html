@@ -1,0 +1,80 @@
+{%load i18n%}
+{%load translate%}
+<div id="quick-view">
+	<div class="close"><i class="far fa-window-close"></i></div>
+	<div class='gallery'>
+		<div class='big-photo'>
+			<img src="{{product.image.big_thumb}}" alt="{% translate product 'names' lang %}">
+		</div>
+		{%if product.gallery%}
+			<div class="mini-photos">
+				{%for image in product.gallery.all%}
+					<a href="{{image.big_thumb}}"><img src="{{image.mini_thumb}}" alt="{% translate product 'names' lang %}"></a>
+				{%endfor%}
+			</div>
+			<script>
+				$('#quick-view .mini-photos').slick({slidesToShow:4,slidesToScroll:4});
+				$('.mini-photos a').on('click',function(){
+					$('.big-photo img').attr('src',$(this).attr('href'));
+					return false;
+				});
+			</script>
+		{%endif%}
+	</div>
+	<div class='product-info right' data-id='{{product.id}}'>
+		<a href="{% translate product 'slugy' lang %}" class="name">{% translate product 'names' lang %}</a>
+		<div class="available">{{product.availability|safe}}</div>
+		<div id="price">
+				{%if product.special%}
+					<span class="old price">{{product.retail_price}} грн.</span>
+					<span class="new price">{{product.price}} грн.</span>
+				{%else%}
+					<div class="price">{{product.price}} грн.</div>
+				{%endif%}
+			{%if product.is_available%}
+					<div class="opt">{{product.big_opt_price}}</span> <span>грн. <a href="{{language}}/igrushki-optom" class="opt">{% trans '(условия)' %}</a></div>
+			{%endif%}
+		</div>
+		{%if product.is_available%}
+			<div>{% trans 'Количество'%}</div>
+			<div class="quantity">
+				<div class='button minus'>-</div>
+				<input type="text" value="1">
+				<div class='button plus'>+</div>
+			</div>
+			<button class="buy green" value="{{product.id}}">{% trans 'В корзину'%}</button>
+			<button class="blue quick-order">{% trans 'Заказ в один клик'%}</button>
+		{%endif%}
+		<div class="properties">
+			<span class="key">{% trans 'Артикул'%}:</span>
+			<span class="value"> {{product.model}} </span>
+			<br>
+			{%if product.brand.country%}
+				<span class="key">{% trans 'Страна производитель'%}:</span>
+				<span class="value"> {{product.brand.country}} </span>
+				<br>
+			{%endif%}
+			{%if product.brand%}
+				<span class="key">{% trans 'Производитель'%}:</span>
+				<span class="value"> {{product.brand}} </span>
+				<br>
+			{%endif%}
+			{%if product.parameters%}
+				<span class="key">{% trans 'Размеры'%}:</span>
+				<span class="value">{{product.parameters}}</span>
+				<br>
+			{%endif%}
+			<span class="key">{% trans 'Категория'%}:</span>
+			<span class="value">
+				<a href="{% translate product.get_category 'slugy' lang %}">{{product.get_category.name_ru}}</a>
+			</span>
+			<br>
+			<span class="key">ID:</span>
+			<span class="value">{{product.id}}</span>
+		</div>
+	</div>
+</div>
+<script>
+	var id = $('#quick-view .product-info').attr('data-id');
+	$('#quick-view .big-photo').zoom();
+</script>

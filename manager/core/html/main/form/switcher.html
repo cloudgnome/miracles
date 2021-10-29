@@ -1,0 +1,7 @@
+<label class="switcher">
+    <span class="switch">
+        <input name="{{widget.name}}" type="checkbox" {% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %} {% include "django/forms/widgets/attrs.html" %}>
+        <span class="slider round"></span>
+        <span class="text">{{label}}</span>
+    </span>
+</label>

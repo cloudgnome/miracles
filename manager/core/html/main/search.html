@@ -1,0 +1,3 @@
+{%for product in products%}
+    <div product-id="{{product.id}}" storage="{{product.get_storage_display}}" href="{{product.slug}}" price="{{product.price}}" opt="{{product.big_opt_price}}" image="{{product.admin_image}}">{{product.description.first.name}}</div>
+{%endfor%}

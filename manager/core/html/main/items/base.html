@@ -1,0 +1,45 @@
+{%load value%}
+{%for item in items%}
+	<div class="item column">
+		<input type="checkbox" value="{{item.pk}}" name="delete">
+		{%for field in Model|value:item%}
+			{%if forloop.counter == 2%}
+				<a class="item-column" href="/{{Model}}/{{item.pk}}">{{field}}</a>
+			{%else%}
+				<div class="item-column">{{field|default_if_none:''|safe}}</div>
+			{%endif%}
+		{%endfor%}
+	</div>
+{%endfor%}
+{% if items.paginator.num_pages > 1 %}
+	<div id="pagination">
+		<span class="step-links">
+			{% if items.has_previous and items.previous_page_number > 1%}
+				<a class='prevPage' href="?page={{items.previous_page_number}}"> < Пред.</a>
+			{% endif %}
+			{%for page in items.paginator.page_range%}
+				{%if page == items.number%}
+					<span class="active">{{page}}</span>
+				{%elif page == 1%}
+					<a href="?page={{page}}">{{page}}</a>
+				{%elif page <= 4%}
+					<a href="?page={{page}}">{{page}}</a>
+				{%endif%}
+			{%endfor%}
+			{% if items.has_next %}
+				<a class='nextPage' href="?page={{items.next_page_number}}"> След. > </a>
+			{% endif %}
+		</span>
+		<div class="pagi-info">
+			{%if items.paginator.per_page%}
+				<span class="search-count">{{items.paginator.per_page}} на странице</span>
+			{%endif%}
+			{%if count%}
+				<span class="search-count">{{count}} всего</span>
+			{%endif%}
+			{% if items.has_next %}
+				<a id="list-all">Показать все</a>
+			{% endif %}
+		</div>
+	</div>
+{%endif%}

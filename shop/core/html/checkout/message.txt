@@ -1,0 +1,17 @@
+{%load i18n%}
+{% load translate%}
+{% trans 'Ваш заказ'%} №{{order.id}}. {% trans 'Спасибо что выбрали наш магазин'%}!
+{% trans 'Номер телефона'%}: {{order.user.phone}}
+{% trans 'Имя клиента'%}: {{order.name}}
+{% trans 'Способ доставки'%}: {{delivery_type}}
+{% trans 'Адрес доставки'%}: {{address}}
+{% trans 'Способ оплаты'%}: {{payment_type}}
+{% trans 'Содержание заказа'%}:
+{%for item in order.cart%}
+    {% translate item.product 'names' lang %}
+    {{product.qty}}шт. x {{product.price}}грн.
+{%endfor%}
+{% trans 'Стоимость заказа'%}: {{order.total}} 
+{% trans 'Если у Вас есть какие-либо вопросы, пишите нам или звоните по номерам'%}:
+{{phones}}
+{%if password%}{% trans 'Ваш пароль к личному кабинету'%}: {{password}}{%endif%}

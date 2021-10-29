@@ -1,0 +1,126 @@
+{%extends base%}
+{%load i18n%}
+{%block main%}
+<div class="close"></div>
+<form id="signin" class="user" action="javascript: void(0)">
+	{%csrf_token%}
+	<h3>{% trans 'Вход'%}</h3>
+	{{form.phone.label_tag}}
+	{{form.phone}}
+	{{form.phone.errors}}
+	{{form.password.label_tag}}
+	{{form.password}}
+	{{form.password.errors}}
+	{{form.non_field_errors}}
+	<input type="hidden" name="next" value="{{next}}">
+	<a href="javascript:void(0)" id="forget">{% trans 'ой,пароль? напомнить'%}</a>
+	<button class="blue">{% trans 'Войти'%}</button>
+	<div class="outer">{% trans 'или'%}:</div>
+	<div class="social">
+		<div id="facebook"><svg><use xlink:href="#fbIcon"></use></svg></div>
+		<div id="google"><svg><use xlink:href="#gplusIcon"></use></svg></div>
+	</div>
+	<a href="javascript:void(0)" id="sign-up">{% trans 'зарегистрироваться'%}</a>
+</form>
+<form id="forget-password-form" class="user" action="javascript: void(0)">
+	{%csrf_token%}
+	{{forget_form.phone.label_tag}}
+	{{forget_form.phone}}
+	{{forget_form.phone.errors}}
+	{{error}}
+	<button class="blue">{% trans 'Напомнить'%}</button>
+</form>
+<script>
+	$("#signin").validate({
+		rules:{
+			phone:{
+				required: true,
+				maxlength: 16,
+			},
+			password:{
+				required: true,
+				minlength: 6,
+				maxlength: 16,
+			},
+		},
+		messages:{
+			phone:{
+				required: "{% trans 'Введите номер телефона.'%}",
+				maxlength: "{% trans 'Максимальная длина 16 символов.'%}",
+			},
+			password:{
+				required: "{% trans 'Введите пароль.'%}",
+				minlength: "{% trans 'Длина пароля минимум 6 символа.'%}",
+				maxlength: "{% trans 'Максимальная длина 16 символов'%}.",
+			},
+		},
+		submitHandler: function(form) {
+			http.action = function(){
+				if(window.http.json){
+					if(window.http.json.next && http.json.next != 'None')
+						location.href = http.json.next;
+					else{
+						location.reload();
+					}
+				}
+				else{
+					unload();
+					setTimeout(function(){
+						load();
+					},200);
+				}
+			};
+			http.post('/user/signin/',$('#signin').serialize(),true);
+			return false;
+		}
+	});
+	var data;
+	$('#forget').on('click',function(){
+		$('#signin').hide();
+		$('#forget-password-form').show();
+	});
+	$('#facebook').on('click',FBlogin);
+	/* SOCIAL AUTH*/
+	if(window.gapi){
+		function onSuccess(googleUser) {
+			var profile = googleUser.getBasicProfile();
+			data = {
+				social_type:2,
+				social_id:profile.getId(),
+				name:profile.getName(),
+				// image:profile.getImageUrl(),
+				email:profile.getEmail(),
+				social:true
+			};
+			http.action = function(){
+				if(http.json && http.json.href)
+					location.href = http.json.href;
+				else{
+					location.reload();
+				}
+			};
+			http.post('/user/signup/',data=data,true);
+		}
+		function onFailure(resp){
+		  log('failure g+');
+		}
+		var googleUser = {};
+		var startApp = function() {
+		gapi.load('auth2', function(){
+		  auth2 = gapi.auth2.init({
+			client_id: '527934852054-lfqjb64khhjkor8gurr8jcvdh5dntlgp.apps.googleusercontent.com',
+			cookiepolicy: 'single_host_origin',
+			scope: 'profile email'
+		  });
+		  attachSignin($('#google')[0]);
+		});
+		};
+
+		function attachSignin(element) {
+		auth2.attachClickHandler(element, {},
+			onSuccess, onFailure);
+		}
+		startApp();
+	}
+</script>
+{%endblock%}

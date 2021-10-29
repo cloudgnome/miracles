@@ -1,0 +1,34 @@
+{%extends 'shop/desktop/index.html'%}
+{%block main%}
+	<ul>
+		{% load mptt_tags %}
+		{% full_tree_for_model catalog.Category as nodes %}
+		{% recursetree nodes %}
+			{%if node.active%}
+				<li>
+					{%if not node.is_child_node%}
+						{%if node.is_leaf_node%}
+							<a href="/{{node.slug}}">{{node.name}}</a>
+						{%else%}
+							<a class="" href="/{{node.slug}}">
+								{{node.name}}
+							</a>
+							<ul class="">
+								{{children}}
+							</ul>
+						{%endif%}
+					{%else%}
+						<a {%if not node.is_leaf_node%}class=""{%endif%} href="/{{node.slug}}">
+							{{node.name}}
+						</a>
+						{%if not node.is_leaf_node%}
+							<ul class="">
+								{{children}}
+							</ul>
+						{%endif%}
+					{%endif%}
+				</li>
+			{%endif%}
+		{% endrecursetree %}
+	</ul>
+{%endblock%}

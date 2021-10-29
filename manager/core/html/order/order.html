@@ -1,0 +1,100 @@
+{%extends extends%}
+{%block main%}
+    <div id="reload">
+        <h1></h1>
+        <form id="order" action="javascript: void(0)">
+            {%csrf_token%}
+            <div class="left">
+                <div class="order-info">№ {{order.id}}&nbsp;&nbsp;&nbsp;{{order.created_at}}</div>
+                <div class="user">
+                    <div id="user-info">
+                        <div class="field">{{user.name}}</div>
+                        <div class="field">{{user.email}}</div>
+                        <div class="field">{{user.phone}}</div>
+                    </div>
+                </div>
+                <div id="order-info">
+                    {%csrf_token%}
+                    {{form.delivery_type}}
+                    {{form.city}}
+                    {{form.departament}}
+                    {{form.payment_type}}
+                    {{form.status}}
+                    {{form.comment}}
+                </div>
+            </div>
+            <div class="right">
+                <div id="order-items">
+                    {%for item in order.cart%}
+                        <div class="item id{{item.id}}" item-id="{{item.id}}">
+                            <div class="remove-wrap">
+                                <div class="remove" item-id="{{item.id}}"></div>
+                            </div>
+                            <div class="name">
+                                <a href="http://{{BASE_URL}}/{{item.product.slug}}" target="_blank">{{item.product.name}}</a>
+                            </div>
+                            <div>
+                                <input type="text" name="qty" value="{{item.qty}}">
+                            </div>
+                            <div>
+                                <input type="text" name="price" value="{{item.price}}">
+                            </div>
+                            <div class="total">
+                                {{item.total}} грн.
+                            </div>
+                            <div class="storage">
+                                {{item.product.get_storage_display}}
+                            </div>
+                        </div>
+                    {%endfor%}
+                </div>
+                <div id="total">Итого: <span class="sum">{{order.cart.total}}</span> грн.</div>
+                <div id="discount">Скидка: <span class="sum">{{order.cart.discount}}</span> грн.</div>
+                <div id="add-product">
+                    <i class="fas fa-plus-circle"></i>
+                </div>
+            </div>
+            <input type="hidden" name="item-id" value="{{order.id}}">
+        </form>
+        <div id="panel">
+            <svg class="button" id="delete" item-id="{{order.id}}" model="order" fill="#aaa" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"/>
+                <path d="M0 0h24v24H0z" fill="none"/>
+            </svg>
+            <button class="button load" id="save" disabled="" view="{{view}}" item-id="{{order.id}}" model="order">Сохранить</button>
+            {%if form.delivery_type.value == 'np'%}
+                {%if order.ttn%}
+                    <button class="button load" id="track">Отследить</button>
+                {%endif%}
+                <div class="button" id="filter">
+                    <form id="filters" action="javascript: void(0)">
+                        <label>Вес:<input value="0.1" type="text" name="weight" placeholder="Вес" required></label>
+                        <label>Обьемный вес:<input value="0.1" type="text" name="volume" placeholder="Обьемный вес" required></label>
+                        <label>Кол-во мест:<input value="1" type="text" name="seats" placeholder="Кол-во мест" required></label>
+                        <label>Дата:<input value="{{date}}" type="date" name="date" placeholder="Дата в формате 00.00.0000" required autocomplete></label>
+                        <button id="make-ttn">Давай</button>
+                    </form>
+                    <svg fill="#bbb" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"/>
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                    </svg>
+                </div>
+            {%endif%}
+            <div id="sms-panel" class="button">
+                <button id="sms" class="load">SMS</button>
+                <div class="buttons">
+                    <button id="ttn">ТТН</button>
+                    <button id="payment">Расч. счет</button>
+                    <button id="card">Номер карты</button>
+                </div>
+            </div>
+            {%if order.link%}
+                <a class="button" id="ttn_link" href="{{order.link}}" target="_blank">ТТН</a>
+            {%endif%}
+            {%if order.ttn%}
+                <div class="button" id="ttn_id">{{order.ttn}}</div>
+            {%endif%}
+        </div>
+    </div>
+{%endblock%}

@@ -1,0 +1,81 @@
+{%load value%}
+{%load i18n%}
+{%for item in items%}
+    <div class="product_item">
+        <div>
+            <div class="delete">
+                <input type="checkbox" value="{{item.pk}}" name="delete">
+            </div>
+            <div class="image">
+                {{item.admin_image|safe}}
+            </div>
+            <div class="info-wrap">
+                <div class="name">
+                    <a href="/{{Model}}/{{item.pk}}">{{item.name}}</a>
+                    <a class="link" href="http://{{SITE_URL}}/{{item.slug}}" target="_blank"><i class="fas fa-link clickable"></i></a>
+                </div>
+                <div class="info">
+                    <div>{{item.id}}</div>
+                    <div>{{item.model}}</div>
+                    {%if item.brand%}
+                        <a href="?brand__description__name__icontains={{item.brand_name}}" class="clickable overlay_container">
+                            {{item.brand.icon|safe}}
+                            <div class="overlay">
+                                <div class="overlay_text">
+                                    {{item.brand_name}}
+                                </div>
+                            </div>
+                        </a>
+                    {%endif%}
+                    <a href="?storage__in={{item.storage}}" class="overlay_container clickable">
+                        {{item.storage_icon|safe}}
+                        <div class="overlay">
+                            <div class="overlay_text">
+                                {{item.get_storage_display}}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="price">
+                <div>{{item.price}}</div>
+                <div class="availability">{{item.available|safe}}</div>
+            </div>
+            <div class="settings-button" product-id="{{item.id}}">
+                <i class="fas fa-cog clickable"></i>
+            </div>
+        </div>
+    </div>
+{%endfor%}
+{% if items.paginator.num_pages > 1 %}
+    <div id="pagination">
+        <span class="step-links">
+            {% if items.has_previous and items.previous_page_number > 1%}
+                <a class='prevPage' href="?page={{items.previous_page_number}}"> < Пред.</a>
+            {% endif %}
+            {%for page in items.paginator.page_range%}
+                {%if page == items.number%}
+                    <span class="active">{{page}}</span>
+                {%elif page == 1%}
+                    <a href="?page={{page}}">{{page}}</a>
+                {%elif page <= 4%}
+                    <a href="?page={{page}}">{{page}}</a>
+                {%endif%}
+            {%endfor%}
+            {% if items.has_next %}
+                <a class='nextPage' href="?page={{items.next_page_number}}"> След. > </a>
+            {% endif %}
+        </span>
+        <div class="pagi-info">
+            {%if items.paginator.per_page%}
+                <span class="search-count">{{items.paginator.per_page}} на странице</span>
+            {%endif%}
+            {%if count%}
+                <span class="search-count">{{count}} всего</span>
+            {%endif%}
+            {% if items.has_next %}
+                <a id="list-all">Показать все</a>
+            {% endif %}
+        </div>
+    </div>
+{%endif%}

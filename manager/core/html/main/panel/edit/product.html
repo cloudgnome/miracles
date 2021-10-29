@@ -1,0 +1,52 @@
+{%load i18n%}
+{%load export_status%}
+<div id="toggleProductInfo" class="edit-panel-icon toggle-panel">
+    <i class="fas fa-cog"></i>
+</div>
+<div id="panel-menu">
+    <div id="search">
+        <div class="toggle-panel panel-icon action">
+            <i class="fas fa-hamburger"></i>
+        </div>
+    </div>
+    <div id="panel">
+        <div id="product-info">
+            {%for export in exports%}
+                <div class="export" type="{{export.id}}">
+                    <div class="heading">{{export.name}}</div>
+                    <div class="field">
+                        <label class="custom-radio">
+                            {% trans 'Так'%}
+                            <input value="true" type="radio" autocomplete="off" name="{{export.id}}"{%export_status_checked item export True%}>
+                            <span class="checkmark">
+                                <span class="inside"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="field">
+                        <label class="custom-radio">
+                            {% trans 'Ні'%}
+                            <input value="false" type="radio" autocomplete="off" name="{{export.id}}"{%export_status_checked item export False%}>
+                            <span class="checkmark">
+                                <span class="inside"></span>
+                            </span>
+                        </label>
+                    </div>
+                    {%if export.has_meta%}
+                        <div class="meta">
+                            <div class="input">
+                                <input type="text" name="export-name" autocomplete="off" placeholder="{% trans 'Назва'%}" value="{% export_status item export 'name' %}">
+                            </div>
+                            <div class="input">
+                                <textarea name="text" autocomplete="off" placeholder="{% trans 'Опис'%}" id="export-text">
+                                    {% export_status item export 'text' %}
+                                </textarea>
+                                <input type="hidden" name="export-json_text" id="export-json_text" value="{% export_status item export 'json_text' %}">
+                            </div>
+                        </div>
+                    {%endif%}
+                </div>
+            {%endfor%}
+        </div>
+    </div>
+</div>

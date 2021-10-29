@@ -1,0 +1,25 @@
+{%extends 'shop/desktop/index.html'%}
+{%load i18n%}
+{%block main%}
+<div class="bread-crumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+	<span itemprop="itemListElement" 
+	itemscope itemtype="http://schema.org/ListItem">
+		<a href="{{language}}/" itemprop="item">
+			<span itemprop="name">{% trans 'Главная'%}</span>
+		</a>
+		<meta itemprop="position" content="1">
+	</span>
+	<h1>{% trans 'Заказы'%}</h1>
+</div>
+<div>
+	<a href="{{language}}/user/change-password">{% trans 'Изменить пароль входа'%}</a><br><br>
+	{%if orders%}
+		{%for order in orders%}
+			<a href="{{language}}/user/order/{{order.id}}">{% trans 'Заказ'%} №{{order.id}}</a><br> 
+			{% trans 'Статус'%}: {{order.get_status_display}}&nbsp;&nbsp;&nbsp;{% trans 'Кол-во товаров'%}: {{order.cart.items_qty}}&nbsp;&nbsp;&nbsp;{% trans 'Общая сумма'%}: {{order.cart.total}}грн.<hr> 
+		{%endfor%}
+	{%else%}
+	{% trans 'Нет доступной информации'%}.
+	{%endif%}
+</div>
+{%endblock%}

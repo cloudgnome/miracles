@@ -1,0 +1,326 @@
+{%load i18n%}
+{%load translate%}
+{%block main%}
+<template id="galleryTemplate">
+	<div id="gallery">
+		<div class="close noselect"><i class="far fa-window-close"></i></div>
+		<div class="arrow left noselect"></div>
+		<div id='image'>
+			<img class="noselect" src="" alt="{{product.name}}">
+		</div>
+		<div class="arrow right noselect"></div>
+	</div>
+</template>
+<template id="feedbackTemplate">
+	<article>
+		<div class="rate one"></div>
+		<h4>author</h4>
+		<p>text</p>
+	</article>
+</template>
+<div id="product" itemscope itemtype="http://schema.org/Product">
+	<div id="product-bc">
+		<span class="bread-crumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+			<span itemprop="itemListElement" 
+				itemscope itemtype="http://schema.org/ListItem">
+				<a href="{{language}}/" itemprop="item">
+					<span itemprop="name">{% trans 'Главная'%}</span>
+				</a>
+				<meta itemprop="position" content="1">
+			</span>
+			{%for crumb in breadcrumbs%}
+				<span itemprop="itemListElement" 
+				itemscope itemtype="http://schema.org/ListItem">
+					<a href='{{crumb.1}}'
+					itemprop="item">
+						<span itemprop="name">{{crumb.0}}</span>
+					</a>
+					<meta itemprop="position" content="{{forloop.counter|add:'1'}}">
+				</span>
+			{%endfor%}
+		</span>
+		<h1 itemprop="name" class="name{%if product.special%} specialPrice{%endif%}">{% translate product 'names' lang %}</h1>
+	</div>
+	<div class="product" data-id="{{product.id}}">
+		<div class="info">
+			<div class="photo-gallery">
+				<div class="mini_photos photos">
+					{%if product.gallery%}
+						{%for image in product.gallery.all%}
+							<a href="{{image.large_thumb}}">
+								<img src="{{image.mini_thumb}}" alt="{% translate product 'names' lang %}" data-image="{{image.big_thumb}}">
+							</a>
+						{%endfor%}
+					{%endif%}
+				</div>
+				<a id='big-photo'>
+					<img itemprop="image" src="{{product.image.large_thumb}}" alt="{% translate product 'names' lang %}" data-image="{{product.image.hd_thumb}}">
+					{%if product.special%}
+						<div class="special">-{{product.special.percent}}%</div>
+					{%endif%}
+				</a>
+				{%if related%}
+					<div class="related">
+						{%block related_title%}
+							<h3 class="topic">{% trans 'Вместе с этим товаром покупают'%}:</h3>
+						{%endblock%}
+						<div class="items">
+							{%for product in related%}
+								<div class="item{%if not product.is_available%} notavail{%endif%}">
+									<a class="image" href="{% translate product 'slugy' lang %}">
+										<img src="{{product.image.home_thumb}}" alt="{% translate product 'names' lang %}">
+										{%if product.special%}
+											<div class="special">-{{product.special.percent}}%</div>
+										{%endif%}
+									</a>
+									<div class="availability">
+										{{product.availability|safe}}
+									</div>
+									{%if product.special%}
+										<div class="price">
+											<span class="old">{{product.retail_price}} грн.</span>
+											<span class="new">{{product.price|default_if_none:0}} грн.</span>
+										</div>
+									{%else%}
+										<div class="price">{{product.price|default_if_none:0}} грн.</div>
+									{%endif%}
+									<a href="{% translate product 'slugy' lang %}" class="name">{% translate product 'names' lang%}</a>
+								</div>
+							{%endfor%}
+						</div>
+					</div>
+				{%endif%}
+				{%if similar%}
+					<div class="related">
+						<h3><a class="topic" href="{% translate product.category.first 'slugy' lang %}" title="{{product.category.first.name}}">{% trans 'Похожие товары'%}:</a></h3>
+						<div class="latest items">
+							{%for product in similar%}
+								<div class="item{%if not product.is_available%} notavail{%endif%}">
+									<a class="image" href="{% translate product 'slugy' lang %}">
+										<img src="{{product.image.home_thumb}}" alt="{% translate product 'names' lang %}">
+										{%if product.special%}
+											<div class="special">-{{product.special.percent}}%</div>
+										{%endif%}
+									</a>
+									<div class="availability">
+										{{product.availability|safe}}
+									</div>
+									{%if product.special%}
+										<div class="price">
+											<span class="old">{{product.retail_price}} грн.</span>
+											<span class="new">{{product.price|default_if_none:0}} грн.</span>
+										</div>
+									{%else%}
+										<div class="price">{{product.price|default_if_none:0}} грн.</div>
+									{%endif%}
+									<a class="name" href="{% translate product 'slugy' lang %}">{% translate product 'names' lang %}</a>
+								</div>
+							{%endfor%}
+						</div>
+					</div>
+				{%endif%}
+				<div id="tabContent">
+					{%if product.gallery%}
+						<div class="gallery photos">
+							{%for image in product.gallery.all%}
+								<a href="{{image.hd_thumb}}" data-image="{{image.big_thumb}}">
+									<img src="{{image.home_thumb}}" alt="{% translate product 'names' lang %}" data-image="{{image.big_thumb}}">
+								</a>
+							{%endfor%}
+						</div>
+					{%endif%}
+				</div>
+				<div class="related">
+					{%include 'catalog/desktop/sidebar_products.html'%}
+				</div>
+			</div>
+			<div class="product-info">
+				{%block freeDelivery%}
+				{%endblock%}
+				<div class="availability">
+					<link itemprop="availability" href="http://schema.org/InStock"/>
+					<link itemprop="url" href="{% translate product 'slugy' lang %}"/>
+					{{product.product_availability|safe}}
+				</div>
+				<div>
+					{%if product.is_available%}
+						<div id="price-block">
+							<div class="row">
+								<span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="col">
+									<span class="price">
+										{%if product.special%}
+											<span class="old">{{product.retail_price|floatformat:0}} грн.</span>
+											<span itemprop="price" class="new"> {{product.price|default_if_none:0}}</span> <span itemprop="priceCurrency" class="new ">грн.</span>
+											<meta itemprop="priceValidUntil" content="2030-06-05">
+											<link itemprop="availability" href="http://schema.org/InStock"/>
+											<link itemprop="url" href="{% translate product 'slugy' lang %}"/>
+										{%else%}
+											<span itemprop="price">{{product.price|default_if_none:0}}</span> <span itemprop="priceCurrency">грн.</span>
+										{%endif%}
+									</span>
+									<br>
+								</span>
+								<div class="product-buttons">
+									<i class="fas fa-balance-scale"></i>
+									<i class="fas fa-star"></i>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<button class="green buy button" value="{{product.id}}" name="{% translate product 'names' lang%}">
+										<svg width="30" height="30"><use xlink:href="#cartIcon"></use></svg>
+										{% trans 'Купить'%}
+									</button>
+								</div>
+								<div class="quantity">
+									<span class='minus'>-</span>
+									<input type="text" name="quantity" value="1">
+									<span class='plus'>+</span>
+								</div>
+							</div>
+						</div>
+						<div id="call-back-block">
+							<button class="blue quick-order button">{% trans 'Заказ в один клик'%}</button>
+							<a id="call-back" class="call-back">
+								<i class="fas fa-phone"></i>
+								{% trans 'Перезвоните'%}
+							</a>
+						</div>
+					{%endif%}
+					<div class="properties">
+						{%if product.is_available%}
+							<span class="key">Опт: </span><span class="opt">{{product.opt_price|floatformat:"0"}} грн. <a href="{{language}}/{{OPT_LINK}}" class="opt">{% trans '(умови)' %}</a></span>
+						{%endif%}
+						<br>
+						{%if product.brand%}
+							<span class="key">{% trans 'Производитель'%}: </span>
+							{%if product.brand.active%}
+								<a href="{% translate product.brand 'slugy' lang %}" itemprop="brand" class="value">{% translate product.brand 'names' lang%}</a>
+							{%else%}
+								<span itemprop="brand" class="value"> {% translate product.brand 'names' lang%} </span>
+							{%endif%}
+							<br>
+						{%endif%}
+						{%if product.brand.country%}
+							<span class="key">{% trans 'Страна'%}: </span>
+							<span itemprop="manufacturer" class="value"> {{product.brand.country}} </span>
+							<br>
+						{%endif%}
+						{%if product.parameters%}
+							<span class="key">Параметры: </span>
+							<span class="value" itemprop="model">{{product.parameters}}</span>
+							<br>
+						{%endif%}
+						<span class="key">ID {% trans 'Артикул'%}: </span>
+						<span itemprop="sku" class="value"> {{product.model}} </span>
+						<br>
+					</div>
+				</div>
+				<div id="tags" class="container">
+					{%for tag in product.tags.all%}
+						<a href="{% translate tag 'slugy' lang %}">#{% translate tag 'names' lang %}</a>
+					{%endfor%}
+				</div>
+				<div class="tabs">
+					<div class="tab">
+						<label for="tab-1" class='blue tab'>{% trans 'ОПИСАНИЕ'%}</label>
+					</div>
+					<div id="tab-1" itemprop="description" class="tab_content noselect">
+						{%if product.attributes.all%}
+							<table>
+								{%for attribute in product.attributes.all%}
+									<tr><td>{{attribute.name}}</td><td>{{attribute.value}}</td></tr>
+								{%endfor%}
+							</table>
+						{%endif%}
+						{{description|safe|default_if_none:''}}
+					</div>
+					<div class="tab">
+						<label for="feedbackTab" class='blue tab'>{% trans 'ОТЗЫВЫ'%} ({{feedbacks.count}})</label>
+					</div>
+					<div id="tab-3" class=" tab_content reviews">
+						<div {%if feedbacks.count%}itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating"{%endif%}>
+							<select id="rating">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4.8" selected="">4.8</option>
+								<option value="5">5</option>
+							</select>
+							<div id="ratingStars">
+								<i class="far fa-star" number="1"></i>
+								<i class="far fa-star" number="2"></i>
+								<i class="far fa-star" number="3"></i>
+								<i class="far fa-star" number="4"></i>
+								<i class="far fa-star" number="5"></i>
+							</div>
+							{%if feedbacks.count%}
+								<meta itemprop="reviewCount" content="{{feedbacks.count|default:'1'}}">
+								<meta itemprop="ratingValue" content="4.8">
+							{%endif%}
+						</div>
+						<div>
+							<form action="javascript:void(0)" id="feedback-form">
+								<textarea id="id_text" rows="5" cols="30" placeholder="{% trans 'Текст отзыва'%}" name="text" required="" maxlength="400" minlength="20" autocomplete="off"></textarea>
+								<button class="blue right">{% trans 'Отправить'%}</button>
+							</form>
+							{%if feedbacks%}
+								<div id="reviews" itemprop="review" itemscope itemtype="http://schema.org/Review">
+									{%for feedback in feedbacks%}
+										<article>
+											<div class="rate one"></div>
+											<div itemprop='author'>{{feedback.author}}</div>
+											<p itemprop='name'>{{feedback}}</p>
+										</article>
+									{%endfor%}
+								</div>
+							{%endif%}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="buy-info">
+	<div class="shiping icon">
+		<div class="blue info-head">
+			<svg><use xlink:href="#buyInfoDelivery"></use></svg>
+			{% trans 'ДОСТАВКА'%}
+		</div>
+		<ul>
+			<li><span>{% trans 'Самовывоз'%} <span>({% trans 'Харьков,Тюринская'%} 147)</span></span></li>
+			<li><span>{% trans 'Новой Почтой'%}</span></li>
+			<li><span>{% trans 'Деливери'%}</span></li>
+			{%block ukr_poshta%}<li><span>{% trans 'УкрПочта'%}</span></li>{%endblock%}
+			<li><span>{% trans 'Срок доставки'%}: <span>1-3 {% trans 'дня'%}</span></span></li>
+			<li><span>{% trans 'Курьерская доставка по Харькову'%}: <span>{% trans 'от'%} 80 грн.</span></span></li>
+		</ul>
+		<div class="i">*{% trans 'Отправки перевозчиками осуществляются ежедневно, кроме выходных'%}</div>
+	</div>
+	<div class="pay icon">
+		<div class="blue info-head">
+			<svg><use xlink:href="#buyInfoPayment"></use></svg>
+			{% trans 'ОПЛАТА'%}
+		</div>
+		<ul>
+			<li><span>{% trans 'Наличными при получении заказа'%} ({% trans 'только Новой Почтой'%})</span></li>
+			<li><span>{% trans 'Безналичная оплата'%}</span></li>
+			<li><span>{% trans 'Оплата платежной картой'%}</span></li>
+			<li><span>{% trans 'Наличными в магазине'%}</span></li>
+		</ul>
+	</div>
+	<div class="return icon">
+		<div class="blue info-head">
+			<svg><use xlink:href="#buyInfoReturn"></use></svg>
+			<a href="{{language}}/obmen-i-vozvrat">{% trans 'ОБМЕН/ ВОЗВРАТ'%}</a>
+		</div>
+		<ul>
+			<li><span>{% trans 'Обмен и возврат товара осуществляется в течении 14 дней после покупки, согласно закону Украины “О защите прав потребителей Украины”'%}</span></li>
+		</ul>
+	</div>
+</div>
+<script>
+	var gallery = {{product.gallery_list|safe}};
+</script>
+{%endblock%}

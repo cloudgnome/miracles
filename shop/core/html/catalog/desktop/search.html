@@ -1,0 +1,16 @@
+{%extends 'shop/desktop/index.html'%}
+{%load i18n%}
+{%load translate%}
+{%block main%}
+    {%include 'catalog/desktop/products.html'%}
+    <script>
+        var parameters = {
+                'min':"{{min_price|default_if_none:0}}",
+                'max':"{{max_price|default_if_none:0}}",
+            {%if products.has_next%}
+                'page':"{{products.next_page_number|default_if_none:0}}",
+                'num_pages':"{{num_pages|default_if_none:0}}"
+            {%endif%}
+        };
+    </script>
+{%endblock%}

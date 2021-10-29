@@ -1,0 +1,42 @@
+{%extends 'desktop/index.html'%}
+{%block breadcrumbs%}
+<div class="bread-crumbs">
+    <a href="/">Главная</a>
+    <span>Карта сайта</span>
+</div>
+{%endblock%}
+{%block main%}
+    <h1>Карта сайта</h1>
+    <h2>Товары</h2>
+    <ul>
+        {%for product in products%}
+            <li>
+                <a href="{{product.slug}}" title="{{product.name}}">{{product.name}}</a>
+            </li>
+        {%endfor%}
+    </ul>
+    <h2>Категории</h2>
+    <ul>
+        {%for category in categories%}
+            <li>
+                <a href="{{category.slug}}" title="{{category.name}}">{{category.name}}</a>
+            </li>
+        {%endfor%}
+    </ul>
+    <h2>Производители</h2>
+    <ul>
+        {%for brand in brands%}
+            <li>
+                <a href="{{brand.slug}}" title="{{brand.name}}">{{brand.name}}</a>
+            </li>
+        {%endfor%}
+    </ul>
+    <h2>Статьи</h2>
+    <ul>
+        {%for article in articles%}
+            <li>
+                <a href="{{article.slug}}" title="{{article.name}}">{{article.name}}</a>
+            </li>
+        {%endfor%}
+    </ul>
+{%endblock%}

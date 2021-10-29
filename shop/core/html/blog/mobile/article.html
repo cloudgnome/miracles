@@ -1,0 +1,45 @@
+{% load i18n %}
+{%load translate%}
+{%block breadcrumbs%}
+    <div class="bread-crumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+        <span itemscope itemprop="itemListElement">
+            <a href="{% trans 'Главная'%}">
+                <div></div>
+                <span itemprop="name">{% translate product.get_category 'names' lang%}</span>
+            </a>
+        </span>
+        {%if article%}
+            <span itemscope itemtype="http://schema.org/ListItem">
+                <a href="{{language}}/useful_articles.html">
+                    <div></div>
+                    <span itemprop="name">{% trans 'Полезные статьи'%}</span>
+                </a>
+            </span>
+            <h1>{% translate article 'names' lang%}</h1>
+        {%else%}
+            <span itemscope itemtype="http://schema.org/ListItem">
+                <a href="{{language}}/">
+                    <div></div>
+                    <span itemprop="name">{% trans 'Главная'%}</span>
+                </a>
+            </span>
+            <h1>{% trans 'Полезные статьи'%}</h1>
+        {%endif%}
+    </div>
+{%endblock%}
+{%block main%}
+{%if articles_list%}
+    {%for article in articles_list%}
+    <article class="useful_article">
+        <h2><a href="{% translate article 'slugy' lang%}">{% translate article 'names' lang%}</a></h2>
+    </article>
+    {%endfor%}
+{%elif article%}
+    <article>
+        {%autoescape off%}{% translate article 'text' lang %}{%endautoescape%}
+    </article>
+{%else%}
+    <h1>{% trans 'ПОЛЕЗНЫЕ СТАТЬИ'%}</h1>
+{%endif%}
+<style>article{height:auto;}article p{font-size: 15px;line-height: 25px;text-indent: 1em;margin-bottom: 10px;}h1+p{text-indent: 0;}article img{max-width: 100%;max-height: 500px;}</style>
+{%endblock%}

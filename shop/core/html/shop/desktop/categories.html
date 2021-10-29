@@ -1,0 +1,37 @@
+{%load i18n%}
+{%load translate%}
+<div class="head">{% trans 'Каталог товаров'%}<div>
+{%for parent in navigation%}
+	{%if parent.is_leaf_node%}
+		<div>
+			<a href="/{{parent.slug}}">{%translate parent 'name' lang%}</a>
+		</div>
+	{%else%}
+		<div class="parent_category">
+			<div class="arrow"></div>
+			<a class="icon" href="/{{parent.slug}}">
+				{%translate parent 'name' lang%}
+			</a>
+			<div class="categories">
+				{%for child in parent.child.all%}
+					<div class="cell">
+						<a href="/{{child.slug}}">
+							{%translate child 'name' lang%}
+						</a>
+						{%if not child.is_leaf_node%}
+							<div class="sub">
+								{%for schild in child.child.all%}
+									<a href="/{{schild.slug}}">
+										{%translate schild 'name' lang%}
+									</a>
+								{%endfor%}
+							</div>
+						{%endif%}
+					</div>
+				{%endfor%}
+				<img src="{{parent.image_url}}" alt="{%translate parent 'name' lang%}">
+			</div>
+			<div class="outer"></div>
+		</div>
+	{%endif%}
+{%endfor%}

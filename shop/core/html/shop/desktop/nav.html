@@ -1,0 +1,41 @@
+{%load i18n%}
+{%load translate%}
+<div class="navigation">
+    <div class="head">{% trans 'Категории товаров'%}<div></div></div>
+    <div id="categories">
+        {% load mptt_tags %}
+        {% full_tree_for_model catalog.Category as nodes %}
+        {% recursetree nodes %}
+            {%if node.active%}
+                <div class="node">
+                    {%if not node.is_leaf_node%}
+                        <div class="navigate">
+                            <div class="name">
+                                <div class="image category-{{node.id}}"></div>
+                                <a href="{%translate node 'slugy' lang%}">
+                                    {%translate node 'names' lang%}
+                                </a>
+                            </div>
+                            <div class="back">
+                                <i class="fas fa-chevron-left"></i>
+                                <span>{%trans 'Назад'%}</span>
+                            </div>
+                        </div>
+                        <div class="children">
+                            {{children}}
+                        </div>
+                    {%else%}
+                        <div class="navigate">
+                            <div class="name">
+                                <div class="image category-{{node.id}}"></div>
+                                <a href="{%translate node 'slugy' lang%}">
+                                    {%translate node 'names' lang%}
+                                </a>
+                            </div>
+                        </div>
+                    {%endif%}
+                </div>
+            {%endif%}
+        {% endrecursetree %}
+    </div>
+</div>

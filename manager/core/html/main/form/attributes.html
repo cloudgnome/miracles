@@ -1,0 +1,18 @@
+{%if attributes%}
+	{%load attribute%}
+	{%for attribute in attributes%}
+		<div class="field">
+			<label for="attribute_{{attribute.id}}">{{attribute}}</label>
+			<div class="custom-select">
+				<select name="attributes[]" id="attribute_{{attribute.id}}">
+					<option value="">{{attribute}}</option>
+					{%for value in attribute.values.all%}
+						<option value="{{value.id}}" {%if value|attribute:product_id%}selected{%endif%}>{{value}}</option>
+					{%endfor%}
+				</select>
+			</div>
+		</div>
+	{%endfor%}
+{%else%}
+	Нет атрибутов по данной категории.
+{%endif%}

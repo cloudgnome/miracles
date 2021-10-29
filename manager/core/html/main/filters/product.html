@@ -1,0 +1,129 @@
+{%load i18n%}
+<form action="javascript: void(0)" method="post" id="filters" class="filters">
+	<div class="heading">{% trans 'Фільтр'%}</div>
+	<div id="range-1">
+		<div class="inputs">
+			<div>
+				<input autocomplete="off" type="text" id="amount-from" value="{{context.min_price}}" name="retail_price__gte">
+			</div>
+			<div>
+				<input autocomplete="off" type="text" id="amount-to" value="{{context.max_price}}" name="retail_price__lte">
+			</div>
+		</div>
+		<div id="slider-range"></div>
+	</div>
+	<div class="custom-select">
+		<select name="is_available" id="is_available" autocomplete="off">
+			<option value="" selected>{% trans 'Наявність'%}</option>
+			<option value="True">{% trans 'В наявності'%}</option>
+			<option value="False">{% trans 'Нема в наявності'%}</option>
+		</select>
+	</div>
+	<div class="custom-select">
+	    <select name="storage__in[]" class='selectedFilter' id='storage-filter'>
+	        <option value="">{% trans 'за складом'%}</option>
+	        <option value="[2,3]">{% trans 'в наявністі'%}</option>
+	        <option value="[1]">{% trans 'під замовлення'%}</option>
+	    </select>
+	</div>
+	<div class="custom-select">
+		<select name="export_status__export_id" id="export_status" action="move" autocomplete="off">
+			<option value="" selected="">{% trans 'Додано в експорт'%}</option>
+			{%for export in exports%}
+				<option value='{{export.id}}'>{{export.name}}</option>
+			{%endfor%}
+		</select>
+	</div>
+	<div class="radio-wrapper">
+		<div class="field">
+			<label class="custom-radio">
+				{% trans 'Так'%}
+				<input value='True' type="radio" autocomplete="off" name="export_status__load">
+				<span class="checkmark">
+					<span class="inside"></span>
+				</span>
+			</label>
+		</div>
+		<div class="field">
+			<label class="custom-radio">
+				{% trans 'Ні'%}
+				<input value='False' type="radio" autocomplete="off" name="export_status__load">
+				<span class="checkmark">
+					<span class="inside"></span>
+				</span>
+			</label>
+		</div>
+	</div>
+	<div class="custom-select">
+		<select name="export_status__meta__name__isnull" id="export_status__meta__name__isnull" autocomplete="off">
+			<option value="" selected>{% trans 'Назва експорту'%}</option>
+			<option value="False">{% trans 'Наявна'%}</option>
+			<option value="True">{% trans 'Відсутня'%}</option>
+		</select>
+	</div>
+	<div class="custom-select">
+		<select name="export_status__meta__text__isnull" id="export_status__meta__text__isnull" autocomplete="off">
+			<option value="" selected>{% trans 'Текст експорту'%}</option>
+			<option value="False">{% trans 'Наявний'%}</option>
+			<option value="True">{% trans 'Відсутній'%}</option>
+		</select>
+	</div>
+	<div class="autocomplete brand" id="brand" model="brand">
+		<input type="text" name="brand__description__name__icontains" value="" placeholder="{% trans 'Производитель'%}" autocomplete="off">
+		<div class="variants"></div>
+	</div>
+	<div class="autocomplete category" id="category" model="category">
+		<input type="text" name="category__description__name__icontains" value="" placeholder="{% trans 'Категория'%}" autocomplete="off">
+		<div class="variants"></div>
+	</div>
+	<div class="custom-select">
+		<select name="category__isnull" id="category__isnull" autocomplete="off">
+			<option value="" selected>{% trans 'Категорія'%}</option>
+			<option value="False">{% trans 'Наявна'%}</option>
+			<option value="True">{% trans 'Відсутня'%}</option>
+		</select>
+	</div>
+	<div class="custom-select">
+		<select name="gallery__isnull" id="gallery__isnull" autocomplete="off">
+			<option value="" selected>{% trans 'Фото'%}</option>
+			<option value="False">{% trans 'Наявна'%}</option>
+			<option value="True">{% trans 'Відсутня'%}</option>
+		</select>
+	</div>
+	<div class="custom-select">
+		<select name="slug__isnull" id="slug__isnull" autocomplete="off">
+			<option value="" selected>URL</option>
+			<option value="False">{% trans 'Наявна'%}</option>
+			<option value="True">{% trans 'Відсутня'%}</option>
+		</select>
+	</div>
+	<div class="custom-select">
+		<select name="attributes__isnull" id="attributes__isnull" autocomplete="off">
+			<option value="" selected>{% trans 'Атрибути'%}</option>
+			<option value="False">{% trans 'Наявна'%}</option>
+			<option value="True">{% trans 'Відсутня'%}</option>
+		</select>
+	</div>
+	<div class="custom-select">
+		<select name="storage" id="storage" autocomplete="off">
+			<option value="" selected>{% trans 'Склад'%}</option>
+			<option value="1">{% trans 'Игротека'%}</option>
+			<option value="2">{% trans 'Велис'%}</option>
+			<option value="3">{% trans 'Тигрец'%}</option>
+		</select>
+	</div>
+	<div class="custom-select">
+		<select name="price_fixed" id="price_fixed" autocomplete="off">
+			<option value="" selected>{% trans 'Фікс. ціна'%}</option>
+			<option value="True">{% trans 'Так'%}</option>
+			<option value="False">{% trans 'Ні'%}</option>
+		</select>
+	</div>
+	<div class="custom-select">
+		<select name="description__text__isnull" id="description__text__isnull" autocomplete="off">
+			<option value="" selected>{% trans 'Опис'%}</option>
+			<option value="False">{% trans 'Наявна'%}</option>
+			<option value="True">{% trans 'Відсутня'%}</option>
+		</select>
+	</div>
+</form>

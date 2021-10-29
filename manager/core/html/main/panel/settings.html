@@ -1,0 +1,28 @@
+{%load i18n%}
+<div id="panel">
+    <div id="tasks">
+        <div class="box">
+            <div class="custom-select">
+                <select name="task" id="tasks-select" autocomplete="off">
+                    <option value="">{%trans 'Оберіть завдання'%}</option>
+                    {%for task in tasks%}
+                        <option value="{{task.id}}">{{task.name}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+            <i class="fas fa-cog"></i>
+        </div>
+        {%for task in tasks%}
+            <div class="task_status">
+                <div>{{task.name}} - {{task.get_status_display}}</div>
+                {%if task.link%}
+                    <div>
+                        <a href="/static/{{task.link}}" target="_blank">
+                            {{task.link|default:''}}
+                        </a>
+                    </div>
+                {%endif%}
+            </div>
+        {%endfor%}
+    </div>
+</div>

@@ -1,0 +1,199 @@
+{%load i18n%}
+{%load translate%}
+{%block breadcrumbs%}
+	<div class="bread-crumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+		{%if category.parent%}
+			<a href="{% translate category.parent 'slugy' lang %}">
+				<span itemscope itemprop="itemListElement" itemtype="http://schema.org/ListItem">
+					<div></div>
+					<span itemprop="name">
+						{% translate category.parent 'names' lang%}
+					</span>
+					<meta itemprop="position" content="1">
+					<meta itemprop="url" content="{% translate category.parent 'slugy' lang %}">
+				</a>
+			</span>
+		{%else%}
+			<a href="{{language}}/">
+				<span itemscope itemtype="http://schema.org/ListItem">
+					<div></div>
+					<span itemprop="name">{% trans 'Главная'%}</span>
+					<meta itemprop="position" content="1">
+					<meta itemprop="url" content="{{language}}/">
+				</span>
+			</a>
+		{%endif%}
+	</div>
+{%endblock%}
+{%block main%}
+	{%block freeDelivery%}
+	{%endblock%}
+	<h1>{{h1}}</h1>
+	{%if products%}
+		<form action="javascript: void(0)" method="post" id="filters" class="form">
+			<label class="dropdownButton">{% trans 'Фильтр'%}</label>
+			<div class="close"></div>
+			<div class="dropdown">
+				{%if min_price and max_price%}
+					<h3>{% trans 'Цена'%}(грн.)</h3>
+					<div id="range-1">
+						<div class="inputs">
+							<div>
+								{% trans 'от'%}
+								<input type="text" id="amount-from" value="{{min_price}}" readonly disabled name="retail_price__gte">
+							</div>
+							<div>
+								{% trans 'до'%}
+								<input type="text" id="amount-to" value="{{max_price}}" readonly disabled name="retail_price__lte">
+							</div>
+						</div>
+						<div id="slider-range"></div>
+					</div>
+				{%endif%}
+				{%if attributes%}
+					<h3>{% trans 'ПАРАМЕТРЫ'%}</h3>
+					{%for attribute in attributes%}
+						<label class="heading" for="attribute_{{attribute.id}}">{{attribute}}</label>
+						<div class="custom-select">
+							<select name="attributes__id[]" id="attribute_{{attribute.id}}">
+								<option value="">{% trans 'Выберите'%} {{attribute}}</option>
+								{%for value in attribute.values.all%}
+									<option value="{{value.id}}">{{value}}</option>
+								{%endfor%}
+							</select>
+						</div>
+					{%endfor%}
+				{%endif%}
+				{%if brands%}
+					<div class="manufacturer brand">
+						<div class="shadow">
+							<h3>{% trans 'ПРОИЗВОДИТЕЛИ'%}</h3>
+							<div>
+								{%for brand in brands%}
+									<label class="switcher">
+										<span class="switch">
+											<input id='{{brand.id}}' type="checkbox" name="brand__id__in[]" value="{{brand.id}}">
+											<span class="slider round"></span>
+											<span class="text">{% translate brand 'names' lang %}</span>
+										</span>
+									</label>
+								{%endfor%}
+							</div>
+						</div>
+					</div>
+				{%endif%}
+				{%if categories%}
+					<div class="manufacturer categories">
+						<div class="shadow">
+							<h3>{% trans 'КАТЕГОРИИ'%}</h3>
+							<div>
+								{%for category in categories%}
+									<label class="switcher">
+										<span class="switch">
+											<input id='{{category.id}}' type="checkbox" name="category__id__in[]" value="{{category.id}}">
+											<span class="slider round"></span>
+											<span class="text">{% translate category 'names' lang %}</span>
+										</span>
+									</label>
+								{%endfor%}
+							</div>
+						</div>
+					</div>
+				{%endif%}
+				<button class="aprove">{% trans 'Применить'%}</button>
+			</div>
+			<label class="heading dropdownButton">{% trans 'Сортировка'%}</label>
+			<div class="close"></div>
+			<div class="dropdown">
+				<div class="custom-select">
+					<select name="ordering" class='selectedFilter' id='price-sort'>
+						<option value="">{% trans 'по цене'%}</option>
+						<option value="retail_price" {%if ordering and ordering == 'retail_price'%}selected{%endif%}>{% trans 'от дешевых к дорогим'%}</option>
+						<option value="-retail_price" {%if ordering and ordering == '-retail_price'%}selected{%endif%}>{% trans 'от дорогих к дешевым'%}</option>
+					</select>
+				</div>
+				{%if not user.is_opt%}
+				<div class="custom-select">
+					<select name="storage" class='selectedFilter' id='storage-filter'>
+						<option value="">{% trans 'по наличию'%}</option>
+						<option value="in" {%if storage and storage == 'in'%}selected{%endif%}>{% trans 'в наличии'%}</option>
+						<option value="out" {%if storage and storage == "out"%}selected{%endif%}>{% trans 'под заказ'%}</option>
+					</select>
+				</div>
+				{%endif%}
+				<button class="aprove">{% trans 'Применить'%}</button>
+			</div>
+		</form>
+		<div id="category">
+			<div class="products items">
+				{%for product in products%}
+					<div class='item{%if not product.is_available%} notavail{%endif%}'>
+						<a href="{% translate product 'slugy' lang%}" class="image">
+							<img src="{{product.image.preview_thumb}}" alt="{% translate product 'names' lang%}">
+						</a>
+						<div class="availability">{{product.availability|safe}}</div>
+						{%if product.is_available%}
+							{%block buy%}
+								<button class='buy' value="{{product.id}}">
+									<svg><use xlink:href="#cartIcon" fill="#fff"></use></svg>
+									{% trans 'КУПИТЬ'%}
+								</button>
+								<div class="price">
+									{%if product.special%}
+										<span class="price old">{{product.retail_price}} грн</span>
+										<span class="price new">{{product.price|default_if_none:0}} грн.</span>
+									{%else%}
+										<span class="price">{{product.price|default_if_none:0}} грн.</span>
+									{%endif%}
+								</div>
+							{%endblock%}
+						{%endif%}
+						<div class="name">
+							<a href="{% translate product 'slugy' lang%}">
+								{% translate product 'names' lang%}
+							</a>
+						</div>
+					</div>
+				{%endfor%}
+			</div>
+		</div>
+		{% if products.paginator.num_pages > 1 %}
+			<div class="pagination">
+				<span class="step-links">
+					{% if products.has_previous and products.previous_page_number > 1%}
+						<a class='prevPage' href="/{{url}}?page={{products.previous_page_number}}"> < {% trans 'Предыдущие'%}</a>
+					{% endif %}
+					{%for page in products.paginator.page_range%}
+						{%if page == products.number%}
+							<span class="active">{{page}}</span>
+						{%elif page == 1%}
+							<a href="/{{url}}" title="/{{url}}">{{page}}</a>
+						{%else%}
+							<a href="/{{url}}?page={{page}}" title="/{{url}}?page={{page}}">{{page}}</a>
+						{%endif%}
+					{%endfor%}
+					{% if products.has_next %}
+						<a class='nextPage' href="/{{url}}?page={{products.next_page_number}}"> {% trans 'следующие'%} > </a>
+					{% endif %}
+				</span>
+			</div>
+		{%endif%}
+		<div class="wrap">
+			<article class="noselect description">
+				{{description|safe}}
+			</article>
+		</div>
+	{%else%}
+		<div>{% trans 'Здесь товаров нет'%}.</div>
+	{%endif%}
+	<script>
+		var parameters = {
+				'min':"{{min_price|default_if_none:0}}",
+				'max':"{{max_price|default_if_none:0}}",
+			{%if products.has_next%}
+				'page':"{{products.next_page_number|default_if_none:0}}",
+				'num_pages':"{{num_pages|default_if_none:0}}"
+			{%endif%}
+		};
+	</script>
+{%endblock%}

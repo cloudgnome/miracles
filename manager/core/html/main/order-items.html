@@ -1,0 +1,32 @@
+{%if item.cart.count > 1%}
+    {%for item in item.cart%}
+        <div class="item" product-id={{item.product.id}}>
+            <div class="remove-wrap">
+                <div class="remove" item-id="{{item.id}}">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="image">
+                {{item.product.admin_image|safe}}
+            </div>
+            <div class="name">
+                <a href="http://{{SITE_URL}}/{{item.product.slug}}" target="_blank">{{item.product.description.first.name}}</a>
+            </div>
+            <div>
+                <input type="text" name="qty" value="{{item.qty}}">
+                <input type="text" name="price" opt='{{item.product.big_opt_price}}' value="{{item.price}}">
+            </div>
+            <div class="total">
+                <div>
+                    <span class="title">{{item.total}}</span> грн.
+                </div>
+                <div class="icon">
+                    <img src="/static/icon/{{item.product.get_storage_display}}.jpg" alt="{{item.product.get_storage_display}}">
+                </div>
+                <div>
+                    <span class="title">{{item.product.qty}}</span> шт.
+                </div>
+            </div>
+        </div>
+    {%endfor%}
+{%endif%}

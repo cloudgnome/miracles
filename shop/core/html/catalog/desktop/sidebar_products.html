@@ -1,0 +1,38 @@
+{%load i18n%}
+{%load translate%}
+<h3 class="topic">{% trans 'Популярные' %}</h3>
+<div class="items">
+	{%for item in popular%}
+		<div class="item">
+			<a class="image" href="{% translate item.product 'slugy' lang %}">
+				<img src="{{item.product.image.list_thumb}}" alt="{% translate item.product 'names' lang %}">
+				{%if item.product.special%}
+					<div class="special">-{{item.product.special.percent}}%</div>
+				{%endif%}
+			</a>
+			<div class="availability">
+				{{product.availability|safe}}
+			</div>
+			<div class="price">{{item.product.price}}грн</div>
+			<a class="name" href="{% translate item.product 'slugy' lang %}">{% translate item.product 'names' lang %}</a>
+		</div>
+	{%endfor%}
+</div>
+<h3 class="topic">{% trans 'Новинки' %}</h3>
+<div class="items">
+	{%for product in latest%}
+		<div class="item">
+			<a class="image" href="{% translate product 'slugy' lang %}">
+				<img src="{{product.image.list_thumb}}" alt="{% translate product 'names' lang %}">
+				{%if product.special%}
+					<div class="special">-{{product.special.percent}}%</div>
+				{%endif%}
+			</a>
+			<div class="availability">
+				{{product.availability|safe}}
+			</div>
+			<div class="price">{{product.price}}грн</div>
+			<a class="name" href="{% translate product 'slugy' lang %}">{% translate product 'names' lang%}</a>
+		</div>
+	{%endfor%}
+</div>

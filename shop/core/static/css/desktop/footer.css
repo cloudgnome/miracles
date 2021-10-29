@@ -1,0 +1,150 @@
+/*critical*/
+footer{
+	font-size: 14px;
+	padding-bottom: 24px;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	padding: 0 2% 4%;
+	position: relative;
+	background-color: #d8edf7;
+	font-size: 18px;
+	border-top: 11px solid #D3EDF8 ;
+	min-height: 136px;
+	flex-wrap: wrap;
+    padding-top: 23px;
+}
+footer > div{
+	width: 100%;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+footer .email{
+	height: 42px;
+	margin-left: 3px;
+	display: block;
+	text-align: left;
+	max-width: 50%;
+	line-height: 39px;
+	padding-left: 13px;
+	font-size: 14px;
+	cursor: pointer;
+}
+footer .phoneList{
+	font-size: 15px;
+	height: 57px;
+	line-height: 57px;
+	padding: 0 7px;
+	width: 100%;
+}
+footer #footer-phones svg{
+	height: 24px;
+	width: 24px;
+	fill: #1d97ca;
+	margin: 0px 8px;
+	position: relative;
+	top: 4px;
+}
+footer .email svg{
+	top: 7px;
+	margin: 0px 7px 0 3px;
+}
+footer .phoneList span{
+	margin-right: 5px;
+	color: #000 !important;
+}
+footer .address{
+	color:black;
+	margin-right: 40px;
+	padding-top: 26px;
+}
+footer .address .link{
+	font-size: 13px;
+}
+footer .heading{
+    font-size: 26px;
+    font-family: RobotBold,FiraBold,Bold;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+footer #footer-info{
+	font-size: 15px;
+	width: 100%;
+}
+footer .footer-info-links a{
+    margin-bottom: 10px;
+    display: block;
+    font-size: 14px;
+    line-height: 1.6;
+    font-weight: 400;
+    padding-left: 22px;
+    position: relative;
+}
+footer .footer-info-links a:before{
+    content: "\E015";
+    font-family: Icon;
+    position: absolute;
+    left: 0;
+    top: 4px;
+    font-size: 10px;
+}
+footer hr{
+    border-color: #fff;
+    margin: 20px auto;
+    width: 94%;
+}
+footer #footer-info > div{
+    width: 33%;
+}
+footer #footer-info > div:nth-child(2){
+    width: 50%;
+}
+footer #footer-info > div > div{
+    position: relative;
+}
+footer #footer-info > div > div svg{
+    width: 100%;
+}
+footer #site-by{
+    text-transform: uppercase;
+    text-align: right;
+    position: relative;
+	top: -2px;
+    padding-right: 8px;
+}
+footer #site-by svg{
+    width: 76px;
+}
+footer #footer-logo{
+    height: 51px;
+}
+footer #footer-logo svg{
+    max-width: 100%;
+    max-height: 100%;
+}
+/*endcritical*/
+footer #channels{
+    width: 26%;
+    padding-right: 3%;
+}
+footer #channels svg{
+    width: 46px;
+    height: 46px;
+    margin-right: 9px;
+}
+footer #footer-privacy{
+	font-size: 14px;
+	padding-top: 20px;
+}
+footer #footer-privacy .mid{
+	width: 70%;
+}
+#privacy {
+	font-size: 13px;
+	color: #888;
+}

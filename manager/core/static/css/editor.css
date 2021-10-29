@@ -1,0 +1,14 @@
+.codex-editor{
+	background: #fff;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+}
+.ce-block__content{
+	margin: 15px;
+}
+.codex-editor__redactor {
+	padding-bottom: 19px !important;
+}
+.codex-editor--narrow .ce-toolbar__actions{
+	right: 7px;
+}
