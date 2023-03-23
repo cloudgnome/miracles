@@ -2,13 +2,6 @@ function theme(color){
 	storage.theme = color;
 	$('header').set('class',color);
 }
-/*if(window.model){
-	current = $(`menu a[model="${model}"]`)[0];
-	current.active();
-	current.parent().active();
-	current.parent().parent().active();
-}*/
-
 if(!storage.theme)
 	storage.theme = 'black';
 
@@ -40,12 +33,7 @@ $('body').on('click',function(){
 	var filters = $('#filters');
 	if(filters.style && filters.style.display == 'grid'){
 		filters.hide();
-	}
-	/*if(window.panel && panel.className.includes('active')){
-		panel.active();
-		panel_buttons.active();
-	}*/
-});
+	}});
 
 jQuery(document).ready(function(){
 	try{
