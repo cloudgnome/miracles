@@ -62,10 +62,6 @@ class ModelAdmin:
     def filters(self,context):
         filters = {}
 
-        # if request.body:
-        #     filters = loads(request.body.decode('utf8'))
-        #     return Q(**filters)
-
         if context:
             for field in context:
                 if field in ['page','limit','o','all','filters']:

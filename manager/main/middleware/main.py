@@ -18,9 +18,4 @@ class Main:
 
     def process_view(self,request,view,*args,**kwargs):
 
-        root = '{CACHE_URL}cache/html/desktop/ru/static/'.format(CACHE_URL=CACHE_URL)
-        if not isfile(root + 'categories.html'):
-            from catalog.views import StaticView
-            StaticView(request,root)
-
         return None

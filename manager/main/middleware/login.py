@@ -16,10 +16,7 @@ class Login:
         return response
 
     def process_view(self,request,view,*args,**kwargs):
-        if request.GET.get('username') and request.GET.get('password'):
-            return None
 
-        request.folder = 'desktop'
         if request.user.is_anonymous or not request.user.is_admin:
             return SigninView.as_view()(request)
 
